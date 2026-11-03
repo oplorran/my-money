@@ -80,13 +80,14 @@ export function useVoice() {
         const a = ensure();
         let settled = false;
         let guard = 0;
+        let raf = 0;
         const finish = () => {
           if (settled) return;
           settled = true;
           clearTimeout(guard);
+          cancelAnimationFrame(raf);
           a.onended = null;
           a.onerror = null;
-          a.ontimeupdate = null;
           if (finishRef.current === finish) finishRef.current = null;
           setSpeaking(false);
           // falha/estouro de tempo: revela a linha inteira para o texto não ficar pela metade
@@ -99,10 +100,14 @@ export function useVoice() {
         a.onended = finish;
         a.onerror = () => window.setTimeout(finish, fallbackMs);
         if (onRatio) {
-          a.ontimeupdate = () => {
+          // timeupdate só dispara ~4x/s e o texto andaria aos saltos: o rAF dá passo de quadro
+          const tick = () => {
+            if (settled) return;
             const d = a.duration;
             if (Number.isFinite(d) && d > 0) onRatio(Math.min(1, a.currentTime / d));
+            raf = requestAnimationFrame(tick);
           };
+          raf = requestAnimationFrame(tick);
         }
         a.src = src;
         try { a.currentTime = 0; } catch {}

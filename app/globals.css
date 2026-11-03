@@ -163,6 +163,15 @@ body {
   0%,100% { transform: scaleY(.35); }
   50% { transform: scaleY(1); }
 }
+/* palavra da legenda: entra desfocada e assenta, em vez de piscar seca */
+.cap-word { animation: cap-word .34s ease-out both; }
+@keyframes cap-word {
+  from { opacity: 0; filter: blur(3px); }
+  to { opacity: 1; filter: blur(0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .cap-word { animation: none; }
+}
 .mc-slider {
   -webkit-appearance: none; appearance: none;
   height: 22px; border-radius: 9999px; outline: none; cursor: pointer;

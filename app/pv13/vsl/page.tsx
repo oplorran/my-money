@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { Fragment, useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { SCRIPT, VOICE } from "@/lib/voice";
 import { useVoice } from "@/lib/useVoice";
@@ -313,7 +313,15 @@ export default function VslPage() {
         {/* legenda grande, como fala ao vivo; cresce conforme o áudio e é ancorada embaixo */}
         <div className="pt-5 pb-2 min-h-[112px] flex items-end justify-center">
           <p className={`text-center font-semibold tracking-tight leading-[1.35] text-[clamp(17px,4.6vw,21px)] ${caption ? "text-white" : "text-slate-500"}`}>
-            {caption || (speaking ? "…" : "Line connected.")}
+            {caption
+              ? caption.split(" ").map((word, i) => (
+                  <Fragment key={i}>
+                    <span className="cap-word">{word}</span>{" "}
+                  </Fragment>
+                ))
+              : speaking
+                ? "…"
+                : "Line connected."}
           </p>
         </div>
 
