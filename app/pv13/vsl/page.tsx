@@ -194,12 +194,8 @@ export default function VslPage() {
             <div className="absolute inset-0 rounded-full call-halo" />
             <div className="absolute inset-0 rounded-full call-halo d2" />
             <div className="absolute inset-0 rounded-full call-halo d3" />
-            <div className="relative w-32 h-32">
-              {/* o overflow fica só na foto; o ponto precisa ficar fora para não ser cortado */}
-              <div className="w-full h-full rounded-full overflow-hidden ring-4 ring-emerald-700/40 call-avatar-img">
-                <img src="/pv13/perfil-alex.png" alt="Alex Parker" className="w-full h-full object-cover" />
-              </div>
-              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full presence-dot" />
+            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-emerald-700/40 call-avatar-img">
+              <img src="/pv13/perfil-alex.png" alt="Alex Parker" className="w-full h-full object-cover" />
             </div>
           </div>
 
