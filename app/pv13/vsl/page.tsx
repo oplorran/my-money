@@ -190,12 +190,16 @@ export default function VslPage() {
         </div>
 
         <div className="relative z-10 flex flex-col items-center">
-          <div className="relative mb-9">            <div className="absolute inset-0 rounded-full call-halo" />
+          <div className="relative mb-9">
+            <div className="absolute inset-0 rounded-full call-halo" />
             <div className="absolute inset-0 rounded-full call-halo d2" />
             <div className="absolute inset-0 rounded-full call-halo d3" />
-            <div className="relative w-32 h-32 rounded-full overflow-hidden ring-4 ring-emerald-700/40 call-avatar-img">
-              <img src="/pv13/perfil-alex.png" alt="Alex Parker" className="w-full h-full object-cover" />
-              <span className="absolute bottom-1.5 right-1.5 w-4 h-4 rounded-full presence-dot" />
+            <div className="relative w-32 h-32">
+              {/* o overflow fica só na foto; o ponto precisa ficar fora para não ser cortado */}
+              <div className="w-full h-full rounded-full overflow-hidden ring-4 ring-emerald-700/40 call-avatar-img">
+                <img src="/pv13/perfil-alex.png" alt="Alex Parker" className="w-full h-full object-cover" />
+              </div>
+              <span className="absolute -bottom-1 -right-1 w-4 h-4 rounded-full presence-dot" />
             </div>
           </div>
 
@@ -334,9 +338,9 @@ export default function VslPage() {
                   placeholder="Your first name"
                   autoComplete="given-name"
                   enterKeyHint="done"
-                  className="flex-1 rounded-2xl bg-[#0d0d0f] border border-white/15 px-4 py-3.5 text-white placeholder:text-slate-500 caret-white outline-none focus:border-orange-700/60 focus:ring-2 focus:ring-orange-800/25"
+                  className="flex-1 min-w-0 rounded-2xl bg-[#0d0d0f] border border-white/15 px-4 py-3.5 text-white placeholder:text-slate-500 caret-white outline-none focus:border-orange-700/60 focus:ring-2 focus:ring-orange-800/25"
                 />
-                <button onClick={submitName} className="answer-btn px-5 rounded-2xl font-bold text-white">OK</button>
+                <button onClick={submitName} className="answer-btn shrink-0 px-5 rounded-2xl font-bold text-white">OK</button>
               </div>
             </div>
           )}
