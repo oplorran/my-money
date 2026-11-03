@@ -1,0 +1,618 @@
+ENGENHARIA REVERSA DE FUNIL
+Funil Money Club / AI Program
+Mapeamento completo: páginas, URLs, checkouts, área de membros, APIs e infraestrutura
+Alvo principal: growaiclub.com · Levantado em 21–22/out/2026
+Métodos: análise de DOM ao vivo, engenharia reversa dos chunks JS (Next.js), probing de rotas/APIs, crt.sh, robots.txt, validação checkout a
+checkout
+1. Sumário executivo
+26
+domínios do operador (13 aliases
++ 8 advertoriais + 2 WAF + 3
+serviços)
+32
+checkouts identificados
+8 + 13 + 22
+fronts ocultos + rotas app + APIs
+$203.80+
+ticket máx. (funil + VIP)
+A operação vende um produto de "trading com IA" (Money Club, fachada AI Program / AI Club) em dois idiomas (EN/ES), com funil de
+quiz → checkout de $29.90 → dois upsells sequenciais → área de membros que funciona como máquina de monetização contínua (6
+produtos internos adicionais, roleta, indicação e referral de corretora). O painel admin revela que a operação roda 5 fronts × 5
+downsells em múltiplas versões (PV11–PV14) — este domínio é apenas uma das pontas. growaiclub.com é 1 de 13 domínios
+idênticos servidos pelo mesmo deployment Vercel; o tráfego de anúncios entra por um cloaker próprio com fingerprint JS
+(go.riseaiclub.com / get.aiengineclub.com) e por 8 domínios de advertoriais "white" — por isso o domínio não aparece em bibliotecas
+de anúncios (ver seção 9C).
+Não existe sitemap.xml em nenhum domínio (todos 404). As rotas foram descobertas por robots.txt, chunks JS do build e probing.
+2. Arquitetura do funil (fluxo ponta a ponta)
+1 · FRONT-END — quiz
+https://growaiclub.com/ (rota real: /quiz-wt) · ES: https://transitaclub.com/
+Landing "AI Program": quiz de 10 perguntas ("Descubra seu perfil para a nova era digital em 2 min"). Versão ES: "Descubre tu Perfil Mental para Invertir"
+(16 perguntas). Sem chamadas de API — redirect client-side puro, repassando todos os parâmetros de tracking.
+▼ fim do quiz → window.location.href com UTMs/xcod/sck
+2 · CHECKOUT FRONT — $29.90
+pay.hotmart.com/P104403669D?off=g3l9bb5h (EN) · pay.hotmart.com/M104846164A?off=81ea4jjm (ES) ·
+go.centerpag.com/PPU38CQFOA2
+Três checkouts para o mesmo front: Hotmart "AI Club" US$29.90 (destino do quiz EN), Hotmart ES (destino do quiz ES) e CenterPag "Money Club —
+Access Money Club" $29.90 (usado em tráfego pago direto).
+▼ página de obrigado do gateway → /pay/up1
+3 · UPSELL 1 — escolha de plano $37 / $47 / $57
+https://growaiclub.com/pay/up1
+"Congratulations! You now have access to Money Club" — Conservative $37 (15 análises/dia, 85%), Growth $47 (25/dia, 88%), Elite $57 (40/dia, 92% +
+gerente) com badge MOST POPULAR. Gatilhos: escassez ("Only 14 spots left"), travamento permanente do plano, ancoragem $200–$1.000/dia. CTAs
+passam pelo redirector /hotwt/up1?to=<checkout>. Skip: "No thanks, I want to stay on the basic plan" → /pay/up2.
+▼ compra ou skip → /pay/up2
+
+-- 1 of 17 --
+
+4 · UPSELL 2 — AI Multiplier $24.90 / $34.90 / $49.90
+https://growaiclub.com/pay/up2
+"PLAN ACTIVATED" → survey de 4 perguntas (situação financeira, meta mensal, objetivo, prazo) → projeção personalizada ("você precisa de $60.000")
+→ pitch do "AI MULTIPLIER" (juros compostos, simulação com/sem) → ofertas Basic $24.90 (12 meses), Advanced $34.90 (6 meses), Ultra $49.90 (4
+meses, RECOMMENDED). CTAs via /hotwt/up2?to=<checkout>. Skip: "No, I want to continue without multiplying" → riseaiclub.com.
+▼ compra ou skip → área de membros
+5 · ÁREA DE MEMBROS + monetização interna — até +$67
+https://riseaiclub.com · cross-sell: https://aiengineclub.com (WebCash)
+App "Money Club" (trade com IA). Dentro do app: VIP Mode $67, Session Express $47, WebCash, Ultra Booster, Infinity Pass, Prize Wheel $20, indicação
+($200 por convite) e referral de corretora (u3.shortink.io) — monetização por depósito (FTD).
+Camada de cloaking: redirectores "white" /hotwt
+Todos os CTAs de upsell apontam para /hotwt/up1?to=<checkout centerpag> (ou /hotwt/up2). A página aguarda ~1.2s, preserva sck (Vturb),
+xcod e UTMs e executa window.location.replace para o checkout. O domínio white padrão (env CHECKOUT_WHITE_ORIGIN) é transitaclub.com
+— separação entre domínio "money page" e domínio de redirecionamento.
+
+-- 2 of 17 --
+
+3. Domínios e serviços
+Domínio / host 	Papel 	Stack / evidência
+growaiclub.com 	Funil principal EN (quiz + upsells +
+redirectores)
+Next.js App Router na Vercel
+(dpl_5qvmg8KcPAEukPos56R5oYe9Eaxn)
+transitaclub.com 	Funil ES (quiz) + domínio white dos
+redirectores
+Next.js / Vercel — /quiz-wt, /hotwt/up1, /hotwt/up2 ativos
+riseaiclub.com 	Área de membros "Money Club" (app de
+trade)
+Next.js Turbopack (dpl_2VyN5oTH8v5scBYNJjqhYXcCCp7V) +
+Supabase
+aiengineclub.com 	Área de membros do produto WebCash
+(cross-sell)
+Next.js / Vercel (dpl_6eKGp4dxYEstgFjPhfKU2T1WMaRE) — só
+/login pública
+go.riseaiclub.com 	Microserviço de tracking/redirect 	Node/Express — /health 200; demais paths 400 (via crt.sh)
+get.aiengineclub.com 	Microserviço de tracking/redirect 	Node/Express — /health 200 (mesmo app do go.riseai)
+go.centerpag.com
+checkout.centerpag.com
+Gateway principal (CenterPag / Perfect
+Pay)
+17 checkouts mapeados; assets em perfectpay-files.s3.us-east-2
+pay.hotmart.com 	Gateway alternativa (front EN + ES) 	2 produtos: P104403669D e M104846164A
+u3.shortink.io 	Referral de corretora (/register) 	Link de afiliado com sub_id1=<email do usuário> — monetização
+por depósito
+zjyhssrabkqeiwvelzuf.supabase.co Backend do app de membros 	Anon key pública no HTML; dados protegidos por RLS
+4. Páginas do funil de entrada (todas as URLs ativas)
+URL 	Etapa 	Conteúdo 	HTTP
+growaiclub.com/ (= /quiz-wt) 	Front-end EN 	Quiz 10 perguntas → redirect Hotmart P104403669D 	200
+growaiclub.com/quiz-wt 	Front-end EN (rota real) 	Mesma página da home 	200
+growaiclub.com/pay/up1 	Upsell 1 	Escolha de plano $37/$47/$57 	200
+growaiclub.com/pay/up2 	Upsell 2 	Survey 4 perguntas → AI Multiplier 	200
+growaiclub.com/hotwt/up1 	Redirector white 	?to=<checkout> → redirect 1.2s 	200
+growaiclub.com/hotwt/up2 	Redirector white 	Idem, usado pelos CTAs do upsell 2 	200
+transitaclub.com/ (= /quiz-wt) 	Front-end ES 	Quiz 16 perguntas → Hotmart M104846164A 	200
+transitaclub.com/hotwt/up1 · /hotwt/up2 	Redirector white ES 	Mesmo mecanismo (CHECKOUT_WHITE_ORIGIN) 	200
+Sem gate de sessão: /pay/up1 e /pay/up2 abrem direto sem compra prévia — facilita a clonagem. Rotas legadas do robots.txt (/up2a-c, /up3a-c, /up4a-c, /rec-, /back/,
+/be/, /tk/ etc.) retornam 404/308 — não fazem parte do funil ativo. Não há páginas de downsell neste domínio (testadas /pay/down1, /pay/ds1, /pay/downsell,
+/pay/up1b, /pay/up2b — todas 404).
+
+-- 3 of 17 --
+
+5. Checkouts — funil de entrada (9)
+ID / slug 	Gateway 	Produto 	Preço 	Etapa
+PPU38CQFOA2 	CenterPag 	Money Club — Access Money Club 	$29.90 	Front
+P104403669D?off=g3l9bb5h 	Hotmart 	AI Club 	US$29.90 	Front (quiz EN)
+M104846164A?off=81ea4jjm 	Hotmart 	AI Club (ES) 	n/d 	Front (quiz ES)
+PPU38CQFOA4 	CenterPag 	Plan Conservative — 15 análises/dia, win rate 85% 	$37 	Upsell 1
+PPU38CQFOEP 	CenterPag 	Plan Growth — 25 análises/dia, win rate 88% 	$47 	Upsell 1
+PPU38CQFOEQ 	CenterPag 	Plan Elite — 40 análises/dia, 92% + account manager 	$57 	Upsell 1
+PPU38CQFOAA 	CenterPag 	Basic Multiplier — meta $60k em 12 meses 	$24.90 	Upsell 2
+PPU38CQFOA8 	CenterPag 	Advanced Multiplier — meta $60k em 6 meses 	$34.90 	Upsell 2
+PPU38CQFOA6 	CenterPag 	Ultra Multiplier — meta $60k em 4 meses (RECOMMENDED) 	$49.90 	Upsell 2
+Mapeamento plano → ID extraído dos chunks app/pay/up1/page-*.js e app/pay/up2/page-*.js e confirmado no DOM ao vivo; Elite validado no checkout
+("Money Plans - Plan Elite $57").
+6. Checkouts — monetização dentro do app (10)
+ID 	Produto 	Preço Origem da evidência
+PPU38CQFQKI VIP Mode 	$67 	CTA no app: "Activate VIP Now · $67"
+PPU38CQH2GO VIP Mode (mapa interno "vip") 	$67 	Mapa de produtos no chunk principal
+PPU38CQFUNN Session Express 	$47 	"Unlock Session Express · $47" (env
+NEXT_PUBLIC_EXPRESS_CHECKOUT_URL)
+PPU38CQH2GQ Session Express (mapa "express") 	$47 	Mapa de produtos
+PPU38CQH2GS WebCash — sites de review em aiengineclub.com 	n/d 	Mapa "webcash" + SitesInviteProvider
+PPU38CQH2H0 Ultra Booster 	n/d 	Mapa "ultra"
+PPU38CQH2H2 Infinity Pass 	n/d 	Mapa "infinity"
+PPU38CQGK1J Infinity Pass (env
+NEXT_PUBLIC_INFINITY_PASS_CHECKOUT_URL)
+n/d 	Popup Infinity no app
+PPU38CQH2H4 Prize Wheel 	$20 	"Unlock my spin — $20" (mapa "wheel")
+PPU38CQGN9M Prize Wheel (env
+NEXT_PUBLIC_PRIZE_WHEEL_CHECKOUT_URL)
+$20 	Página /demo
+Rewrite dinâmico de checkout
+O helper checkoutUrlFor(produto, email, …) pode reescrever qualquer link para https://checkout.centerpag.com/upsell/<slug>/<PPU…
+>?email=<email> — upsell com e-mail pré-preenchido (1-click). Os IDs H2G* / FQKI / FUNN / GK1J / GN9M são fallbacks embutidos no código.
+
+-- 4 of 17 --
+
+7. Área de membros — riseaiclub.com (13 rotas)
+Rota 	Função
+/login 	Login (e-mail usado no checkout)
+/inicio 	Home pós-login (destino do redirect de login)
+/trade 	Tela de trade com sinais — chama /api/signals/increment; logos TradingView
+/accelerator 	Accelerator — /api/accelerator/save
+/ranking 	Ranking de membros (prova social)
+/wallet 	Carteira e pedidos de saque — /api/intl/withdraw
+/wheel 	Prize Wheel (roleta, $20/giro) — /api/intl/roulette*
+/invite 	Indicação — "You earned $200" — /api/intl/invite
+/profile 	Perfil — /api/auth/profile
+/help 	Ajuda / AI coach (chat) — /api/chat/*; vende Session Express
+/demo 	Demo com venda da Prize Wheel (PPU38CQGN9M)
+/terms 	Termos de uso
+/admin 	Painel "Money Club — Admin" — protegido por token — /api/admin/*
+A rota / retorna 404 mas renderiza o shell (header + bottom nav: Home, Accelerator, Trade, Ranking). Providers no bootstrap: GeoProvider, AuthProvider,
+VipPopupProvider, SitesInviteProvider. Rotas testadas e inexistentes: /register, /signup, /dashboard, /deposit, /settings, /vip, /withdraw, /forgot-password, /lab, /a/b, /a/i.
+8. APIs do app (Next.js API routes)
+Endpoint 	Grupo 	Função / status
+/api/geo 	Geo 	Aberto (200): {"{"}country, edition, isBrazil, ip{"}"} via x-
+vercel-ip-country
+/api/auth/login · /me · /logout · /profile 	Auth 	Sessão do membro — 401 sem login
+/api/chat/session · /messages · /triggers 	AI coach 	Chat interno; triggers disparam popups de venda — 401
+/api/intl/session · /session/start 	Sessão 	Controle das sessões de "trading" — 401
+/api/intl/withdraw 	Saque 	Pedido de saque (alimenta /api/admin/withdrawals) — 401
+/api/intl/invite 	Indicação 	Recompensas ($200/convite) — 401
+/api/intl/sites-invite 	WebCash 	Convite cross-sell p/ aiengineclub.com — 401
+/api/intl/roulette · /close · /credit 	Prize
+Wheel
+Giros e crédito de prêmio — 401
+/api/signals/increment 	Trade 	Contador de sinais consumidos — 401
+/api/accelerator/save 	Accelerator 	Persistência — 401
+/api/broadcast 	Tempo real 	OPTIONS 204 (CORS); GET 404 — provável POST/SSE
+/api/admin/verify · /logout · /invite · /users/retention ·
+/withdrawals
+Admin 	Painel interno — 401 "Token não encontrado"
+
+-- 5 of 17 --
+
+9. Infraestrutura e tracking
+Camada 	Detalhe
+Páginas do funil 	Next.js App Router na Vercel; sem APIs próprias; redirect 100% client-side
+App de
+membros
+Next.js Turbopack + Supabase (zjyhssrabkqeiwvelzuf) — anon key pública no HTML
+Gateways 	CenterPag (plataforma Perfect Pay; suporte support@centerpag.com) + Hotmart
+Tracking 	Utmify (cdn.utmify.com.br/scripts/utms/latest.js + pixel/pixel.js); parâmetros xcod e sck propagados de ponta a ponta (quiz →
+checkout → app)
+Vídeo 	Vturb (param sck) e ConverteAI (scripts/images.converteai.net) dentro do app
+Trade 	Logos s3-symbol-logo.tradingview.com; sessões via /api/intl/session
+Referral
+corretora
+u3.shortink.io/register?utm_campaign=835286&utm_source=affiliate&ac=app-mnc-pd-in-sb&sub_id1=<email> —
+comissão por primeiro depósito (FTD)
+Certificados
+(crt.sh)
+Wildcard em todos os domínios; subdomínios ativos: go.riseaiclub.com, get.aiengineclub.com
+
+-- 6 of 17 --
+
+9B. O FRONT REAL — rotas ocultas /pv13, /pv14 e /back
+Correção crítica da análise anterior
+O quiz da home (/quiz-wt) é a página white. Os fronts de verdade — para onde os anúncios apontam — ficam em rotas não linkadas, não
+indexadas e bloqueadas no robots.txt do mesmo domínio: /pv11, /pv12, /pv13, /pv14 e /back (PV11/PV12 = versões anteriores do mesmo
+simulador, mesmo initialBalance:50, rota /pvNN/trading). Há ainda /wt, advertorial "TradeGuide AI" indexável com tripwire de US$ 1 (seção
+9C). Nas páginas em si não há cloaker; a seleção black/white acontece nos trackers de entrada (seção 9C). Quem chega pela home vê educação
+financeira; quem chega pelo link do anúncio vê um simulador de trading com agente de voz.
+Fluxo do front PV13 (4 etapas no mesmo domínio)
+Etapa 	Rota 	O que acontece
+1. Landing 	/pv13 	"AI · Trade" com ticker Apple/NVIDIA/Meta/Tesla. "Activate the AI and multiply your balance in 60 seconds." "1 free
+license". Geo-detecção client-side via 3 APIs (api.country.is, ipwho.is, ipapi.co) — escolhe moeda e tracking por
+país.
+2. Simulador 	/pv13/trading 	"How much do you want to make?" → slider de modo (Safe / Moderate / Maximum Gains) → saldo inicial fake de
+$50 → animação "AI running technical analysis… Scanning for high-probability opportunities… Profit confirmed"
+com lucros pré-programados ($11.66, $12.36 … $30.28) → "REQUEST MY WITHDRAWAL" → "Your account is
+still in demonstration mode… withdrawals stay locked until verification" → CONTINUE VERIFICATION.
+3.
+"Verificação"
+(VSL)
+/pv13/vsl 	Não é vídeo — é um agente de voz. "Daniel Torres, Money Club verification" liga para a vítima. 99 falas pré-
+geradas em TTS (Inworld TTS-2, voz "Nate", prompt "speak conversationally at a relaxed pace like a phone call"),
+servidas de /pv13/voice/manifest.json + /api/tts. Pede o primeiro nome, faz 4 perguntas de qualificação, mostra
+"provas", pressiona e fecha com preço dinâmico.
+4. Saque isca 	/pv13/withdraw
+· /back
+"Your Money Club withdrawal is approved — US$125.57 available", escolha Bank/PayPal, feed fake "Live
+withdrawals +2,847 this week — Mike G. 🇺🇸 US$123.95 8s ago". Para "sacar", precisa pagar a "ativação". /back é
+a versão standalone para retargeting ($29.90 full / $9.90 down).
+Precificação dinâmica — o preço é escolhido pelas respostas
+A VSL pontua 4 respostas (p1–p4) e soma um score que define o tier do preço anunciado por "Daniel":
+Pergunta 	Pontuação
+p1 — "How much do you want to make?" (meta mensal) 	<$2.000 = 0 · ≤$5.000 = 1 · ≤$15.000 = 2 · >$15.000 = 3
+p2 — "Why are you here?" 	debt = 0 · extra income = 1 · family = 1 · stop depending on job = 2 · build future = 2
+p3 — Situação financeira atual 	"in the red" → "solid base" (0–3)
+p4 — "I want to activate my account" vs "I still have a question" 	activate = 2 · doubt = 0 (marco ans_p5_activate do admin)
+Tier (score) 	Preço cheio 	Checkout 	Downsell 	Checkout
+17 	$17 	PPU38CQG07H 	$9.90 	PPU38CQG07N
+27 	$27 	PPU38CQG07I 	$14.90 	PPU38CQG07O
+47 (default) 	$47 	PPU38CQG07K 	$24.90 	PPU38CQG07P
+67 	$67 	PPU38CQG07L 	$34.90 	PPU38CQG07R
+97 	$97 	PPU38CQG07M 	$49.90 	PPU38CQG07S
+/back (retargeting) 	$29.90 	PPU38CQFUFH 	$9.90 	PPU38CQFUFG
+São exatamente os "dez planos" e "5 fronts e 5 downsells" citados no painel admin. Quanto mais desesperada e ambiciosa a resposta, maior o preço. Tudo roteado por
+growaiclub.com/?to=<checkout> (a home funciona como redirector) e rastreado via POST /api/funnel-hit.
+Roteiro do agente "Daniel Torres" (99 falas — trechos-chave)
+Fase 	Fala (transcrição literal do manifest de voz)
+Abertura / urgência 	"Daniel Torres, Money Club verification. I'm the one handling your case." · "If this call drops, the process resets from zero and I
+can't guarantee your withdrawal."
+Autoridade falsa 	"Money Club was built with a hundred and twenty seven million dollars from Bill Gates. I know how that sounds — but it's
+real. That's him right there in our office. I work in that building."
+
+-- 7 of 17 --
+
+Mecanismo 	"The Money Club A I was trained on millions of real trades… analyzes more than two hundred assets per second… accuracy went
+from seventy-three to eighty-three point three three percent… only executes when confidence is above ninety percent."
+Prova social fabricada 	"This is María… three months behind on rent… that plaque — fifty thousand dollars." · "James. One hundred thousand dollars…
+the watch, the champagne, the plaque." · "Marco… took his whole family to Cancún." · "Top hundred — cruise. Top ten —
+Dubai."
+Reframe do saldo fake 	"The $50.00 credit you got in the test session is a test credit… On the left is where you are — demonstration mode. Withdrawal
+blocked. On the right… withdrawals released, A I trading around the clock."
+Justificativa da taxa 	"To activate your account there's a one-time fee. It works like an access license… If one person creates ten accounts, they
+contaminate the algorithm."
+Ancoragem 	"Professional trading algorithms cost between five thousand and fifteen thousand dollars a year… The activation fee could be two
+thousand dollars. It could be five hundred. Even two hundred would be fair."
+Escassez 	"We opened three hundred fifty spots… three hundred forty-two are already filled. There are 8 left." · "The first session closed in
+eleven days."
+Tratamento de objeção
+(ramificado)
+"too good to be true" → história do smartphone · "I don't understand tech" → "María barely knew how to use her phone… you
+press a button" · "I want to think" → "I take forty to fifty calls a day… by the time they come back the conditions have changed."
+Fechamento 	"Option one — you hang up, go back to the same paycheck… what if I had activated that day?" · "I've done my part. Now it's on
+you." · "I'm waiting for you to tap one of the buttons below."
+A promessa real do funil
+"Teste grátis" de uma IA que "multiplica seu saldo em 60 segundos" → o simulador mostra $50 virando ~$125 em trades fake → o saque é
+bloqueado por "verificação" → um "funcionário" de voz sintética (Bill Gates investiu $127M, María fez $50k, só 8 vagas) cobra uma "taxa de
+ativação" de $17–$97 para liberar o dinheiro inexistente. Depois da compra: upsells de plano ($37–$57), multiplicador ($24.90–$49.90), app com
+VIP/Express/roleta e referral de corretora para o "saque".
+
+-- 8 of 17 --
+
+9C. DE ONDE VEM O TRÁFEGO — rede de domínios e cloaker de entrada
+Por que growaiclub.com não aparece na Biblioteca de Anúncios
+Nenhum anúncio aponta para growaiclub.com. O domínio é apenas 1 de 13 aliases idênticos do mesmo deployment Vercel
+(dpl_5qvmg8KcPAEukPos56R5oYe9Eaxn). Os anúncios apontam para (a) trackers com cloaker (go.riseaiclub.com, get.aiengineclub.com), (b) 8
+domínios de advertoriais "white" em outro deployment, ou (c) aliases rotativos registrados em lote (30/ago a 05/out/2026). Sem Meta Pixel nas
+páginas (conversão server-side via Utmify), ferramentas de espionagem não conseguem correlacionar pixel → domínio. Enumeração feita por
+DNS em 552 candidatos *aiclub.com/.online + validação de deployment/NS.
+A) 13 aliases do funil principal (mesmo dpl, mesma CF account jo/kenneth, /quiz-wt, /pv13 = 200)
+Domínio 	Domínio 	Domínio
+growaiclub.com 	ascendaiclub.online 	blazeaiclub.online
+bloomaiclub.com 	bloomaiclub.online 	flashaiclub.online
+igniteaiclub.online leapaiclub.online 	masteraiclub.online
+summitaiclub.online surgeaiclub.com 	thriveaiclub.com
+thriveaiclub.online Todas com título "AI Program", mesmas rotas ocultas /pv11–/pv14, /back, /wt, /hotwt, /pay/up1–2, /api/tts. ScamAdviser:
+"domain age 3 days", registrar GoDaddy/Cloudflare, Vercel US.
+B) 8 domínios de advertoriais "white" — 2º deployment (dpl_AwB8neJJG9jA8vPKdB4rLjdFsXxD)
+Projeto Next.js separado só com páginas "compliance-safe" (disclaimer "Research, not a pitch", "Loss is normal here"), Utmify
+embutido, visual de blog editorial. Cada domínio redireciona a raiz (307) para uma "marca" diferente:
+Domínio 	Raiz → 	Marca fake 	Título
+momentumaiclub.online 	/lesson Vesper 	A margin on models and side tasks
+prosperaiclub.online 	/guide 	Second
+Bench
+Bench notes on models and paid tasks
+visionaiclub.online 	/study 	Low Fern 	A walking map of side tasks
+edgeaiclub.online, growaiclub.online, launchaiclub.online,
+peakaiclub.online, riseaiclub.online
+/ e /be Lumenfield 	Markets, Models, and Machine Learning
+(robots: Disallow /be)
+O mesmo advertorial existe dentro do funil principal como growaiclub.com/wt ("TradeGuide AI", meta index,follow — a única página
+indexável de toda a operação). O CTA do Lumenfield/TradeGuide vai para o checkout go.centerpag.com/PPU38CQ513F = "Activate Your
+Potential [MX] – /wt", US$ 1,00 (tripwire de cartão para México/LatAm; moedas USD/MXN/BRL no checkout). Isso confirma uma
+frente MX além de EN/ES.
+C) O cloaker: go.riseaiclub.com e get.aiengineclub.com (/js/captcha.min.js)
+Qualquer path de 2 segmentos (/r/<slug>, /c/, /l/, /t/, /go/, /click/) devolve 200 com um spinner "Loading" de 1 KB que carrega
+/js/captcha.min.js (5,5 KB, ofuscado, atualizado em 16/out/2026). O script:
+Etapa 	O que coleta / faz
+1. Fingerprint 	UA, navigator.webdriver, plugins, idioma, timezone, platform, cores, RAM, touch, 9 métricas de tela, cookies, bateria, canvas hash,
+WebGL vendor/renderer, tipo de conexão/RTT, performance.timing
+2. Geo 	fetch('https://ipapi.co/json') → país, cidade, IP, ISP, ASN (filtra datacenter/VPN)
+3. Anti-análise 	debugger; cronometrado — se DevTools aberto (>10 ms) marca devtools:true
+4. Anti-proxy 	RTCPeerConnection + ICE candidates → vaza IPs locais/reais (detecta proxy residencial mal configurado)
+5. Envio 	JSON cifrado com XOR (chave = origin+pathname) + base64 → POST para a própria URL
+6. Decisão
+(server)
+{type:"content"} → document.write() da página white
+{type:"redirect"} → location.href para a oferta (/pv13, /back, checkout…)
+slug inválido → {error:"Campaign not found"}
+Assinaturas 	Rate-limit 60-in-1min; erro em PT-BR ("Ocorreu um erro ao processar a requisição"); /health → OK; /start → 302 growaiclub.com
+(link de fallback); /errors recebe stack traces
+
+-- 9 of 17 --
+
+Simulei o protocolo completo (iPhone/EUA/T-Mobile, referrer l.facebook.com) e o servidor respondeu corretamente em JSON — a
+implementação está confirmada; só falta um slug de campanha real, que só existe nas URLs dos anúncios. É isso que você precisa
+capturar do anúncio (o link go.riseaiclub.com/r/<slug> ou similar) para ver a decisão black/white ao vivo.
+D) 2 domínios com WAF geográfico (mesma conta Cloudflare)
+boostaiclub.online e surgeaiclub.online devolvem 403 "Access Denied" (regra WAF custom, text/plain) para todo visitante a partir do
+Brasil, independente de UA (iPhone, Android FB in-app, facebookexternalhit, curl). Googlebot recebe 404 vazio da origem (não-Vercel,
+headers CORS localhost — provável mesmo app Express do cloaker). surgeaiclub.online foi adicionado a diretórios em 05/out/2026,
+ou seja, é a geração mais nova de domínios de entrada. Para vê-los é preciso IP residencial dos EUA/MX.
+E) Como capturar os anúncios
+Ação 	Motivo
+Buscar na Ad Library cada um dos 13 aliases + 8 advertoriais (não só growaiclub) 	Os anúncios rodam em domínio rotativo; o mais recente
+(surgeaiclub, thriveaiclub, flashaiclub, igniteaiclub) tem mais
+chance
+Buscar por riseaiclub.com e aiengineclub.com (domínios dos trackers) 	O link do anúncio pode ser go.riseaiclub.com/…; a Ad Library
+indexa pelo domínio raiz
+Buscar por texto: "Discover how Artificial Intelligence can help you with your
+finances", "AI Program", "Activate the AI and multiply your balance in 60 seconds"
+Copy fixa do quiz e do pv13
+Usar proxy residencial EUA/MX + celular real ao abrir os links 	O cloaker rejeita datacenter/VPN, Brasil, desktop sem touch e
+DevTools
+Monitorar novos registros *aiclub.online com NS jo/kenneth.ns.cloudflare.com 	O operador registra em lote (GoDaddy/Cloudflare) e troca a cada
+2–4 semanas
+
+-- 10 of 17 --
+
+9D. QUEM RECEBE O TRÁFEGO — Biblioteca de Anúncios da Meta (22/out/2026)
+Consulta direta à Ad Library (busca por domínio e por página anunciante). Contagem de anúncios ativos é o melhor proxy público de
+tráfego — a Meta não expõe gasto/impressões fora da UE. Nenhum dos 13 aliases do funil nem dos 8 advertoriais tem anúncio: eles
+são destinos. Os anúncios apontam para domínios-ponte com cloaker (slug de campanha no path), que decidem server-side:
+visitante fora do alvo → 302 para um advertorial Lumenfield/Vesper; alvo real → funil /pv13.
+# 	Domínio do anúncio (link real) 	Total 	Ativos 	Período 	Ponte → white (visto do BR) 	Status
+1 	surgeaiclub.online/pz8g9b4dhe/ 	2.620 ~1.170 08/set →
+hoje
+→ riseaiclub.online/be 	CAMPANHA PRINCIPAL — 11
+páginas, 45% da verba ativa
+2 	new.kindleaiclub.online/education 865 	115 	05/out →
+hoje
+→ unlockaiclub.online/blog 	Ativa, em queda
+3 	try.soaraiclub.online/guide 	182 	152 	20/out →
+hoje
+→
+prosperaiclub.online/guide
+MAIS NOVA — 13 páginas,
+subindo
+4 	start.flourishaiclub.online/home 	319 	0 	05–11/set 	→ propelaiclub.online/blog 	Encerrada
+5 	of.vaultaiclub.online/blog 	264 	0 	12/set →
+03/out
+→ strideaiclub.online/blog 	Encerrada (páginas EUA "Lauren
+Mitchell" etc.)
+6 	go.riseaiclub.com/start 	103 	0 	31/ago →
+02/set
+→ growaiclub.com 	1ª onda (teste)
+7 	boostaiclub.online/t2vtc6t4kr/ 	33 	0 	04–05/set 	→ growaiclub.online/blog 	Encerrada
+8 	eb.conquestaiclub.online/ebook 	10 	0 	23/set 	→ edgeaiclub.online/ebook 	Teste
+— growaiclub.com 	1 	0 	— 	— 	Ruído (anunciante não
+relacionado)
+Total ativo na operação: ~1.430 anúncios em ~25 páginas-fantasma (nomes femininos BR/EUA, categoria "Model"/"Actor"/"Digital
+Creator", 0–2.361 likes), formato DPA/vídeo, Facebook + Instagram, copy fixa: "Test it out for yourself / Everyone needs to see this / Try
+it risk-free / Powered by AI". Páginas com mais anúncios ativos: Júlia de Barros (175), Camila Ribeiro (160), Chloe Pontes (82), Beatriz
+Andrade (81), Stella Miller (80), Carolina Lopes (80), Maria Edwards (76), Nathalia Fernandes (73), Sarah Long (66).
+Padrão de rotação
+Ondas de ~2 semanas: riseaiclub (ago 31) → boost/flourish (set 04) → surge (set 08, continua) → vault (set 12) → conquest (set 23) → kindle
+(out 05) → soar (out 20). Cada onda = domínio-ponte novo + subdomínio aleatório (eb./try./new./start./of.) + slug + advertorial white novo
+(unlock/propel/stride/prosperaiclub). Monitorar: Ad Library por "aiclub.online" e páginas listadas acima; novos registros *aiclub.online em
+jo/kenneth.ns.cloudflare.com.
+Links da Biblioteca de Anúncios — por domínio (clicáveis)
+Domínio 	Total 	Ativos 	Todos 	Só ativos
+surgeaiclub.online 	2.620 	~1.170 	abrir 	abrir
+kindleaiclub.online 	865 	115 	abrir 	abrir
+soaraiclub.online 	182 	152 	abrir 	abrir
+flourishaiclub.online 	319 	0 	abrir 	—
+vaultaiclub.online 	264 	0 	abrir 	—
+riseaiclub.com 	103 	0 	abrir 	—
+boostaiclub.online 	33 	0 	abrir 	—
+conquestaiclub.online 	10 	0 	abrir 	—
+aiclub.online (rede inteira) 	1.927 	— 	abrir 	abrir
+Links da Biblioteca de Anúncios — por página-fantasma (page_id)
+Página 	page_id 	Total 	Ativos 	Campanha 	Link
+Júlia de Barros 	995922473604773 	452 	175 	surge 	abrir
+
+-- 11 of 17 --
+
+Camila Ribeiro 	1311575022037142 	440 	160 	surge 	abrir
+Carolina Lopes 	988198821046653 	173 	80 	surge 	abrir
+Chloe Pontes 	1007885619084443 	160 	82 	surge 	abrir
+Nathalia Fernandes 	1048606108342167 	153 	73 	surge 	abrir
+Stella Miller 	1109501065575766 	145 	80 	surge 	abrir
+Sarah Long 	974218709111636 	141 	66 	surge 	abrir
+Beatriz Andrade 	994401217090778 	128 	81 	surge 	abrir
+Maria Edwards 	1013677708493440 	105 	76 	surge 	abrir
+Sophia Taylor 	1022943964229141 	83 	0 	surge 	abrir
+Natália Fernandes 	1322533707604250 	71 	0 	surge / conquest 	abrir
+Beatriz Nunes 	773364539198764 	143 	3 	flourish / kindle / soar 	abrir
+Joana Siqueira 	781082508425308 	112 	3 	boost / kindle / soar 	abrir
+Adriana da Conceição 	930343063505657 	— 	ativa 	soar / kindle / flourish 	abrir
+Isabella Davis 	1036906469514641 	— 	ativa 	soar / kindle 	abrir
+Madison Miller 	983630741510288 	— 	ativa 	soar / kindle 	abrir
+Aparecida de Moura 	933361916525012 	— 	ativa 	soar 	abrir
+Isabella Rivera 	340658615789859 	27 	0 	rise / vault 	abrir
+Juan Pablo 	1145442055327227 	23 	0 	rise 	abrir
+Ana Gonzales 	206735505857903 	19 	0 	rise 	abrir
+Lauren Mitchell 	166981049828953 	— 	0 	vault 	abrir
+Samantha Brooks 	166953793165801 	— 	0 	vault / kindle 	abrir
+Anúncios individuais de exemplo: 2331684780925619 (Sarah Long → surgeaiclub.online/pz8g9b4dhe/) · 2977334632638751. Para ver só os ativos em qualquer link,
+troque active_status=all por active. Para abrir o destino dos anúncios e ver a página black, use proxy residencial EUA em celular — do Brasil o cloaker entrega
+o advertorial.
+
+-- 12 of 17 --
+
+9E. OS CRIATIVOS REAIS — como o catálogo esconde e o que foi recuperado
+O truque do catálogo (DPA)
+1.185 dos 1.245 anúncios coletados são Dynamic Product Ads. A Biblioteca só mostra o template ("Test it out for yourself | Everyone needs to
+see this") e a imagem do "produto" — e o operador sobe no catálogo fotos neutras geradas por IA (mesa, laptop, caderno, café). De 1.195
+imagens baixadas, só 118 são únicas; as 5 mais usadas cobrem 539 anúncios. Ou seja, até a imagem de catálogo é isca. Os criativos que
+vendem são os 50 vídeos UGC 9:16 das campanhas boost/flourish/surge (atrizes/avatares, legenda queimada), recuperados dos campos
+snapshot.videos[].video_sd_url e cards[].original_image_url.
+Roteiro (13 distintos, 41 vídeos com
+fala) Vídeos 	Ângulo
+"Meu marido disse na frente dos meus
+filhos que sem ele eu estaria na rua"
+8 (surge) 	Drama conjugal → "programa piloto de IA da OpenAI/Meta/Microsoft, 87% de acerto, US$
+100 virtuais deles" → 100→217 na 1ª noite, US$ 1.500/semana, US$ 6.300/mês. Único
+roteiro com números — o mais replicado.
+"Não sei por que este vídeo apareceu pra
+você"
+8
+(flourish/boost)
+Curiosity gap sem promessa; "não é texto nem imagem, é outra coisa"; CTA para "o vídeo
+abaixo"
+"Não vou pedir dinheiro nem cartão" 	6 (flourish) 	Objeção antecipada + amigo(a) que desafiou a testar
+Hook de casal + demo do app (versões
+de 12 min em loop)
+6 (flourish) 	"Ele acha que estou vendo Instagram" → "minha amiga mostrando o app": US$ 50 deles,
+Microsoft/Apple/McDonald's, Low→Max, US$ 60,20 em minutos, saque US$ 1.000 PayPal
+Marido escondendo app · Sogra "merece
+esposa melhor" · Marido pediu divórcio
+2 + 2 + 2
+(surge)
+Família das histórias de humilhação; todas fecham com "é grátis testar, sem compromisso"
+Demo pura do simulador ("recurso do
+celular que 99% não conhece", "Part 3")
+2 (surge) 	Screen recording idêntico ao fluxo de /pv13/trading → /withdraw
+"Comprei tudo isso sem cartão" · "Vou te
+fazer uma pergunta" · "Foi o sistema que
+decidiu te mostrar"
+1 + 2 + 1 	Haul de compras · anti-promessa · pseudo-exclusividade algorítmica
+"Na China isso já gerou US$ 2 bilhões"
+— avaliar vídeos
+2 (surge) 	Oferta diferente (tarefas pagas de feedback humano) = produto WebCash /
+aiengineclub.com, testado na mesma campanha
+Só música + legenda 	9 (surge) 	Sem áudio de fala; conteúdo nas legendas
+Cada claim dos vídeos corresponde a um elemento do funil oculto: "US$ 50/100 deles" = initialBalance:50; "Low→Max" = slider
+Safe/Moderate/Maximum; "saque PayPal cai em minutos" = /pv13/withdraw bloqueado pela "verificação" do agente de voz. Imagens
+não-neutras: "WORKING HARDER? / WORKING SMARTER WITH AI" (rise, 102 usos; reign, 24), mulher com tablet (flourish+vault, 137),
+olho cibernético, robô no laptop.
+Atualização — coleta completa (22/out, lote 2): surgeaiclub.online paginado até o fim: 2.774 anúncios (1.059 ativos) de 47 páginas-
+fantasma, 1.747 mídias baixadas → 123 imagens + 60 vídeos únicos (md5). Os 1.056 DPAs que a Biblioteca lista sem mídia foram
+verificados um a um na página individual: a própria Meta guarda original_image_url: null — não existe criativo a recuperar. 9 ganchos
+novos de "demo do app" e 2 histórias novas ("na frente dos meus filhos", "esperando os filhos na escola") estão em Money Club/04-
+criativos/todos/00-roteiros-e-ganchos.txt. Os demais domínios (kindle, soar, flourish, vault, boost…) ficaram pendentes porque a
+Meta bloqueou buscas a partir do IP de coleta após ~1.400 requisições.
+Entregáveis: ~/Desktop/money-club-criativos-reais.pdf (14 p.: folhas de contato, 13 roteiros transcritos na íntegra, mapeamento claim→funil) · pasta
+~/Desktop/money-club-criativos/ (118 imagens + 50 vídeos únicos em unicos/, todos os 1.245 originais, transcrições .txt, 00-indice-criativos.csv
+com ad_id/página/link de cada um).
+
+-- 13 of 17 --
+
+10. Análise de cloaking — existe página white? As URLs são iscas?
+Testes executados em 22/out/2026 para detectar cloaker (conteúdo diferente para bots/revisores vs. usuários reais):
+Teste 	Resultado 	Veredito
+User-Agent fork (Googlebot, facebot,
+Twitterbot vs. iPhone Safari)
+Hash idêntico do HTML em todos 	Sem cloaking por UA
+Assinatura de cloaker nos headers (Keitaro,
+Binom, Adspect, Cloaking House)
+Headers puros de Vercel/Next.js (x-matched-path, x-vercel-*) 	Nenhum cloaker terceirizado
+Fingerprinting client-side
+(navigator.webdriver, headless, selenium)
+Ausente nas páginas do funil (único "isBot" é util interno do Next.js p/
+prefetch)
+Sem detecção de bots
+Geo-fork nas páginas do funil (curl IP
+brasileiro vs. fetch servidor EUA)
+Conteúdo idêntico, preços em USD 	Sem geo-fork no funil
+Trackers Express (go.riseaiclub.com,
+get.aiengineclub.com) — análise do corpo
+"Loading"
+Carrega /js/captcha.min.js: fingerprint + geo + anti-devtools +
+WebRTC → POST cifrado → servidor devolve type:content (white) ou
+type:redirect (oferta)
+CLOAKER server-side próprio
+(ver 9C)
+boostaiclub.online / surgeaiclub.online
+(mesma conta Cloudflare)
+403 "Access Denied" (text/plain, 13 bytes, regra WAF) para iPhone,
+Android, FB in-app, facebookexternalhit e curl a partir do Brasil;
+Googlebot recebe 404 vazio da origem
+Bloqueio geográfico/WAF —
+só tráfego do país-alvo passa
+O cloaking real é ARQUITETURAL, não tecnológico
+Camada 	Mecanismo
+1. Esconderijo pós-compra (o
+truque principal)
+As páginas com claims ilegais de renda (up1: "$800–$1.000/dia"; up2: multiplicador) só são alcançáveis depois
+da compra. Nenhum anúncio aponta para /pay/*. O revisor da ad-network vê: quiz limpo → checkout padrão de
+gateway. O golpe acontece depois que o dinheiro já saiu.
+2. O quiz É a página white 	A rota da home é literalmente /quiz-wt ("wt" = white). Front compliance-safe: "descubra seu perfil em 2 min", zero
+promessa de renda. As promessas agressivas só existem atrás do paywall.
+3. Redirectores /hotwt +
+CHECKOUT_WHITE_ORIGIN
+A camada "white" existe no próprio código (nome da env). Os CTAs quicam num redirector interno que: quebra a
+cadeia de referrer até o checkout, permite trocar o checkout sem republicar páginas e preserva tracking. Se o
+domínio queimar, troca-se só a env.
+4. Rotação de domínios em vez de
+cloaker
+Versão moderna do hot/white: growaiclub (EN), transitaclub (ES + white origin) e fronts BR separados (PV13/PV14).
+Se um domínio for derrubado, os outros seguem rodando. Os fósseis do robots.txt (/hot/, /hotwt/, /back/, /be/, /tk/)
+mostram que a versão ANTIGA do funil tinha split hot/white explícito no mesmo domínio.
+5. Fork de edição por geo no app 	/api/geo grava cookie mnc_country; o app bifurca isBrazil/isInternational (APIs /api/intl/*). A operação BR (PT-BR
+no admin, planos de $9.90, VSLs PV13/PV14) roda em outras propriedades.
+6. Invisibilidade orgânica 	Meta robots noindex + robots.txt com Disallow em tudo — o funil não quer ser indexado pelo Google; tráfego
+100% de anúncios/social.
+7. Gateway conivente 	CenterPag (Perfect Pay) — gateway popular em operações grayhat BR; fluxo upsell=true e
+checkout.centerpag.com/upsell/<email>/<id> para 1-click com e-mail pré-preenchido.
+Conclusão (revisada)
+As páginas do funil (growaiclub.com e seus 12 aliases) não cloakeiam: o middleware sempre reescreve / → /quiz-wt para qualquer UA/IP. O
+cloaking acontece antes de chegar nelas, em três camadas: (1) cloaker próprio nos trackers go.riseaiclub.com / get.aiengineclub.com
+(fingerprint JS + geo + decisão server-side; seção 9C); (2) WAF Cloudflare em domínios de entrada (403 para quem está fora do país-alvo); (3)
+rota oculta — a home é a white, os anúncios chegam a /pv11–/pv14 e /back (noindex + robots Disallow + zero links internos). Um revisor vê
+educação financeira ou um advertorial "Research, not a pitch"; a vítima vê o simulador + agente de voz. Total agora: 32 checkouts validados (9
+funil + 10 app + 12 fronts PV/back + 1 tripwire /wt).
+
+-- 14 of 17 --
+
+11. Inteligência do painel admin
+Labels internos encontrados no chunk do /admin (PT-BR)
+"Compras aprovadas nos 5 fronts e 5 downsells" · "planos $29.90 e $9.90" · "planos $47 e $29.90 da PV13" · "Vendas dos planos PV14 no
+período, sem filtro de país" · "VSL · Access $29.90 e $47" · "Compras ÷ quem entrou na VSL" · marcos de funil ans_p5_activate · métricas de
+retenção, chargebacks e "compradores com o upsell ativo" · "VIP/Express/Infinity/WebCash/roleta no app. Fora do saldo da IA."
+Conclusões: (1) a operação roda múltiplos fronts e downsells além do growaiclub.com — versões nomeadas PV13/PV14, com VSL
+(não só quiz); (2) existem planos de $9.90 não expostos neste funil; (3) o admin consolida retenção e chargeback de todos os fronts —
+infra compartilhada.
+12. Rotas legadas (robots.txt — inativas neste domínio; /be voltou a existir ativa nos domínios
+Lumenfield, seção 9C)
+growaiclub.com: /hot/ · /up1 · /up2a-c · /up3a-c · /up4a-c · /rec- · /r/ · /hotwt/ · /back/ · /be/ · /be-tk/ · /tk/ · /test-
+min
+transitaclub.com: mesmas + /up5a-c + /pv8/
+Todas retornam 404/308 hoje — são fósseis de versões anteriores do funil no mesmo domínio (provável origem dos nomes PV13/PV14).
+13. Lacunas (fora do alcance sem credenciais)
+Preços de WebCash, Ultra Booster e Infinity Pass (servidos por API autenticada)
+Conteúdo das rotas logadas (/trade, /wallet, /inicio) e do /admin
+Configuração de post-backs/webhooks no CenterPag e Hotmart
+Os demais fronts da operação (PV13/PV14 e os "5 fronts / 5 downsells") — rastreáveis via Utmify ID ou certificados futuros
+Preço do front Hotmart ES (M104846164A) — checkout com renderização JS bloqueada
+
+-- 15 of 17 --
+
+14. Evidências visuais
+Upsell 1 — /pay/up1 (escolha de plano $37/$47/$57)
+Screenshot ao vivo de growaiclub.com/pay/up1 — 21/out/2026
+Upsell 2 — /pay/up2 (ofertas AI Multiplier)
+Screenshot ao vivo de growaiclub.com/pay/up2 após survey completo — 21/out/2026
+Apêndice A — Parâmetros de tracking propagados
+utm_source · utm_medium · utm_campaign · utm_content · utm_term · xcod · sck
+Exemplo real (link do up2): /hotwt/up2?
+to=https%3A%2F%2Fgo.centerpag.com%2FPPU38CQFOA6%3Fupsell%3Dtrue&utm_source=organic<hash>&xcod=organic<hash>&sck=organic<hash>
+A Utmify concatena o hash de sessão ao valor do parâmetro (utm_source=organic + jLj6ad97…).
+Apêndice B — Artefatos analisados
+growaiclub.com: home/up1/up2 HTML + chunks app/quiz-wt, app/pay/up1, app/pay/up2, app/hotwt/up1 + 10 chunks compartilhadas
+riseaiclub.com: 15 chunks compartilhadas + 16 chunks de rota (inicio, trade, wallet, wheel, accelerator, ranking, profile,
+invite, login, help, demo, terms, admin) + _buildManifest
+transitaclub.com: quiz-wt + chunks 7607/16 (redirect Hotmart ES)
+aiengineclub.com: HTML /login (WebCash)
+
+-- 16 of 17 --
+
+19 checkouts abertos e validados individualmente (CenterPag + Hotmart)
+crt.sh: growaiclub.com, riseaiclub.com, transitaclub.com, aiengineclub.com, centerpag.com
+Relatório gerado em 22/out/2026 — engenharia reversa para fins de estudo de funil. Todos os dados são públicos (páginas, JS client-side, certificados e checkouts
+abertos).
+
+-- 17 of 17 --
+

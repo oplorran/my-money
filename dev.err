@@ -1,0 +1,519 @@
+[31m[1m⨯[22m[39m ./app/pv13/page.tsx:6:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@/components/pv13-landing'[39m[22m
+  [90m4 |[0m [36mimport[0m { [33mTicker[0m } [36mfrom[0m [32m"@/components/ticker"[0m;
+  [90m5 |[0m [36mimport[0m { [33mMark[0m } [36mfrom[0m [32m"@/components/marks"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mPv13Landing[0m } [36mfrom[0m [32m"@/components/pv13-landing"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mconst[0m metadata: [33mMetadata[0m = {
+  [90m9 |[0m   title: [32m"AI that trades while you sleep · AI Trade"[0m,
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/pv13/page.tsx:6:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@/components/pv13-landing'[39m[22m
+  [90m4 |[0m [36mimport[0m { [33mTicker[0m } [36mfrom[0m [32m"@/components/ticker"[0m;
+  [90m5 |[0m [36mimport[0m { [33mMark[0m } [36mfrom[0m [32m"@/components/marks"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mPv13Landing[0m } [36mfrom[0m [32m"@/components/pv13-landing"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mconst[0m metadata: [33mMetadata[0m = {
+  [90m9 |[0m   title: [32m"AI that trades while you sleep · AI Trade"[0m,
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/pv13/page.tsx:6:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@/components/pv13-landing'[39m[22m
+  [90m4 |[0m [36mimport[0m { [33mTicker[0m } [36mfrom[0m [32m"@/components/ticker"[0m;
+  [90m5 |[0m [36mimport[0m { [33mMark[0m } [36mfrom[0m [32m"@/components/marks"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mPv13Landing[0m } [36mfrom[0m [32m"@/components/pv13-landing"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mconst[0m metadata: [33mMetadata[0m = {
+  [90m9 |[0m   title: [32m"AI that trades while you sleep · AI Trade"[0m,
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/pv13/page.tsx:6:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@/components/pv13-landing'[39m[22m
+  [90m4 |[0m [36mimport[0m { [33mTicker[0m } [36mfrom[0m [32m"@/components/ticker"[0m;
+  [90m5 |[0m [36mimport[0m { [33mMark[0m } [36mfrom[0m [32m"@/components/marks"[0m;
+[31m[1m>[0m [90m6 |[0m [36mimport[0m { [33mPv13Landing[0m } [36mfrom[0m [32m"@/components/pv13-landing"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m7 |[0m
+  [90m8 |[0m [36mexport[0m [36mconst[0m metadata: [33mMetadata[0m = {
+  [90m9 |[0m   title: [32m"AI that trades while you sleep · AI Trade"[0m,
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[36m[browser][39m ./app/pv13/page.tsx:6:1
+Error: Module not found: Can't resolve '@/components/pv13-landing'
+  4 | import { Ticker } from "@/components/ticker";
+  5 | import { Mark } from "@/components/marks";
+> 6 | import { Pv13Landing } from "@/components/pv13-landing";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export const metadata: Metadata = {
+  9 |   title: "AI that trades while you sleep · AI Trade",
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/pv13/page.tsx:6:1
+Error: Module not found: Can't resolve '@/components/pv13-landing'
+  4 | import { Ticker } from "@/components/ticker";
+  5 | import { Mark } from "@/components/marks";
+> 6 | import { Pv13Landing } from "@/components/pv13-landing";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  7 |
+  8 | export const metadata: Metadata = {
+  9 |   title: "AI that trades while you sleep · AI Trade",
+
+Import map: aliased to relative './components/pv13-landing' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[31m[1m⨯[22m[39m ./app/layout.tsx:3:1
+[1m[31mError[39m: [1m[31mModule not found[39m[22m[1m: Can't resolve [32m'@next/third-parties/google'[39m[22m
+  [90m1 |[0m [36mimport[0m [36mtype[0m { [33mMetadata[0m, [33mViewport[0m } [36mfrom[0m [32m"next"[0m;
+  [90m2 |[0m [36mimport[0m { [33mPoppins[0m, [33mMerriweather[0m, [33mJetBrains_Mono[0m } [36mfrom[0m [32m"next/font/google"[0m;
+[31m[1m>[0m [90m3 |[0m [36mimport[0m { [33mGoogleTagManager[0m } [36mfrom[0m [32m"@next/third-parties/google"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m4 |[0m [36mimport[0m [32m"./globals.css"[0m;
+  [90m5 |[0m
+  [90m6 |[0m [36mconst[0m poppins = [33mPoppins[0m({ variable: [32m"--font-poppins"[0m, subsets: [[32m"latin"[0m], weight: [[32m"400"[0m, [32m"...[0m
+
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 
+[36m[browser][39m ./app/layout.tsx:3:1
+Error: Module not found: Can't resolve '@next/third-parties/google'
+  1 | import type { Metadata, Viewport } from "next";
+  2 | import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+> 3 | import { GoogleTagManager } from "@next/third-parties/google";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  4 | import "./globals.css";
+  5 |
+  6 | const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "...
+
+https://nextjs.org/docs/messages/module-not-found 

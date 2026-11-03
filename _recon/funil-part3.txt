@@ -1,0 +1,26 @@
+ (escolha de plano $37/$47/$57)
+Screenshot ao vivo de growaiclub.com/pay/up1 — 21/out/2026
+Upsell 2 — /pay/up2 (ofertas AI Multiplier)
+Screenshot ao vivo de growaiclub.com/pay/up2 após survey completo — 21/out/2026
+Apêndice A — Parâmetros de tracking propagados
+utm_source · utm_medium · utm_campaign · utm_content · utm_term · xcod · sck
+Exemplo real (link do up2): /hotwt/up2?
+to=https%3A%2F%2Fgo.centerpag.com%2FPPU38CQFOA6%3Fupsell%3Dtrue&utm_source=organic<hash>&xcod=organic<hash>&sck=organic<hash>
+A Utmify concatena o hash de sessão ao valor do parâmetro (utm_source=organic + jLj6ad97…).
+Apêndice B — Artefatos analisados
+growaiclub.com: home/up1/up2 HTML + chunks app/quiz-wt, app/pay/up1, app/pay/up2, app/hotwt/up1 + 10 chunks compartilhadas
+riseaiclub.com: 15 chunks compartilhadas + 16 chunks de rota (inicio, trade, wallet, wheel, accelerator, ranking, profile,
+invite, login, help, demo, terms, admin) + _buildManifest
+transitaclub.com: quiz-wt + chunks 7607/16 (redirect Hotmart ES)
+aiengineclub.com: HTML /login (WebCash)
+
+-- 16 of 17 --
+
+19 checkouts abertos e validados individualmente (CenterPag + Hotmart)
+crt.sh: growaiclub.com, riseaiclub.com, transitaclub.com, aiengineclub.com, centerpag.com
+Relatório gerado em 22/out/2026 — engenharia reversa para fins de estudo de funil. Todos os dados são públicos (páginas, JS client-side, certificados e checkouts
+abertos).
+
+-- 17 of 17 --
+
+

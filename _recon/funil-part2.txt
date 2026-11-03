@@ -1,0 +1,203 @@
+ia "Model"/"Actor"/"Digital
+Creator", 0–2.361 likes), formato DPA/vídeo, Facebook + Instagram, copy fixa: "Test it out for yourself / Everyone needs to see this / Try
+it risk-free / Powered by AI". Páginas com mais anúncios ativos: Júlia de Barros (175), Camila Ribeiro (160), Chloe Pontes (82), Beatriz
+Andrade (81), Stella Miller (80), Carolina Lopes (80), Maria Edwards (76), Nathalia Fernandes (73), Sarah Long (66).
+Padrão de rotação
+Ondas de ~2 semanas: riseaiclub (ago 31) → boost/flourish (set 04) → surge (set 08, continua) → vault (set 12) → conquest (set 23) → kindle
+(out 05) → soar (out 20). Cada onda = domínio-ponte novo + subdomínio aleatório (eb./try./new./start./of.) + slug + advertorial white novo
+(unlock/propel/stride/prosperaiclub). Monitorar: Ad Library por "aiclub.online" e páginas listadas acima; novos registros *aiclub.online em
+jo/kenneth.ns.cloudflare.com.
+Links da Biblioteca de Anúncios — por domínio (clicáveis)
+Domínio 	Total 	Ativos 	Todos 	Só ativos
+surgeaiclub.online 	2.620 	~1.170 	abrir 	abrir
+kindleaiclub.online 	865 	115 	abrir 	abrir
+soaraiclub.online 	182 	152 	abrir 	abrir
+flourishaiclub.online 	319 	0 	abrir 	—
+vaultaiclub.online 	264 	0 	abrir 	—
+riseaiclub.com 	103 	0 	abrir 	—
+boostaiclub.online 	33 	0 	abrir 	—
+conquestaiclub.online 	10 	0 	abrir 	—
+aiclub.online (rede inteira) 	1.927 	— 	abrir 	abrir
+Links da Biblioteca de Anúncios — por página-fantasma (page_id)
+Página 	page_id 	Total 	Ativos 	Campanha 	Link
+Júlia de Barros 	995922473604773 	452 	175 	surge 	abrir
+
+-- 11 of 17 --
+
+Camila Ribeiro 	1311575022037142 	440 	160 	surge 	abrir
+Carolina Lopes 	988198821046653 	173 	80 	surge 	abrir
+Chloe Pontes 	1007885619084443 	160 	82 	surge 	abrir
+Nathalia Fernandes 	1048606108342167 	153 	73 	surge 	abrir
+Stella Miller 	1109501065575766 	145 	80 	surge 	abrir
+Sarah Long 	974218709111636 	141 	66 	surge 	abrir
+Beatriz Andrade 	994401217090778 	128 	81 	surge 	abrir
+Maria Edwards 	1013677708493440 	105 	76 	surge 	abrir
+Sophia Taylor 	1022943964229141 	83 	0 	surge 	abrir
+Natália Fernandes 	1322533707604250 	71 	0 	surge / conquest 	abrir
+Beatriz Nunes 	773364539198764 	143 	3 	flourish / kindle / soar 	abrir
+Joana Siqueira 	781082508425308 	112 	3 	boost / kindle / soar 	abrir
+Adriana da Conceição 	930343063505657 	— 	ativa 	soar / kindle / flourish 	abrir
+Isabella Davis 	1036906469514641 	— 	ativa 	soar / kindle 	abrir
+Madison Miller 	983630741510288 	— 	ativa 	soar / kindle 	abrir
+Aparecida de Moura 	933361916525012 	— 	ativa 	soar 	abrir
+Isabella Rivera 	340658615789859 	27 	0 	rise / vault 	abrir
+Juan Pablo 	1145442055327227 	23 	0 	rise 	abrir
+Ana Gonzales 	206735505857903 	19 	0 	rise 	abrir
+Lauren Mitchell 	166981049828953 	— 	0 	vault 	abrir
+Samantha Brooks 	166953793165801 	— 	0 	vault / kindle 	abrir
+Anúncios individuais de exemplo: 2331684780925619 (Sarah Long → surgeaiclub.online/pz8g9b4dhe/) · 2977334632638751. Para ver só os ativos em qualquer link,
+troque active_status=all por active. Para abrir o destino dos anúncios e ver a página black, use proxy residencial EUA em celular — do Brasil o cloaker entrega
+o advertorial.
+
+-- 12 of 17 --
+
+9E. OS CRIATIVOS REAIS — como o catálogo esconde e o que foi recuperado
+O truque do catálogo (DPA)
+1.185 dos 1.245 anúncios coletados são Dynamic Product Ads. A Biblioteca só mostra o template ("Test it out for yourself | Everyone needs to
+see this") e a imagem do "produto" — e o operador sobe no catálogo fotos neutras geradas por IA (mesa, laptop, caderno, café). De 1.195
+imagens baixadas, só 118 são únicas; as 5 mais usadas cobrem 539 anúncios. Ou seja, até a imagem de catálogo é isca. Os criativos que
+vendem são os 50 vídeos UGC 9:16 das campanhas boost/flourish/surge (atrizes/avatares, legenda queimada), recuperados dos campos
+snapshot.videos[].video_sd_url e cards[].original_image_url.
+Roteiro (13 distintos, 41 vídeos com
+fala) Vídeos 	Ângulo
+"Meu marido disse na frente dos meus
+filhos que sem ele eu estaria na rua"
+8 (surge) 	Drama conjugal → "programa piloto de IA da OpenAI/Meta/Microsoft, 87% de acerto, US$
+100 virtuais deles" → 100→217 na 1ª noite, US$ 1.500/semana, US$ 6.300/mês. Único
+roteiro com números — o mais replicado.
+"Não sei por que este vídeo apareceu pra
+você"
+8
+(flourish/boost)
+Curiosity gap sem promessa; "não é texto nem imagem, é outra coisa"; CTA para "o vídeo
+abaixo"
+"Não vou pedir dinheiro nem cartão" 	6 (flourish) 	Objeção antecipada + amigo(a) que desafiou a testar
+Hook de casal + demo do app (versões
+de 12 min em loop)
+6 (flourish) 	"Ele acha que estou vendo Instagram" → "minha amiga mostrando o app": US$ 50 deles,
+Microsoft/Apple/McDonald's, Low→Max, US$ 60,20 em minutos, saque US$ 1.000 PayPal
+Marido escondendo app · Sogra "merece
+esposa melhor" · Marido pediu divórcio
+2 + 2 + 2
+(surge)
+Família das histórias de humilhação; todas fecham com "é grátis testar, sem compromisso"
+Demo pura do simulador ("recurso do
+celular que 99% não conhece", "Part 3")
+2 (surge) 	Screen recording idêntico ao fluxo de /pv13/trading → /withdraw
+"Comprei tudo isso sem cartão" · "Vou te
+fazer uma pergunta" · "Foi o sistema que
+decidiu te mostrar"
+1 + 2 + 1 	Haul de compras · anti-promessa · pseudo-exclusividade algorítmica
+"Na China isso já gerou US$ 2 bilhões"
+— avaliar vídeos
+2 (surge) 	Oferta diferente (tarefas pagas de feedback humano) = produto WebCash /
+aiengineclub.com, testado na mesma campanha
+Só música + legenda 	9 (surge) 	Sem áudio de fala; conteúdo nas legendas
+Cada claim dos vídeos corresponde a um elemento do funil oculto: "US$ 50/100 deles" = initialBalance:50; "Low→Max" = slider
+Safe/Moderate/Maximum; "saque PayPal cai em minutos" = /pv13/withdraw bloqueado pela "verificação" do agente de voz. Imagens
+não-neutras: "WORKING HARDER? / WORKING SMARTER WITH AI" (rise, 102 usos; reign, 24), mulher com tablet (flourish+vault, 137),
+olho cibernético, robô no laptop.
+Atualização — coleta completa (22/out, lote 2): surgeaiclub.online paginado até o fim: 2.774 anúncios (1.059 ativos) de 47 páginas-
+fantasma, 1.747 mídias baixadas → 123 imagens + 60 vídeos únicos (md5). Os 1.056 DPAs que a Biblioteca lista sem mídia foram
+verificados um a um na página individual: a própria Meta guarda original_image_url: null — não existe criativo a recuperar. 9 ganchos
+novos de "demo do app" e 2 histórias novas ("na frente dos meus filhos", "esperando os filhos na escola") estão em Money Club/04-
+criativos/todos/00-roteiros-e-ganchos.txt. Os demais domínios (kindle, soar, flourish, vault, boost…) ficaram pendentes porque a
+Meta bloqueou buscas a partir do IP de coleta após ~1.400 requisições.
+Entregáveis: ~/Desktop/money-club-criativos-reais.pdf (14 p.: folhas de contato, 13 roteiros transcritos na íntegra, mapeamento claim→funil) · pasta
+~/Desktop/money-club-criativos/ (118 imagens + 50 vídeos únicos em unicos/, todos os 1.245 originais, transcrições .txt, 00-indice-criativos.csv
+com ad_id/página/link de cada um).
+
+-- 13 of 17 --
+
+10. Análise de cloaking — existe página white? As URLs são iscas?
+Testes executados em 22/out/2026 para detectar cloaker (conteúdo diferente para bots/revisores vs. usuários reais):
+Teste 	Resultado 	Veredito
+User-Agent fork (Googlebot, facebot,
+Twitterbot vs. iPhone Safari)
+Hash idêntico do HTML em todos 	Sem cloaking por UA
+Assinatura de cloaker nos headers (Keitaro,
+Binom, Adspect, Cloaking House)
+Headers puros de Vercel/Next.js (x-matched-path, x-vercel-*) 	Nenhum cloaker terceirizado
+Fingerprinting client-side
+(navigator.webdriver, headless, selenium)
+Ausente nas páginas do funil (único "isBot" é util interno do Next.js p/
+prefetch)
+Sem detecção de bots
+Geo-fork nas páginas do funil (curl IP
+brasileiro vs. fetch servidor EUA)
+Conteúdo idêntico, preços em USD 	Sem geo-fork no funil
+Trackers Express (go.riseaiclub.com,
+get.aiengineclub.com) — análise do corpo
+"Loading"
+Carrega /js/captcha.min.js: fingerprint + geo + anti-devtools +
+WebRTC → POST cifrado → servidor devolve type:content (white) ou
+type:redirect (oferta)
+CLOAKER server-side próprio
+(ver 9C)
+boostaiclub.online / surgeaiclub.online
+(mesma conta Cloudflare)
+403 "Access Denied" (text/plain, 13 bytes, regra WAF) para iPhone,
+Android, FB in-app, facebookexternalhit e curl a partir do Brasil;
+Googlebot recebe 404 vazio da origem
+Bloqueio geográfico/WAF —
+só tráfego do país-alvo passa
+O cloaking real é ARQUITETURAL, não tecnológico
+Camada 	Mecanismo
+1. Esconderijo pós-compra (o
+truque principal)
+As páginas com claims ilegais de renda (up1: "$800–$1.000/dia"; up2: multiplicador) só são alcançáveis depois
+da compra. Nenhum anúncio aponta para /pay/*. O revisor da ad-network vê: quiz limpo → checkout padrão de
+gateway. O golpe acontece depois que o dinheiro já saiu.
+2. O quiz É a página white 	A rota da home é literalmente /quiz-wt ("wt" = white). Front compliance-safe: "descubra seu perfil em 2 min", zero
+promessa de renda. As promessas agressivas só existem atrás do paywall.
+3. Redirectores /hotwt +
+CHECKOUT_WHITE_ORIGIN
+A camada "white" existe no próprio código (nome da env). Os CTAs quicam num redirector interno que: quebra a
+cadeia de referrer até o checkout, permite trocar o checkout sem republicar páginas e preserva tracking. Se o
+domínio queimar, troca-se só a env.
+4. Rotação de domínios em vez de
+cloaker
+Versão moderna do hot/white: growaiclub (EN), transitaclub (ES + white origin) e fronts BR separados (PV13/PV14).
+Se um domínio for derrubado, os outros seguem rodando. Os fósseis do robots.txt (/hot/, /hotwt/, /back/, /be/, /tk/)
+mostram que a versão ANTIGA do funil tinha split hot/white explícito no mesmo domínio.
+5. Fork de edição por geo no app 	/api/geo grava cookie mnc_country; o app bifurca isBrazil/isInternational (APIs /api/intl/*). A operação BR (PT-BR
+no admin, planos de $9.90, VSLs PV13/PV14) roda em outras propriedades.
+6. Invisibilidade orgânica 	Meta robots noindex + robots.txt com Disallow em tudo — o funil não quer ser indexado pelo Google; tráfego
+100% de anúncios/social.
+7. Gateway conivente 	CenterPag (Perfect Pay) — gateway popular em operações grayhat BR; fluxo upsell=true e
+checkout.centerpag.com/upsell/<email>/<id> para 1-click com e-mail pré-preenchido.
+Conclusão (revisada)
+As páginas do funil (growaiclub.com e seus 12 aliases) não cloakeiam: o middleware sempre reescreve / → /quiz-wt para qualquer UA/IP. O
+cloaking acontece antes de chegar nelas, em três camadas: (1) cloaker próprio nos trackers go.riseaiclub.com / get.aiengineclub.com
+(fingerprint JS + geo + decisão server-side; seção 9C); (2) WAF Cloudflare em domínios de entrada (403 para quem está fora do país-alvo); (3)
+rota oculta — a home é a white, os anúncios chegam a /pv11–/pv14 e /back (noindex + robots Disallow + zero links internos). Um revisor vê
+educação financeira ou um advertorial "Research, not a pitch"; a vítima vê o simulador + agente de voz. Total agora: 32 checkouts validados (9
+funil + 10 app + 12 fronts PV/back + 1 tripwire /wt).
+
+-- 14 of 17 --
+
+11. Inteligência do painel admin
+Labels internos encontrados no chunk do /admin (PT-BR)
+"Compras aprovadas nos 5 fronts e 5 downsells" · "planos $29.90 e $9.90" · "planos $47 e $29.90 da PV13" · "Vendas dos planos PV14 no
+período, sem filtro de país" · "VSL · Access $29.90 e $47" · "Compras ÷ quem entrou na VSL" · marcos de funil ans_p5_activate · métricas de
+retenção, chargebacks e "compradores com o upsell ativo" · "VIP/Express/Infinity/WebCash/roleta no app. Fora do saldo da IA."
+Conclusões: (1) a operação roda múltiplos fronts e downsells além do growaiclub.com — versões nomeadas PV13/PV14, com VSL
+(não só quiz); (2) existem planos de $9.90 não expostos neste funil; (3) o admin consolida retenção e chargeback de todos os fronts —
+infra compartilhada.
+12. Rotas legadas (robots.txt — inativas neste domínio; /be voltou a existir ativa nos domínios
+Lumenfield, seção 9C)
+growaiclub.com: /hot/ · /up1 · /up2a-c · /up3a-c · /up4a-c · /rec- · /r/ · /hotwt/ · /back/ · /be/ · /be-tk/ · /tk/ · /test-
+min
+transitaclub.com: mesmas + /up5a-c + /pv8/
+Todas retornam 404/308 hoje — são fósseis de versões anteriores do funil no mesmo domínio (provável origem dos nomes PV13/PV14).
+13. Lacunas (fora do alcance sem credenciais)
+Preços de WebCash, Ultra Booster e Infinity Pass (servidos por API autenticada)
+Conteúdo das rotas logadas (/trade, /wallet, /inicio) e do /admin
+Configuração de post-backs/webhooks no CenterPag e Hotmart
+Os demais fronts da operação (PV13/PV14 e os "5 fronts / 5 downsells") — rastreáveis via Utmify ID ou certificados futuros
+Preço do front Hotmart ES (M104846164A) — checkout com renderização JS bloqueada
+
+-- 15 of 17 --
+
+14. Evidências visuais
+Upsell 1 — /pay/up1

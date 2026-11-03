@@ -1,0 +1,380 @@
+Money Club / AI Club — Os criativos reais
+escondidos no catálogo
+Extraído da Meta Ad Library em 22/out/2026 · Lote 1 (amostra): 34 páginas · 1.245 mídias → 118 imagens + 50 vídeos únicos
+· Lote 2 (coleta completa de surgeaiclub.online): 47 páginas · 2.774 anúncios · 1.747 mídias → 123 imagens + 60 vídeos
+únicos · transcrição por Whisper
+O truque: 1.185 dos 1.245 anúncios são do formato DPA (Dynamic Product Ads / catálogo). A
+Biblioteca mostra só o template (“Test it out for yourself”, “Everyone needs to see this”) e a imagem do
+“produto”. O operador sobe no catálogo imagens neutras geradas por IA (mesa, laptop, caderno, café)
+— a imagem de catálogo também é isca. Os criativos que vendem são vídeos UGC 9:16
+(atrizes/avatares, legenda queimada) usados em anúncios de vídeo das campanhas boost, flourish e
+surge, e as fotos “WORKING HARDER? WORKING SMARTER WITH AI” da campanha rise/reign.
+1. Números
+Camada 	Qtde 	O que é
+Imagens de
+catálogo
+(DPA)
+1.185 →
+118
+únicas
+97% fotos neutras IA de home-office. Top 5 imagens cobrem 539 anúncios. Exceções:
+“Working harder? / Working smarter with AI” (rise, 102 usos; reign, 24), mulher com
+tablet (flourish+vault, 137), olho cibernético, robô no laptop, cachorro+gato.
+Vídeos 	50 únicos 41 com fala (13 roteiros) + 9 só música/legenda. 42–106 s; 6 versões de ~700 s (loop).
+Campanhas: surge 28, flourish 20, boost 2.
+Imagens
+estáticas
+10 	Advertorial Lumenfield “Extra Income with AI: A Practical Educational Guide”.
+Textos de
+template
+7 	“Test it out for yourself | Everyone needs to see this” (597) · “Made to make your life
+easier | Try it risk-free” (174) · “Give it a try | This is worth seeing” (62) · “The solution
+you were missing” (29) · “Try it for yourself | Everyone should see this” (14) · Lumenfield
+(221).
+2. O que os vídeos prometem (coincide com o funil oculto /pv13)
+Claim no anúncio 	Onde aparece no funil
+“OpenAI/Google/Microsoft (ou Meta) criaram”,
+“programa piloto”, “fase de testes”
+pv13: “Powered by Google, ChatGPT & Microsoft”, “1 free
+license”
+“US$ 50 / US$ 100 virtuais pra testar, dinheiro
+deles”
+initialBalance:50 (default 100) no /pv13/trading
+Microsoft, Apple, McDonald’s, Google na tela 	ticker Apple/NVIDIA/Meta/Tesla do simulador
+“Nível Low → Max, sempre Max” 	slider Safe / Moderate / Maximum Gains
+“US$ 60,20 em minutos”, “100 → 217”, “US$ 6.300
+no 1º mês”
+lucros pré-programados $11.66… $30.28; /back “US$ 125,57
+aprovado”
+“Saque de US$ 1.000 via PayPal, cai em minutos” /pv13/withdraw Bank/PayPal → bloqueado por “verificação” →
+agente de voz Daniel cobra US$ 17–97
+
+-- 1 of 16 --
+
+3. Folhas de contato — imagens de catálogo (as 60 mais usadas)
+
+-- 2 of 16 --
+
+
+
+-- 3 of 16 --
+
+
+
+-- 4 of 16 --
+
+4. Folhas de contato — vídeos (frames em 1 s / 5 s / 12 s)
+
+-- 5 of 16 --
+
+
+
+-- 6 of 16 --
+
+
+
+-- 7 of 16 --
+
+
+
+-- 8 of 16 --
+
+5. Roteiros transcritos (13 distintos, do mais replicado ao menos)
+Roteiro B — Humilhação do marido → AI pilot program (R$ nos números)
+surge — 8 vídeos (VID05, 08, 09, 17, 22, 28, 36, 43) · 51–100 s
+Hook de drama conjugal (“sem mim você estaria na rua”, dito na frente dos filhos e da sogra). Vira: ela tem
+mais dinheiro guardado que ele e ele não sabe. Mecanismo: “programa piloto de IA criado por OpenAI,
+Meta e Microsoft”, “87% de acerto”, “US$ 100 virtuais, dinheiro deles”. Prova numérica: 100→217 na 1ª
+noite, US$ 1.500 na 1ª semana, US$ 6.300 no 1º mês. É o roteiro mais replicado da campanha principal e o
+único que cita números — por isso fica atrás do catálogo.
+My husband told me in front of my kids that without him, I'd be out on the street. He said it at dinner, in front of my
+mother-in-law, in front of everyone. And I stayed quiet. But not because I didn't have anything to say. I stayed quiet
+because if I told him the truth, it would have been much worse. The truth is, I have more money saved than everything
+he has saved in his entire life, and he has no idea. Four months ago, those words would have destroyed me, because
+they would have been true. I depended completely on him for food, rent, the kids shoes, everything. And he made
+sure I paid for it. Not with money, with humiliation. You should be grateful I support you. What do you contribute
+around here? That's what I heard every week. One night, after the first time he said something like that to me, I locked
+myself in the bedroom crying, and a video popped up about an artificial intelligence pilot program created by OpenAI,
+Meta, and Microsoft. It said they were selecting ordinary people to test an AI that automatically trades in the financial
+markets with an accuracy rate of 87%. And the best part? They gave you 100 virtual dollars to try it, not your money,
+theirs. I signed up at 3 in the morning while I was crying, expecting nothing. I just wanted something to distract me
+from the pain. The next day, I opened the app. The AI had traded on its own. My 100 dollars had already turned into
+217. First trade, 52 dollars. Second, 33. Third, 39. Without me touching anything. The first week, I made 1500 dollars,
+more than he gave me for the entire month. The second week, 1800. First month, 6300 dollars. More than he makes
+in six months.
+Roteiro A — “Não sei por que este vídeo apareceu pra você”
+flourish/boost — 8 vídeos (VID03, 12, 15, 23, 29, 37, 38, 42) · 42–57 s
+Curiosity gap puro, sem promessa: “não é gerar texto nem imagem, é outra coisa”; “testei sem pagar, sem
+cartão”; CTA “o vídeo abaixo explica melhor”. Roteiro ‘white’ usado para passar na revisão e aquecer para a
+VSL/pv13.
+I'm gonna be honest with you, I have no idea why this video appeared for you. But if it did, I think you should watch it
+until the end, because something similar appeared for me a month ago, and I almost didn't watch it. I almost kept
+scrolling like we do with everything that pops up on our phone. But something made me stop. I don't know if it was
+curiosity or boredom. I clicked, watched the video, and that's when I discovered something about artificial intelligence
+that nobody had explained to me before. It's not what you think. It's not writing texts. It's not generating images. It's
+something completely different that most people still don't know about. I tried it without paying anything, without giving
+my card. No commitment. And I'm glad I didn't keep scrolling that day. The video below explains everything better than
+I could explain here. Click the button below and watch it. Then you decide. But watch it, because I almost didn't. And it
+would have been the worst mistake of the last few months.
+
+-- 9 of 16 --
+
+Roteiro C — “Não vou pedir dinheiro, nem cartão”
+flourish — 6 vídeos (VID02, 14, 24, 26, 39, 46) · 42–57 s
+Objeção antecipada (free trial) + prova social de amigo(a) que desafiou a testar. Zero números. CTA “é
+grátis testar, sem compromisso”.
+I'm gonna show you something. I'm not gonna ask you for money. I'm not gonna ask for your card. I'm not gonna ask
+you to buy anything. I'm only gonna ask you to try it yourself before you judge. What I'm about to show you was shown
+to me by a friend a month ago. I thought he was crazy. I told him no, that it was impossible, but he challenged me to
+try it before judging. I tried it, and I went quiet, because what I saw wasn't what I expected. It was a technology that I
+didn't know existed, and when I used it, I understood why my friend insisted so much. I can't explain everything here,
+but when you try it yourself, you'll understand. Click the button below. It's free to try. No commitment, no payment.
+Then you form your own opinion. That's what I did, and I'm glad I did.
+Roteiro E — Marido escondendo um app
+surge — 2 vídeos (VID04, 33) · 78 s
+Suspeita de traição vira descoberta de app de IA. “Antes eu pedia permissão pra comprar coisas pros filhos;
+agora não.” CTA free trial. Fecha com “agora nós dois usamos e nenhum fala sobre isso — esse silêncio diz
+tudo”.
+My husband has been hiding something for me for months. I found out by accident. It wasn't another woman. It was
+worse. An app on his phone he'd been using without telling me. When I asked him what it was, he got nervous. Said it
+was a personal project that I shouldn't worry about it. That made me angrier than if it had been another woman
+because he was hiding something from me in our home. Under our roof, while I struggled to make ends meet every
+month, so I searched on my own, found what it was. It was a technology based on artificial intelligence that I didn't
+know existed. I tried it myself without telling him that same night. And what I found was not what I expected. When I
+used it, I understood why he was hiding it. Not because it was bad, because it's too good to share before you're sure.
+Before that night, I depended on him for everything. Now I don't. Before I asked permission to buy things for our kids.
+Now I don't need permission. Before he knew everything about our finances, now I know something he doesn't know, I
+know. My mother called me and said, you sound different. What changed? I told her I found something. I can't explain
+everything here, but when you try it yourself, you'll understand. Click the button below. It's free to try. No commitment,
+no payment. Now we both use it. And we both know the other one uses it, but neither of us said a word about it for
+weeks. That silence told me everything I needed to know. It works.
+Roteiro F — Sogra: “meu filho merece uma esposa melhor”
+surge — 2 vídeos (VID07, 18) · 68 s
+Humilhação familiar → amiga manda o link → mudança de confiança. “Antes eu ficava quieta quando minha
+sogra falava; agora olho nos olhos dela.”
+My mother-in-law told the whole family that her son deserved a better wife. At a family dinner in front of everyone.
+Nobody said anything, not even my husband. I went to the bathroom and cried for 20 minutes. That was six months
+ago. If she saw me now, she would choke on every word because that same week a friend sent me something. She
+said, forget about that woman and try this. I said, I can't deal with anything right now. She said, that's exactly why. Just
+try it. I tried it because I didn't have the energy to say no. It was a technology based on artificial intelligence that I
+didn't know existed. And when I used it, something changed. Not just my situation, my confidence. Before that week, I
+couldn't buy anything without asking permission. Now I can. Before I was afraid every time the bills came, now I'm not.
+Before I stayed quiet when my mother-in-law talked. Now I look her in the eyes. My own mother called me and said,
+you seem different. What happened? I told her, I found something. I can't explain everything here. But when you try it
+yourself, you'll understand why I said she would choke on her words. Click the button below. It's free to try. No
+commitment. No payment. She said her son deserves someone better. She's right, but not in the way she thinks.
+
+-- 10 of 16 --
+
+Roteiro G — Marido pediu divórcio por dinheiro
+surge — 2 vídeos (VID11, 34) · 77 s
+“9 anos de casamento acabando porque não dá pra pagar as contas.” Testou às 2h da manhã chorando.
+“Ele pediu divórcio há 3 meses; semana passada disse que está feliz por eu não ter assinado.”
+My husband told me he wants a divorce, not because of another woman, because of money. He said he's tired of
+struggling, tired of fighting about bills every month, tired of choosing between paying rent or buying food for our kids,
+nine years of marriage ending because we can't afford to stay together. That night after our worst fight, he went to the
+couch. I stayed in bed crying. I grabbed my phone looking for nothing. Just escape. And a friend had sent me
+something weeks before that I had ignored. That night I opened it. It was a technology based on artificial intelligence
+that I didn't know existed. I tried it at two in the morning with tears on my face, expecting nothing. And what I found
+was not what I expected. When I used it for the first time in months, I felt like there was a way out that didn't involve
+signing papers. Before that night, every conversation with my husband ended in a fight about money. Now it doesn't.
+Before I thought divorce was the only option. Now it's not. Before my kids saw us fighting every week. Now they don't.
+My sister called me and said, you two seem different. What happened? I told her, I found something. I can't explain
+everything here, but when you try it yourself, you'll understand. Click the button below. It's free to try. No commitment.
+No payment. My husband asked for a divorce three months ago. Last week, he told me he's glad I didn't sign. He
+doesn't know what changed, but I do. And when I'm ready, I'll tell him for now. I just smile.
+Roteiro J — Hook de casal + DEMO do app (versões de 12 min)
+flourish — 6 vídeos (VID10, 31, 32, 40, 47, 49) · 42 s a 701 s
+Variações de hook (“ele acha que estou vendo Instagram / o tempo / sorrindo pro celular às 3h”) + corte
+para ‘minha amiga mostrando o app’: “OpenAI, Google e Microsoft criaram isso”, “US$ 50 pra testar,
+dinheiro deles”, empresas Microsoft/Apple/McDonald’s, modo Low/Max (“sempre Max porque o dinheiro é
+deles”), “US$ 60,20 em minutos sem tocar num botão”, saque de US$ 1.000 via PayPal. As versões de
+~700 s são o mesmo conteúdo em loop para contar como ‘vídeo longo’.
+Every time my husband catches me on my phone in the morning, he thinks I'm scrolling Instagram. I'm not. I'm looking
+at what the AI made overnight. He asked me why I'm always smiling at my phone. I said it's memes. It's not memes.
+GPT, Microsoft, and Google, $50 free, not your money. It's memes. Watch my friend showing you how the app works.
+I'm going to show you how this works. This is my current balance. And this is what the AI made today. OpenAI,
+Google, and Microsoft created this. They give you $50 to test it, not your money. There's. See these companies?
+Microsoft, Apple, McDonald's. These are the companies behind this. The same ones that big banks pay millions to
+access. Now this AI does it for you, for free, because it's still in testing phase. Now comes the good part. Here you set
+how hard the AI works for you. Low means it plays it safe. Max means it goes all in. I always set it to max because it's
+their money, not mine. I didn't do anything. It analyzes and decides what the best option is at this moment. See that
+result? That's more than I used to make in a whole day at my old job. The AI does everything. I literally just sit here
+and watch. Some are bigger, some are smaller. But that total right there, that's my grocery bill for an entire week. In
+minutes. And remember, I started with $50 that aren't even mine. They gave me that to test. Everything the AI
+generates is mine to keep. That's why thousands of people are using this right now. $60.20 in minutes, without
+touching a single button. Now let's withdraw. $1,000. PayPal or bank. I prefer PayPal because it's faster. Processing,
+done. Real money in my real PayPal. In a few minutes it's in my account.
+
+-- 11 of 16 --
+
+Roteiro I — DEMO puro do app (“recurso do celular que 99% não conhece”)
+surge — 2 vídeos (VID13, VID44 ‘Part 3’) · 82 s
+Screen recording do simulador /pv13/trading: saldo, botão start, lista de empresas, “nível da IA” Low→Max,
+resultados aparecendo, saque PayPal. Espelha exatamente o fluxo da página oculta.
+There's a feature on your phone that 99% of people don't know about. Let me show you. I'm going to show you how
+easy it is. This is my current balance, and this is what the AI generated today. Now I hit start, and the AI starts working
+on its own. Here you can see the most important companies in the world, Microsoft, Apple, McDonald's. Look, it shows
+Google all by itself. Now comes the good part. Here you configure the AI level. It's like choosing the speed. You can
+leave it on low, where it works slower but safer, or turn it up to the max, where it works faster and looks for bigger
+results. I always set it to the max. I didn't do anything. It analyzes and decides what the best option is at this moment.
+Look at the results appearing one after another. The AI works on its own. It analyzes, decides, and executes. I just
+watch. Some results are bigger, others smaller, but in the end, it all adds up. Done, it's finished. Total result of this
+session right there on the screen. Now let's withdraw. PayPal or bank, I prefer PayPal because it's faster. Processing.
+Done, in a few minutes it's in my account.
+Roteiro K — “Comprei tudo isso essa semana sem cartão”
+surge — 1 vídeo (VID35) · 99 s
+Haul de compras como prova + mesma demo do app.
+I bought all of this this week and no I didn't go into debt, didn't use a credit card, didn't ask anyone for money. I used
+this. This is what the AI made this week while I was living my normal life. Yay! I used to window shopping, now I
+actually buy. Let me show you how the app works. Watch this. I'm going to show you how this works. This is my
+current balance and this is what the AI made today. OpenAI, Google and Microsoft created this. They give you $50 to
+test it, not your money. There's. See these companies? Microsoft, Apple, McDonald's. These are the companies
+behind this. The same ones that big banks pay millions to access. Now this AI does it for you, for free, because it's still
+in testing phase. Now comes the good part. Here you set how hard the AI works for you. Low means it plays it safe.
+Max means it goes all in. I always set it to max, because it's their money, not mine. I didn't do anything. It finalizes and
+decides what the best option is at this moment. See that result? That's more than I used to make in a whole day at my
+old job. The AI does everything. I literally just sit here and watch. Some are bigger, some are smaller. But that total
+right there, that's my grocery bill for an entire week. In minutes. And remember, I started with $50 that aren't even
+mine. They gave me that to test. Everything the AI generates is mine to keep. That's why thousands of people are
+using this right now. $60.20. In minutes, without touching a single button. Now let's withdraw. $1,000. PayPal or bank.
+I prefer PayPal because it's faster. Processing. Done. Real money. In my real PayPal. In a few minutes it's in my
+account.
+Roteiro D — “Vou te fazer uma pergunta”
+flourish — 2 vídeos (VID01, 48) · 47–51 s
+“Não vou prometer resultado nem falar números” — anti-promessa como gancho. “Por que estão deixando
+gente comum testar antes de virar pago.”
+I'm gonna ask you a question and then you decide if it's for you or not. Nobody asked this. If you had the chance to try
+a new technology without paying anything, without giving your card, no commitment, I'm not gonna promise you
+results, I'm not gonna tell you numbers, and most people don't know it exists. I tried it a month ago. Would you try it or
+not? Because there's a technology available right now, and why they're letting regular people try it before it becomes
+paid. I'll just tell you that when I saw how it works, I understood why so many people are talking about this quietly. It
+changed my perspective on what's possible with the phone and an internet connection. They explained the technology
+there, how it works. What you need to know is in the video. Click the button below and watch the video. No pressure,
+no commitment, just information.
+
+-- 12 of 16 --
+
+Roteiro H — “Não fui eu que decidi te mostrar, foi o sistema”
+flourish — 1 vídeo (VID21) · 47 s
+Pseudo-exclusividade algorítmica: “o sistema escolhe pra quem mostrar; se chegou em você há um motivo.
+Não ignore.”
+I wasn't the one who decided to show you this video. It was the system. I just record it. The system chooses who to
+show it to. And if it's showing it to you, there's a reason. When it was shown to me a month ago, I didn't think much of
+it. I thought it was being shown to everyone. A friend told me no, not everyone gets it, try it. I said, oh no, those things
+are weird. She told me try it. And if it's weird, you can stop using it. I tried it. And I haven't stopped using it. Because
+what I found was an artificial intelligence technology. I didn't even know existed. And when I used it, I understood why
+the system doesn't show it to just anyone. I can't explain everything here. But once you try it yourself, you'll
+understand. Click the button below. The trial is free, with no commitment and no payment required. The system
+showed it to you for a reason. Don't ignore it.
+Roteiro L — “Na China isso já gerou US$ 2 bilhões” — tarefas de avaliar vídeos
+surge — 2 vídeos (VID25, 45) · 99–106 s
+Oferta DIFERENTE: plataforma que “paga usuários reais para assistir vídeos e dar feedback humano”.
+“Não precisa investir nem entender de mercado.” Corresponde ao produto WebCash (aiengineclub.com) —
+mesmo operador testando um segundo ângulo na mesma campanha.
+This in China has already generated $2 billion, $2 billion, and in many parts of the world, nobody knows it exists. Let
+me explain. A while ago, Platform started using a new system that pays real users to watch videos and provide human
+feedback that automated systems and bots can replicate. Thousands of people already use this type of system to earn
+money completing video rating tasks every day. Thousands of people. But access isn't available everywhere or to
+everyone. Recently, this program started accepting eligible users from different regions around the world as part of a
+testing phase. They need real users to expand their human feedback database, and that's why selected people can
+test the platform. They give you videos to review. You watch them, answer simple questions, and provide your opinion.
+The system uses those evaluations to distinguish genuine human feedback from artificial engagement. I found out
+about it through someone who already works with online testing platforms. He told me, Soon a lot more people are
+going to know about this. Enter while the testing phase is still available and check whether you qualify. I registered.
+The tasks were simple. Watch the videos, answer the questions, and submit my feedback. And the most impressive
+part? The platform can make new video rating tasks available throughout the day. I don't have to trade, invest, or
+understand financial markets. In other markets, this type of paid user testing already exists. In many parts of the world,
+it is still relatively unknown, but probably not for long. The link to check the testing phase is below. If enrollment closes
+after they collect enough feedback from users, new users may no longer be able to join under the same conditions.
+Those who qualify can see the available terms. Those who don't, don't participate. You decide what you want to do.
+Vídeos sem fala (só música + legenda queimada)
+VID06, VID16, VID19, VID20, VID27, VID30, VID41, VID50 — campanha surge, 51–96 s. Conteúdo está só nas legendas na
+tela (ver folhas de contato).
+6. Arquivos na pasta ~/Desktop/Money Club/04-criativos/amostra-inicial-1245/
+Caminho 	Conteúdo
+unicos/ 	118 imagens + 50 vídeos únicos, nome = rank_xUSOS_ativosN_campanhas
+imagens-catalogo/ ·
+videos/
+Todos os 1.195 + 50 arquivos originais, nome =
+campanha_ATIVO|off_pagina_adid
+transcricoes/ 	1 .txt por vídeo + _todas-curtas.json
+00-indice-criativos.csv 	1.245 linhas: campanha, página, page_id, ad_id, formato, link do anúncio, título,
+texto, link Ad Library
+
+-- 13 of 16 --
+
+00-unicos.json · 00-
+folha-*.jpg
+Ranking de reuso + folhas de contato
+
+-- 14 of 16 --
+
+7. Coleta completa — surgeaiclub.online paginado até o fim (lote 2)
+Resultado: 2.774 anúncios (1.059 ativos em 22/out) de 47 páginas-fantasma, 264 páginas de
+paginação GraphQL. 2.633 são DPA e 107 são anúncios de vídeo. Das 1.747 mídias baixadas só 235
+hashes únicos (123 imagens, 60 vídeos, 52 posters): o operador replica os mesmos arquivos em
+centenas de anúncios/páginas. Pasta: ~/Desktop/Money Club/04-criativos/todos/.
+Página (page_id) 	Anúncios 	Ativos 	Período
+Júlia de Barros (995922473604773) 	438 	147 	15/10 → 22/10
+Camila Ribeiro (1311575022037142) 	435 	142 	08/10 → 22/10
+Carolina Lopes (988198821046653) 	169 	70 	29/09 → 22/10
+Chloe Pontes (1007885619084443) 	161 	73 	25/09 → 22/10
+Vitória Ramos (1056428214210753) 	161 	61 	01/10 → 22/10
+Nathalia Fernandes (1048606108342167) 	155 	68 	26/09 → 22/10
+Sarah Long · Stella Miller · Beatriz Andrade 	143 · 143 · 131 66 · 71 · 76 set → 22/10
+Luisa Silva · Terezinha Garcia (criadas 20/10) 	126 · 124 	77 · 75 	20/10 → 22/10
+Luisa Mendes · Maria Edwards 	116 · 105 	63 · 70 	out → 22/10
++ 34 páginas pequenas (1–74 anúncios, todas inativas) 	< 500 	0 	set/out
+Leitura: 13 páginas concentram 2.200+ anúncios e 100% dos ativos. As 34 páginas restantes são ondas
+antigas (Sophia Taylor 07–12/set, Natália Fernandes 19–24/set, lote de 15–19/out) que foram queimadas e
+abandonadas. Duas páginas novas (Luisa Silva, Terezinha Garcia) entraram em 20/out com 250 anúncios
+em 48 h — ritmo de ~125 anúncios/dia/página.
+Novos ganchos descobertos (mesmo corpo "demo do app", só troca os 3 primeiros
+segundos)
+# Gancho 	Vídeo
+1 “My friend sent me this at 11 at night. I told her she was crazy. I was wrong.” 	125
+2 “I'm scared to post this because they might take it down, but look.” 	129, 182
+3 “Things rich people don't tell you, but I will. Part 2.” 	137
+4 “What AI does while you sleep if you activate this?” 	139
+5 “I called my friend an idiot when she showed me this. A month later, I apologized.” 	150, 156
+6 “This shouldn't be free, but it still is. And I don't know for how long.” 	163
+7 “I discovered something that AI can do for you that nobody talks about. Part 3.” 	173
+8 “What I do with my phone at 3 in the morning that my husband doesn't know about.” 	174
+9 “Things I do with my phone — they seem illegal but aren't. Part 5.” 	178
+Padrão: curiosity gap + numeração falsa de série (“Part 2/3/5” simula conteúdo orgânico) + proibido/segredo
++ prova social de amiga. O corpo é sempre o mesmo: logos Microsoft/Apple/McDonald's/Tesla/Meta →
+saldo → “hit start” → IA escolhe Amazon/Google sozinha → (variante) slider Low/Max → saque PayPal “em
+minutos”.
+
+-- 15 of 16 --
+
+Novas histórias longas
+Roteiro N — “Na frente dos meus filhos” (146, 180 · 95–110 s)
+Marido diz no jantar, diante da sogra, que sem ele ela estaria na rua. Ela fica calada “porque se eu contasse
+a verdade seria pior”: há dois meses usa uma “tecnologia baseada em IA” que uma amiga mandou. Fecho:
+“Before I stayed quiet because I had no choice. Now I stay quiet because I choose to.” CTA: “Click the
+button below. It's free to try. No commitment, no payment.” Nenhum número — só emoção; a prova fica para
+o app.
+Roteiro O — “Esperando os filhos na escola” (171 · 100 s)
+Mãe no carro na saída da escola checa “o que a IA fez hoje”; filhos entram (“Mommy!”). Depois mostra “a
+amiga” fazendo a demo: “OpenAI, Google and Microsoft created this. They give you $50 to test it, not your
+money… still in testing phase… I always set it to max because it's their money, not mine… $60.20 in
+minutes… withdraw $1,000 to PayPal.” É a fusão do storytelling com a demo — e usa exatamente o
+initialBalance:50 do /pv13.
+Arquivos do lote 2 — ~/Desktop/Money Club/04-criativos/todos/
+Caminho 	Conteúdo
+imagens/ · videos/ 	1.747 arquivos originais (1.627 imagens de catálogo, 60 vídeos + posters),
+nome = campanha_ATIVO|off_pagina_adid_n
+unicos/ 	123 imagens + 60 vídeos únicos por md5, nome =
+rank_xUSOS_ativosN_campanhas
+transcricoes/ 	33 transcrições dos vídeos novos (.txt)
+00-roteiros-e-ganchos.txt Catálogo de todos os ganchos e histórias, com mapeamento claim → funil
+00-indice-anuncios.csv 	2.774 linhas: ad_id, link Ad Library, ativo, datas, formato, página, page_id, URL
+destino, título, texto, CTA, nº mídias
+00-unicos.json · 00-folha-
+imagens-*.jpg
+Ranking de reuso por hash + folhas de contato
+
+-- 16 of 16 --
+

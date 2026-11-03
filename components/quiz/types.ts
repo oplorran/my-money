@@ -1,0 +1,1 @@
+export type Stage = "landing" | "question" | "insight" | "analyzing" | "result" | "offer";

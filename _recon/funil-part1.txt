@@ -1,0 +1,180 @@
+ com ticker Apple/NVIDIA/Meta/Tesla. "Activate the AI and multiply your balance in 60 seconds." "1 free
+license". Geo-detecção client-side via 3 APIs (api.country.is, ipwho.is, ipapi.co) — escolhe moeda e tracking por
+país.
+2. Simulador 	/pv13/trading 	"How much do you want to make?" → slider de modo (Safe / Moderate / Maximum Gains) → saldo inicial fake de
+$50 → animação "AI running technical analysis… Scanning for high-probability opportunities… Profit confirmed"
+com lucros pré-programados ($11.66, $12.36 … $30.28) → "REQUEST MY WITHDRAWAL" → "Your account is
+still in demonstration mode… withdrawals stay locked until verification" → CONTINUE VERIFICATION.
+3.
+"Verificação"
+(VSL)
+/pv13/vsl 	Não é vídeo — é um agente de voz. "Daniel Torres, Money Club verification" liga para a vítima. 99 falas pré-
+geradas em TTS (Inworld TTS-2, voz "Nate", prompt "speak conversationally at a relaxed pace like a phone call"),
+servidas de /pv13/voice/manifest.json + /api/tts. Pede o primeiro nome, faz 4 perguntas de qualificação, mostra
+"provas", pressiona e fecha com preço dinâmico.
+4. Saque isca 	/pv13/withdraw
+· /back
+"Your Money Club withdrawal is approved — US$125.57 available", escolha Bank/PayPal, feed fake "Live
+withdrawals +2,847 this week — Mike G. 🇺🇸 US$123.95 8s ago". Para "sacar", precisa pagar a "ativação". /back é
+a versão standalone para retargeting ($29.90 full / $9.90 down).
+Precificação dinâmica — o preço é escolhido pelas respostas
+A VSL pontua 4 respostas (p1–p4) e soma um score que define o tier do preço anunciado por "Daniel":
+Pergunta 	Pontuação
+p1 — "How much do you want to make?" (meta mensal) 	<$2.000 = 0 · ≤$5.000 = 1 · ≤$15.000 = 2 · >$15.000 = 3
+p2 — "Why are you here?" 	debt = 0 · extra income = 1 · family = 1 · stop depending on job = 2 · build future = 2
+p3 — Situação financeira atual 	"in the red" → "solid base" (0–3)
+p4 — "I want to activate my account" vs "I still have a question" 	activate = 2 · doubt = 0 (marco ans_p5_activate do admin)
+Tier (score) 	Preço cheio 	Checkout 	Downsell 	Checkout
+17 	$17 	PPU38CQG07H 	$9.90 	PPU38CQG07N
+27 	$27 	PPU38CQG07I 	$14.90 	PPU38CQG07O
+47 (default) 	$47 	PPU38CQG07K 	$24.90 	PPU38CQG07P
+67 	$67 	PPU38CQG07L 	$34.90 	PPU38CQG07R
+97 	$97 	PPU38CQG07M 	$49.90 	PPU38CQG07S
+/back (retargeting) 	$29.90 	PPU38CQFUFH 	$9.90 	PPU38CQFUFG
+São exatamente os "dez planos" e "5 fronts e 5 downsells" citados no painel admin. Quanto mais desesperada e ambiciosa a resposta, maior o preço. Tudo roteado por
+growaiclub.com/?to=<checkout> (a home funciona como redirector) e rastreado via POST /api/funnel-hit.
+Roteiro do agente "Daniel Torres" (99 falas — trechos-chave)
+Fase 	Fala (transcrição literal do manifest de voz)
+Abertura / urgência 	"Daniel Torres, Money Club verification. I'm the one handling your case." · "If this call drops, the process resets from zero and I
+can't guarantee your withdrawal."
+Autoridade falsa 	"Money Club was built with a hundred and twenty seven million dollars from Bill Gates. I know how that sounds — but it's
+real. That's him right there in our office. I work in that building."
+
+-- 7 of 17 --
+
+Mecanismo 	"The Money Club A I was trained on millions of real trades… analyzes more than two hundred assets per second… accuracy went
+from seventy-three to eighty-three point three three percent… only executes when confidence is above ninety percent."
+Prova social fabricada 	"This is María… three months behind on rent… that plaque — fifty thousand dollars." · "James. One hundred thousand dollars…
+the watch, the champagne, the plaque." · "Marco… took his whole family to Cancún." · "Top hundred — cruise. Top ten —
+Dubai."
+Reframe do saldo fake 	"The $50.00 credit you got in the test session is a test credit… On the left is where you are — demonstration mode. Withdrawal
+blocked. On the right… withdrawals released, A I trading around the clock."
+Justificativa da taxa 	"To activate your account there's a one-time fee. It works like an access license… If one person creates ten accounts, they
+contaminate the algorithm."
+Ancoragem 	"Professional trading algorithms cost between five thousand and fifteen thousand dollars a year… The activation fee could be two
+thousand dollars. It could be five hundred. Even two hundred would be fair."
+Escassez 	"We opened three hundred fifty spots… three hundred forty-two are already filled. There are 8 left." · "The first session closed in
+eleven days."
+Tratamento de objeção
+(ramificado)
+"too good to be true" → história do smartphone · "I don't understand tech" → "María barely knew how to use her phone… you
+press a button" · "I want to think" → "I take forty to fifty calls a day… by the time they come back the conditions have changed."
+Fechamento 	"Option one — you hang up, go back to the same paycheck… what if I had activated that day?" · "I've done my part. Now it's on
+you." · "I'm waiting for you to tap one of the buttons below."
+A promessa real do funil
+"Teste grátis" de uma IA que "multiplica seu saldo em 60 segundos" → o simulador mostra $50 virando ~$125 em trades fake → o saque é
+bloqueado por "verificação" → um "funcionário" de voz sintética (Bill Gates investiu $127M, María fez $50k, só 8 vagas) cobra uma "taxa de
+ativação" de $17–$97 para liberar o dinheiro inexistente. Depois da compra: upsells de plano ($37–$57), multiplicador ($24.90–$49.90), app com
+VIP/Express/roleta e referral de corretora para o "saque".
+
+-- 8 of 17 --
+
+9C. DE ONDE VEM O TRÁFEGO — rede de domínios e cloaker de entrada
+Por que growaiclub.com não aparece na Biblioteca de Anúncios
+Nenhum anúncio aponta para growaiclub.com. O domínio é apenas 1 de 13 aliases idênticos do mesmo deployment Vercel
+(dpl_5qvmg8KcPAEukPos56R5oYe9Eaxn). Os anúncios apontam para (a) trackers com cloaker (go.riseaiclub.com, get.aiengineclub.com), (b) 8
+domínios de advertoriais "white" em outro deployment, ou (c) aliases rotativos registrados em lote (30/ago a 05/out/2026). Sem Meta Pixel nas
+páginas (conversão server-side via Utmify), ferramentas de espionagem não conseguem correlacionar pixel → domínio. Enumeração feita por
+DNS em 552 candidatos *aiclub.com/.online + validação de deployment/NS.
+A) 13 aliases do funil principal (mesmo dpl, mesma CF account jo/kenneth, /quiz-wt, /pv13 = 200)
+Domínio 	Domínio 	Domínio
+growaiclub.com 	ascendaiclub.online 	blazeaiclub.online
+bloomaiclub.com 	bloomaiclub.online 	flashaiclub.online
+igniteaiclub.online leapaiclub.online 	masteraiclub.online
+summitaiclub.online surgeaiclub.com 	thriveaiclub.com
+thriveaiclub.online Todas com título "AI Program", mesmas rotas ocultas /pv11–/pv14, /back, /wt, /hotwt, /pay/up1–2, /api/tts. ScamAdviser:
+"domain age 3 days", registrar GoDaddy/Cloudflare, Vercel US.
+B) 8 domínios de advertoriais "white" — 2º deployment (dpl_AwB8neJJG9jA8vPKdB4rLjdFsXxD)
+Projeto Next.js separado só com páginas "compliance-safe" (disclaimer "Research, not a pitch", "Loss is normal here"), Utmify
+embutido, visual de blog editorial. Cada domínio redireciona a raiz (307) para uma "marca" diferente:
+Domínio 	Raiz → 	Marca fake 	Título
+momentumaiclub.online 	/lesson Vesper 	A margin on models and side tasks
+prosperaiclub.online 	/guide 	Second
+Bench
+Bench notes on models and paid tasks
+visionaiclub.online 	/study 	Low Fern 	A walking map of side tasks
+edgeaiclub.online, growaiclub.online, launchaiclub.online,
+peakaiclub.online, riseaiclub.online
+/ e /be Lumenfield 	Markets, Models, and Machine Learning
+(robots: Disallow /be)
+O mesmo advertorial existe dentro do funil principal como growaiclub.com/wt ("TradeGuide AI", meta index,follow — a única página
+indexável de toda a operação). O CTA do Lumenfield/TradeGuide vai para o checkout go.centerpag.com/PPU38CQ513F = "Activate Your
+Potential [MX] – /wt", US$ 1,00 (tripwire de cartão para México/LatAm; moedas USD/MXN/BRL no checkout). Isso confirma uma
+frente MX além de EN/ES.
+C) O cloaker: go.riseaiclub.com e get.aiengineclub.com (/js/captcha.min.js)
+Qualquer path de 2 segmentos (/r/<slug>, /c/, /l/, /t/, /go/, /click/) devolve 200 com um spinner "Loading" de 1 KB que carrega
+/js/captcha.min.js (5,5 KB, ofuscado, atualizado em 16/out/2026). O script:
+Etapa 	O que coleta / faz
+1. Fingerprint 	UA, navigator.webdriver, plugins, idioma, timezone, platform, cores, RAM, touch, 9 métricas de tela, cookies, bateria, canvas hash,
+WebGL vendor/renderer, tipo de conexão/RTT, performance.timing
+2. Geo 	fetch('https://ipapi.co/json') → país, cidade, IP, ISP, ASN (filtra datacenter/VPN)
+3. Anti-análise 	debugger; cronometrado — se DevTools aberto (>10 ms) marca devtools:true
+4. Anti-proxy 	RTCPeerConnection + ICE candidates → vaza IPs locais/reais (detecta proxy residencial mal configurado)
+5. Envio 	JSON cifrado com XOR (chave = origin+pathname) + base64 → POST para a própria URL
+6. Decisão
+(server)
+{type:"content"} → document.write() da página white
+{type:"redirect"} → location.href para a oferta (/pv13, /back, checkout…)
+slug inválido → {error:"Campaign not found"}
+Assinaturas 	Rate-limit 60-in-1min; erro em PT-BR ("Ocorreu um erro ao processar a requisição"); /health → OK; /start → 302 growaiclub.com
+(link de fallback); /errors recebe stack traces
+
+-- 9 of 17 --
+
+Simulei o protocolo completo (iPhone/EUA/T-Mobile, referrer l.facebook.com) e o servidor respondeu corretamente em JSON — a
+implementação está confirmada; só falta um slug de campanha real, que só existe nas URLs dos anúncios. É isso que você precisa
+capturar do anúncio (o link go.riseaiclub.com/r/<slug> ou similar) para ver a decisão black/white ao vivo.
+D) 2 domínios com WAF geográfico (mesma conta Cloudflare)
+boostaiclub.online e surgeaiclub.online devolvem 403 "Access Denied" (regra WAF custom, text/plain) para todo visitante a partir do
+Brasil, independente de UA (iPhone, Android FB in-app, facebookexternalhit, curl). Googlebot recebe 404 vazio da origem (não-Vercel,
+headers CORS localhost — provável mesmo app Express do cloaker). surgeaiclub.online foi adicionado a diretórios em 05/out/2026,
+ou seja, é a geração mais nova de domínios de entrada. Para vê-los é preciso IP residencial dos EUA/MX.
+E) Como capturar os anúncios
+Ação 	Motivo
+Buscar na Ad Library cada um dos 13 aliases + 8 advertoriais (não só growaiclub) 	Os anúncios rodam em domínio rotativo; o mais recente
+(surgeaiclub, thriveaiclub, flashaiclub, igniteaiclub) tem mais
+chance
+Buscar por riseaiclub.com e aiengineclub.com (domínios dos trackers) 	O link do anúncio pode ser go.riseaiclub.com/…; a Ad Library
+indexa pelo domínio raiz
+Buscar por texto: "Discover how Artificial Intelligence can help you with your
+finances", "AI Program", "Activate the AI and multiply your balance in 60 seconds"
+Copy fixa do quiz e do pv13
+Usar proxy residencial EUA/MX + celular real ao abrir os links 	O cloaker rejeita datacenter/VPN, Brasil, desktop sem touch e
+DevTools
+Monitorar novos registros *aiclub.online com NS jo/kenneth.ns.cloudflare.com 	O operador registra em lote (GoDaddy/Cloudflare) e troca a cada
+2–4 semanas
+
+-- 10 of 17 --
+
+9D. QUEM RECEBE O TRÁFEGO — Biblioteca de Anúncios da Meta (22/out/2026)
+Consulta direta à Ad Library (busca por domínio e por página anunciante). Contagem de anúncios ativos é o melhor proxy público de
+tráfego — a Meta não expõe gasto/impressões fora da UE. Nenhum dos 13 aliases do funil nem dos 8 advertoriais tem anúncio: eles
+são destinos. Os anúncios apontam para domínios-ponte com cloaker (slug de campanha no path), que decidem server-side:
+visitante fora do alvo → 302 para um advertorial Lumenfield/Vesper; alvo real → funil /pv13.
+# 	Domínio do anúncio (link real) 	Total 	Ativos 	Período 	Ponte → white (visto do BR) 	Status
+1 	surgeaiclub.online/pz8g9b4dhe/ 	2.620 ~1.170 08/set →
+hoje
+→ riseaiclub.online/be 	CAMPANHA PRINCIPAL — 11
+páginas, 45% da verba ativa
+2 	new.kindleaiclub.online/education 865 	115 	05/out →
+hoje
+→ unlockaiclub.online/blog 	Ativa, em queda
+3 	try.soaraiclub.online/guide 	182 	152 	20/out →
+hoje
+→
+prosperaiclub.online/guide
+MAIS NOVA — 13 páginas,
+subindo
+4 	start.flourishaiclub.online/home 	319 	0 	05–11/set 	→ propelaiclub.online/blog 	Encerrada
+5 	of.vaultaiclub.online/blog 	264 	0 	12/set →
+03/out
+→ strideaiclub.online/blog 	Encerrada (páginas EUA "Lauren
+Mitchell" etc.)
+6 	go.riseaiclub.com/start 	103 	0 	31/ago →
+02/set
+→ growaiclub.com 	1ª onda (teste)
+7 	boostaiclub.online/t2vtc6t4kr/ 	33 	0 	04–05/set 	→ growaiclub.online/blog 	Encerrada
+8 	eb.conquestaiclub.online/ebook 	10 	0 	23/set 	→ edgeaiclub.online/ebook 	Teste
+— growaiclub.com 	1 	0 	— 	— 	Ruído (anunciante não
+relacionado)
+Total ativo na operação: ~1.430 anúncios em ~25 páginas-fantasma (nomes femininos BR/EUA, categor

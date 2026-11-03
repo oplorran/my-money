@@ -1,0 +1,355 @@
+Roteiro completo do agente de voz "Daniel Torres"
+Money Club · growaiclub.com/pv13/vsl · 99 falas pré-geradas em TTS
+Extraído de /pv13/voice/manifest.json em 22/out/2026 · Voz: Inworld TTS-2, perfil "Nate", prompt: "speak
+conversationally at a relaxed pace like a phone call" · Áudios: MP3 128 kbps, 24 kHz, mono · Numeração = nome do arquivo
+na pasta money-club-daniel-audios/
+Como funciona a "chamada"
+A página simula uma ligação telefônica recebida. O usuário vem do simulador de trading (/pv13/trading) com um
+saldo fake de ~$125 bloqueado por "verificação". "Daniel" se apresenta como funcionário da verificação, pede o
+primeiro nome e faz 4 perguntas (meta mensal, motivação, situação financeira, "quer ativar?"). As respostas
+selecionam ramos do roteiro (falas 9–13, 53–58, 82–97) e definem um score que escolhe o preço anunciado: $17
+/ $27 / $47 / $67 / $97 (os números são falados por extenso: "seventeen", "forty-seven"…). Quem hesita recebe
+o downsell ($9.90–$49.90). Valores como "$50.00" e "a day/a month" são interpolados dinamicamente (falas com
+espaço inicial são continuações de frases com número variável). O microfone é detectado para dar realismo
+("Your microphone is off").
+Score → tier 	Falado por Daniel 	Checkout cheio 	Downsell
+baixo 	"seventeen dollars" 	PPU38CQG07H ($17) 	PPU38CQG07N ($9.90)
+↓ 	"twenty-seven" 	PPU38CQG07I ($27) 	PPU38CQG07O ($14.90)
+padrão 	"forty-seven" 	PPU38CQG07K ($47) 	PPU38CQG07P ($24.90)
+↓ 	"sixty-seven" 	PPU38CQG07L ($67) 	PPU38CQG07R ($34.90)
+alto 	"ninety-seven" 	PPU38CQG07M ($97) 	PPU38CQG07S ($49.90)
+ABERTURA — urgência e enquadramento
+001 Daniel Torres, Money Club verification. I'm the one handling your case. 	001.mp3
+002 I managed to pull your verification in time. Let's get this sorted while it's open — if this
+call drops, the process resets from zero and I can't guarantee your withdrawal.
+002.mp3
+003 The issue is your account flagged at verification. That's what I'm here to resolve — but
+first, I need you to understand what you have access to here. Because this isn't just
+about this withdrawal. It's about every withdrawal after it. And Money Club is not just
+another app.
+003.mp3
+004 To clear your verification, I need to calibrate your profile. It's quick. 	004.mp3
+CALIBRAÇÃO — perguntas de qualificação (p1–p4)
+005 Got it. Let me pull that up against the system. 	005.mp3
+
+-- 1 of 8 --
+
+006 Now I need you to understand what you're dealing with here. 	006.mp3
+AUTORIDADE FALSA — Bill Gates, prêmios
+007 Money Club was built with a hundred and twenty seven million dollars from Bill Gates. I
+know how that sounds — but it's real. That's him right there in our office. I work in that
+building.
+007.mp3
+008 Every year the company rewards the top members. Cruise for the top hundred, Dubai
+for the top ten. All expenses paid. People who started from zero — just like you.
+008.mp3
+RESPOSTA À MOTIVAÇÃO — ramos por 'why are you here'
+009 Back to your profile. Tell me — why are you here? Which one of these is closest to your
+situation?
+009.mp3
+010 Got it. And look, debt isn't shame — it's just a situation that needs a way out. 	010.mp3
+011 I see this all day long here. The people who do best on this platform are the ones with
+their backs against the wall. Because they don't overthink it — they activate and let the
+A I work.
+011.mp3
+012 I get it. And look — zero judgment. Half the people I talk to tell me the same thing. 	012.mp3
+013 Actually, this is the profile that motivates me the most here. Because when it works —
+and it does — the change is massive. The person goes from drowning to breathing in
+weeks, not years.
+013.mp3
+082 Makes sense. A lot of people here started the same way — just wanted something extra
+to close the month.
+082.mp3
+083 The interesting part is that extra income usually becomes the main income. When the
+person sees the balance growing, they realize the job was the side hustle — not Money
+Club.
+083.mp3
+084 This is María. She used to do nails for a living and just wanted something extra to close
+out the month. That plaque is fifty thousand dollars in results.
+084.mp3
+085 Today the nails are a hobby. The Money Club income is the main one. 	085.mp3
+086 Look, that's the goal of half the people I talk to. Literally half. 	086.mp3
+087 And I'll tell you it's not impossible. It's not easy, it's not overnight — but with the right
+tool and consistency, it's more real than most people think.
+087.mp3
+088 This is María. She hated the job she had. She wanted out but couldn't — she had a
+daughter to support. That plaque is fifty thousand dollars in results.
+088.mp3
+089 She quit four months after activating. Today she works from home. 	089.mp3
+
+-- 2 of 8 --
+
+090 I like that. You're not looking for a side gig — you're looking for a machine. 	090.mp3
+091 And that's exactly what this system is. A machine that works for you while you do
+something else.
+091.mp3
+092 This is María. She wanted to put money away for her kids but there was never anything
+left. That plaque is fifty thousand dollars in results.
+092.mp3
+093 Today she has savings she never imagined having. And it keeps growing. 	093.mp3
+094 I get it. That's the answer that hits me the hardest, honestly. 	094.mp3
+095 Because when someone says family, it's not about money — it's about not having to
+say no to the people you love. And that changes everything.
+095.mp3
+096 This is María. Look at her daughter next to her. Everything she did was for her family.
+That plaque is fifty thousand dollars in results.
+096.mp3
+097 She told me the best part wasn't the money — it was being able to say yes to her kids
+when before she had to say no.
+097.mp3
+MECANISMO — como a 'IA' funciona
+014 While the system processes your verification, let me tell you how this platform works —
+because when I'm done, you'll understand exactly what you have in your hands.
+014.mp3
+015 Banks and investment funds have been using artificial intelligence to trade the markets
+for years. Algorithms that read the market in real time and place thousands of trades per
+second. That's how they make billions.
+015.mp3
+016 The problem is that this technology was always locked. Only zero point three percent of
+the world's population had access to that kind of tool. The rest of us — me, you,
+everybody — were left out.
+016.mp3
+017 What Bill Gates did — and this is why he put one hundred twenty-seven million dollars
+into it — was take that same technology the banks use and build a version regular
+people could actually access.
+017.mp3
+018 You've heard the story about the artificial intelligence that beat the best chess player in
+the world? That happened back in the nineties. And since that day, no human has
+beaten an A I again.
+018.mp3
+019 Now think — if an A I mastered chess, imagine what it does with the financial market,
+which in the end is simpler: up or down.
+019.mp3
+020 The Money Club A I was trained on millions of real trades, from thousands of members,
+over eighteen months. It analyzes more than two hundred assets per second. It spots
+patterns no human can see. And it trades with mathematical precision — no fear, no
+greed, no emotion.
+020.mp3
+
+-- 3 of 8 --
+
+021 It's called data augmentation — collective learning. The more people use it, the more
+data the A I receives. More data means more precision. And more precision means
+more results for everybody.
+021.mp3
+022 When the project started, the A I's accuracy rate was seventy-three percent. After
+eighteen months with real members trading, it went up to eighty-three point three three
+percent.
+022.mp3
+023 And the A I only executes a trade when confidence is above ninety percent. If it reads
+the market and sees the odds below that, it simply doesn't trade. It protects your
+money.
+023.mp3
+024 If it did that with $50.00 in a test session, imagine it running twenty-four hours a day,
+every day, following your plan.
+024.mp3
+025 And look, I know what you might be thinking. If it's that good, why open it to anyone?
+Why not keep it to yourselves?
+025.mp3
+026 The answer is simple — and it's the data augmentation I just explained. The A I needs
+active members trading to keep learning. No members, no data. No data, no evolution.
+Every person who joins improves the system for everyone — including you.
+026.mp3
+PROVA SOCIAL FABRICADA — María, James, Marco, cruzeiro, Dubai
+027 This is María. When she activated, she was three months behind on rent. She couldn't
+pay her bills. Look at that plaque — fifty thousand dollars in results.
+027.mp3
+028 She called me crying the day she cleared her last debt. That was four months ago. 	028.mp3
+029 And this is James. One hundred thousand dollars in results. Look at the kit the company
+sent to his house — the watch, the champagne, the plaque. That's real.
+029.mp3
+030 James told me he didn't believe it at first. He thought it was too good. But he gave it a
+shot. Three months later, he called me to say thank you.
+030.mp3
+031 And this one is Marco. That photo is from last month — he took his whole family to
+Cancún. First time his kids had ever been on a plane.
+031.mp3
+032 He activated eight months ago. Started slow, let the A I calibrate, and grew. Now he
+sends me a travel photo every couple of months.
+032.mp3
+033 And beyond individual results, we run an awards program. The top one hundred
+members of the year travel together on a cruise paid for by the company. That photo is
+from last year's cruise.
+033.mp3
+034 And the top ten go to Dubai. Rooftop dinner, everything covered. Those are members
+who started from zero — just like you.
+034.mp3
+
+-- 4 of 8 --
+
+TRANSIÇÃO PARA O PITCH
+035 Perfect. I like decisive people. So let's go — I'm going to explain exactly what has to
+happen to release your account.
+035.mp3
+036 [breathe] Now comes the part I need to explain carefully. Because this is where you'll
+understand why your withdrawal was held — and what has to happen to release it.
+036.mp3
+037 Alright, your verification update just came through on my end. Let me explain what it
+says.
+037.mp3
+REFRAME DO SALDO FAKE + TAXA DE ATIVAÇÃO
+038 The $50.00 credit you got in the test session is a test credit — it's there so you can
+watch the A I actually work.
+038.mp3
+039 Look at your screen right now. On the left is where you are — demonstration mode.
+Withdrawal blocked, trading limited. On the right is what happens when the account
+goes active. Withdrawals released, A I trading around the clock, no limits.
+039.mp3
+040 To activate your account there's a one-time fee. It works like an access license — the A
+I technology is protected, and access has to be controlled.
+040.mp3
+041 The Money Club A I learns from every member's data. If one person creates ten
+accounts, they contaminate the algorithm and hurt everybody. The fee guarantees each
+account belongs to a real person. One person, one account, one time.
+041.mp3
+042 And before I tell you the amount — I need to tell you something more important than the
+price.
+042.mp3
+INVERSÃO DE RISCO + ESCASSEZ
+043 So in the worst case, you test it, you don't like it, you get your money back, and you're
+exactly where you are right now. Zero to zero. You lose nothing.
+043.mp3
+044 In the realistic case — and it's what I see in the reports every day — you activate, the A
+I trades, and by the end of the first week you have money in your account that didn't
+exist before.
+044.mp3
+045 The first session was eight months ago — María, James, Marco, everyone I showed you
+came in through that first session. It closed in eleven days.
+045.mp3
+046 This is the second session. We opened three hundred fifty spots, because that's what
+the servers handle without compromising the A I's precision. When it fills, it closes. And
+I don't have a date for the next one.
+046.mp3
+047 I'm not telling you this to rush you. I'm telling you because it's information you need to
+have. If this session closes, I can't get you in even if I want to. It's not my call — it's a
+technical limit.
+047.mp3
+
+-- 5 of 8 --
+
+ANCORAGEM DE PREÇO + FECHAMENTO
+048 [breathe] Now — professional trading algorithms cost between five thousand and fifteen
+thousand dollars a year on institutional platforms. That's what banks and funds pay.
+048.mp3
+049 The activation fee could be two thousand dollars. It could be five hundred. Even two
+hundred would be fair for what the system delivers.
+049.mp3
+050 I just need your confirmation to process it. 	050.mp3
+051 As soon as you're done, access is immediate. In under sixty seconds you get your
+credentials and you can open the app. The A I starts trading today.
+051.mp3
+052 Look, I get it. I know a call like this takes time. But I promise you I'm two minutes from
+finishing your verification. Just two minutes.
+052.mp3
+RESPOSTAS À SITUAÇÃO FINANCEIRA (p3)
+053 Tight, but there's room. That's actually the most common profile here. 	053.mp3
+054 And this is the profile that benefits the most from the platform. Because when the first
+return comes in, that margin shifts fast.
+054.mp3
+055 Good. You have some room to move. That's good because it means the return goes
+straight to building.
+055.mp3
+056 Perfect. Financially you already have a solid base. What we're going to do is use Money
+Club to accelerate what you're already building.
+056.mp3
+057 Excellent. That tells me when the returns start coming in, you'll reinvest instead of
+spend. And that's when the growth goes exponential.
+057.mp3
+058 No problem. That's optional — the A I can calibrate without it. Let's keep going. 	058.mp3
+TRATAMENTO DE OBJEÇÕES — ramificado
+059 No problem. Tell me — what's missing? 	059.mp3
+060 Fair question. Look, I can talk about other members' results all day. But what will
+actually convince you is testing it.
+060.mp3
+061 And the good news is you'll be able to test it with zero risk. I'll explain exactly how in a
+minute.
+061.mp3
+062 Hold on a second. Let me check something on your profile. 	062.mp3
+066 I get it. And honestly, if it sounded bad, that's when you should worry. 	066.mp3
+
+-- 6 of 8 --
+
+067 But let me give you some context. When the first smartphone came out, people said the
+same thing — too good to be true. A phone that takes photos, browses the internet,
+does everything? Impossible. Today everyone has one in their pocket.
+067.mp3
+068 With artificial intelligence it's the same. It seems impossible because it's new. But banks
+have been using this for years. The difference is that now, for the first time, regular
+people can use it too.
+068.mp3
+069 I work inside this company. I see the reports every day. I talk to members every week.
+María, the one I showed you — I called her myself. James — I handed him his kit in
+person. This isn't a website on the internet. It's my job.
+069.mp3
+070 But I'll tell you what I tell everyone who says that — you don't have to believe me right
+now. You'll be able to test it yourself, with no risk, and draw your own conclusions. I'd
+rather you see it with your own eyes than take my word for it.
+070.mp3
+071 Perfect. Because this system was built precisely for people who don't understand it.
+María, the one I showed you? She told me she barely knew how to use her phone.
+071.mp3
+072 Let me explain how it works in practice. You open the app, you press one button, and
+the A I starts trading. No charts to read, no decisions to make, nothing to configure. You
+literally press a button.
+072.mp3
+073 And if at any point you have a question, we have a support team that helps you right
+inside the app. Not a robot — real people, like me, who walk you through it step by
+step.
+073.mp3
+074 You don't need to understand how the A I works. You need to press a button. It does
+the rest on its own.
+074.mp3
+075 Look, I deal with every kind of person here. People in their twenties, people in their
+sixties. People who've never touched a computer, people who work in tech. They all use
+the same system.
+075.mp3
+076 And I'll tell you something that might surprise you — the members who do best aren't
+the youngest or the most experienced. They're the ones who simply activate and let the
+A I work without fiddling with it. Sometimes the people who understand less interfere
+less — and that's why they get better results.
+076.mp3
+077 The A I doesn't tell anyone apart. It trades the same for everybody. The result doesn't
+depend on you — it depends on it. And it already proved to you in your test session that
+it works.
+077.mp3
+078 And if you ever get stuck or don't know what to do, we have human support right inside
+the app. You'll never be on your own.
+078.mp3
+079 I understand. Nobody makes a good decision in a hurry. But let me tell you one thing
+before you go think about it.
+079.mp3
+
+-- 7 of 8 --
+
+080 I take about forty to fifty calls a day. And the thing I hear most from people who call me
+back later is — why didn't I just handle this on the first call? Because sometimes a
+person hangs up, goes to think, and by the time they come back the conditions have
+changed.
+080.mp3
+081 In a minute I'm going to explain a condition the system has — one that depends on this
+call. So stay with me two more minutes, and then you decide with all the information in
+hand. If you still want to think it over, at least you'll be thinking with the full picture.
+081.mp3
+ÚLTIMA CHAMADA — vagas e ultimato
+063 Okay. Out of the three hundred fifty spots in this session, three hundred forty-two are
+already filled. There are 8 left.
+063.mp3
+064 Option one — you hang up, go back to the same routine, the same paycheck. And
+some time from now, when this session has closed, you ask yourself: what if I had
+activated that day?
+064.mp3
+065 I've done my part. Now it's on you. 	065.mp3
+ESTADOS DE ESPERA (idle)
+098 I'm waiting for you to tap one of the buttons below. 	098.mp3
+099 I'm waiting for you to type your number and tap Confirm. 	099.mp3
+Técnicas identificadas
+Urgência artificial (chamada cai → processo zera) · Autoridade fabricada (Bill Gates $127M, "I work in that
+building") · Prova social inventada (María/James/Marco com placas, kit, Cancún, cruzeiro, Dubai) · Mecanismo
+pseudo-técnico (data augmentation, 83,33% de acerto, confiança >90%) · Reframe da perda (saldo de teste →
+"ative para sacar") · Justificativa da taxa (licença/anti-fraude) · Inversão de risco (7 dias, "zero to zero") ·
+Ancoragem ($5k–$15k/ano → "could be $2,000") · Escassez (350 vagas, 8 restantes, sessão fecha) ·
+Espelhamento emocional por motivação (dívida, família, liberdade) · Objeções pré-roteirizadas · Ultimato binário
+("Option one — you hang up…").
+
+-- 8 of 8 --
+

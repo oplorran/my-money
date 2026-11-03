@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: my-money
+    runtime: node
+    plan: starter
+    region: virginia
+    buildCommand: npm ci && npm run build
+    startCommand: npm run start -- --port $PORT
+    healthCheckPath: /pv13
+    autoDeploy: true
+    envVars:
+      - key: NODE_VERSION
+        value: 24.19.0
+      - key: NEXT_TELEMETRY_DISABLED
+        value: "1"
+      # Defina o valor no dashboard do Render (nunca no Git).
+      - key: INWORLD_API_KEY
+        sync: false

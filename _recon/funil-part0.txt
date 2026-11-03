@@ -1,0 +1,213 @@
+ENGENHARIA REVERSA DE FUNIL
+Funil Money Club / AI Program
+Mapeamento completo: páginas, URLs, checkouts, área de membros, APIs e infraestrutura
+Alvo principal: growaiclub.com · Levantado em 21–22/out/2026
+Métodos: análise de DOM ao vivo, engenharia reversa dos chunks JS (Next.js), probing de rotas/APIs, crt.sh, robots.txt, validação checkout a
+checkout
+1. Sumário executivo
+26
+domínios do operador (13 aliases
++ 8 advertoriais + 2 WAF + 3
+serviços)
+32
+checkouts identificados
+8 + 13 + 22
+fronts ocultos + rotas app + APIs
+$203.80+
+ticket máx. (funil + VIP)
+A operação vende um produto de "trading com IA" (Money Club, fachada AI Program / AI Club) em dois idiomas (EN/ES), com funil de
+quiz → checkout de $29.90 → dois upsells sequenciais → área de membros que funciona como máquina de monetização contínua (6
+produtos internos adicionais, roleta, indicação e referral de corretora). O painel admin revela que a operação roda 5 fronts × 5
+downsells em múltiplas versões (PV11–PV14) — este domínio é apenas uma das pontas. growaiclub.com é 1 de 13 domínios
+idênticos servidos pelo mesmo deployment Vercel; o tráfego de anúncios entra por um cloaker próprio com fingerprint JS
+(go.riseaiclub.com / get.aiengineclub.com) e por 8 domínios de advertoriais "white" — por isso o domínio não aparece em bibliotecas
+de anúncios (ver seção 9C).
+Não existe sitemap.xml em nenhum domínio (todos 404). As rotas foram descobertas por robots.txt, chunks JS do build e probing.
+2. Arquitetura do funil (fluxo ponta a ponta)
+1 · FRONT-END — quiz
+https://growaiclub.com/ (rota real: /quiz-wt) · ES: https://transitaclub.com/
+Landing "AI Program": quiz de 10 perguntas ("Descubra seu perfil para a nova era digital em 2 min"). Versão ES: "Descubre tu Perfil Mental para Invertir"
+(16 perguntas). Sem chamadas de API — redirect client-side puro, repassando todos os parâmetros de tracking.
+▼ fim do quiz → window.location.href com UTMs/xcod/sck
+2 · CHECKOUT FRONT — $29.90
+pay.hotmart.com/P104403669D?off=g3l9bb5h (EN) · pay.hotmart.com/M104846164A?off=81ea4jjm (ES) ·
+go.centerpag.com/PPU38CQFOA2
+Três checkouts para o mesmo front: Hotmart "AI Club" US$29.90 (destino do quiz EN), Hotmart ES (destino do quiz ES) e CenterPag "Money Club —
+Access Money Club" $29.90 (usado em tráfego pago direto).
+▼ página de obrigado do gateway → /pay/up1
+3 · UPSELL 1 — escolha de plano $37 / $47 / $57
+https://growaiclub.com/pay/up1
+"Congratulations! You now have access to Money Club" — Conservative $37 (15 análises/dia, 85%), Growth $47 (25/dia, 88%), Elite $57 (40/dia, 92% +
+gerente) com badge MOST POPULAR. Gatilhos: escassez ("Only 14 spots left"), travamento permanente do plano, ancoragem $200–$1.000/dia. CTAs
+passam pelo redirector /hotwt/up1?to=<checkout>. Skip: "No thanks, I want to stay on the basic plan" → /pay/up2.
+▼ compra ou skip → /pay/up2
+
+-- 1 of 17 --
+
+4 · UPSELL 2 — AI Multiplier $24.90 / $34.90 / $49.90
+https://growaiclub.com/pay/up2
+"PLAN ACTIVATED" → survey de 4 perguntas (situação financeira, meta mensal, objetivo, prazo) → projeção personalizada ("você precisa de $60.000")
+→ pitch do "AI MULTIPLIER" (juros compostos, simulação com/sem) → ofertas Basic $24.90 (12 meses), Advanced $34.90 (6 meses), Ultra $49.90 (4
+meses, RECOMMENDED). CTAs via /hotwt/up2?to=<checkout>. Skip: "No, I want to continue without multiplying" → riseaiclub.com.
+▼ compra ou skip → área de membros
+5 · ÁREA DE MEMBROS + monetização interna — até +$67
+https://riseaiclub.com · cross-sell: https://aiengineclub.com (WebCash)
+App "Money Club" (trade com IA). Dentro do app: VIP Mode $67, Session Express $47, WebCash, Ultra Booster, Infinity Pass, Prize Wheel $20, indicação
+($200 por convite) e referral de corretora (u3.shortink.io) — monetização por depósito (FTD).
+Camada de cloaking: redirectores "white" /hotwt
+Todos os CTAs de upsell apontam para /hotwt/up1?to=<checkout centerpag> (ou /hotwt/up2). A página aguarda ~1.2s, preserva sck (Vturb),
+xcod e UTMs e executa window.location.replace para o checkout. O domínio white padrão (env CHECKOUT_WHITE_ORIGIN) é transitaclub.com
+— separação entre domínio "money page" e domínio de redirecionamento.
+
+-- 2 of 17 --
+
+3. Domínios e serviços
+Domínio / host 	Papel 	Stack / evidência
+growaiclub.com 	Funil principal EN (quiz + upsells +
+redirectores)
+Next.js App Router na Vercel
+(dpl_5qvmg8KcPAEukPos56R5oYe9Eaxn)
+transitaclub.com 	Funil ES (quiz) + domínio white dos
+redirectores
+Next.js / Vercel — /quiz-wt, /hotwt/up1, /hotwt/up2 ativos
+riseaiclub.com 	Área de membros "Money Club" (app de
+trade)
+Next.js Turbopack (dpl_2VyN5oTH8v5scBYNJjqhYXcCCp7V) +
+Supabase
+aiengineclub.com 	Área de membros do produto WebCash
+(cross-sell)
+Next.js / Vercel (dpl_6eKGp4dxYEstgFjPhfKU2T1WMaRE) — só
+/login pública
+go.riseaiclub.com 	Microserviço de tracking/redirect 	Node/Express — /health 200; demais paths 400 (via crt.sh)
+get.aiengineclub.com 	Microserviço de tracking/redirect 	Node/Express — /health 200 (mesmo app do go.riseai)
+go.centerpag.com
+checkout.centerpag.com
+Gateway principal (CenterPag / Perfect
+Pay)
+17 checkouts mapeados; assets em perfectpay-files.s3.us-east-2
+pay.hotmart.com 	Gateway alternativa (front EN + ES) 	2 produtos: P104403669D e M104846164A
+u3.shortink.io 	Referral de corretora (/register) 	Link de afiliado com sub_id1=<email do usuário> — monetização
+por depósito
+zjyhssrabkqeiwvelzuf.supabase.co Backend do app de membros 	Anon key pública no HTML; dados protegidos por RLS
+4. Páginas do funil de entrada (todas as URLs ativas)
+URL 	Etapa 	Conteúdo 	HTTP
+growaiclub.com/ (= /quiz-wt) 	Front-end EN 	Quiz 10 perguntas → redirect Hotmart P104403669D 	200
+growaiclub.com/quiz-wt 	Front-end EN (rota real) 	Mesma página da home 	200
+growaiclub.com/pay/up1 	Upsell 1 	Escolha de plano $37/$47/$57 	200
+growaiclub.com/pay/up2 	Upsell 2 	Survey 4 perguntas → AI Multiplier 	200
+growaiclub.com/hotwt/up1 	Redirector white 	?to=<checkout> → redirect 1.2s 	200
+growaiclub.com/hotwt/up2 	Redirector white 	Idem, usado pelos CTAs do upsell 2 	200
+transitaclub.com/ (= /quiz-wt) 	Front-end ES 	Quiz 16 perguntas → Hotmart M104846164A 	200
+transitaclub.com/hotwt/up1 · /hotwt/up2 	Redirector white ES 	Mesmo mecanismo (CHECKOUT_WHITE_ORIGIN) 	200
+Sem gate de sessão: /pay/up1 e /pay/up2 abrem direto sem compra prévia — facilita a clonagem. Rotas legadas do robots.txt (/up2a-c, /up3a-c, /up4a-c, /rec-, /back/,
+/be/, /tk/ etc.) retornam 404/308 — não fazem parte do funil ativo. Não há páginas de downsell neste domínio (testadas /pay/down1, /pay/ds1, /pay/downsell,
+/pay/up1b, /pay/up2b — todas 404).
+
+-- 3 of 17 --
+
+5. Checkouts — funil de entrada (9)
+ID / slug 	Gateway 	Produto 	Preço 	Etapa
+PPU38CQFOA2 	CenterPag 	Money Club — Access Money Club 	$29.90 	Front
+P104403669D?off=g3l9bb5h 	Hotmart 	AI Club 	US$29.90 	Front (quiz EN)
+M104846164A?off=81ea4jjm 	Hotmart 	AI Club (ES) 	n/d 	Front (quiz ES)
+PPU38CQFOA4 	CenterPag 	Plan Conservative — 15 análises/dia, win rate 85% 	$37 	Upsell 1
+PPU38CQFOEP 	CenterPag 	Plan Growth — 25 análises/dia, win rate 88% 	$47 	Upsell 1
+PPU38CQFOEQ 	CenterPag 	Plan Elite — 40 análises/dia, 92% + account manager 	$57 	Upsell 1
+PPU38CQFOAA 	CenterPag 	Basic Multiplier — meta $60k em 12 meses 	$24.90 	Upsell 2
+PPU38CQFOA8 	CenterPag 	Advanced Multiplier — meta $60k em 6 meses 	$34.90 	Upsell 2
+PPU38CQFOA6 	CenterPag 	Ultra Multiplier — meta $60k em 4 meses (RECOMMENDED) 	$49.90 	Upsell 2
+Mapeamento plano → ID extraído dos chunks app/pay/up1/page-*.js e app/pay/up2/page-*.js e confirmado no DOM ao vivo; Elite validado no checkout
+("Money Plans - Plan Elite $57").
+6. Checkouts — monetização dentro do app (10)
+ID 	Produto 	Preço Origem da evidência
+PPU38CQFQKI VIP Mode 	$67 	CTA no app: "Activate VIP Now · $67"
+PPU38CQH2GO VIP Mode (mapa interno "vip") 	$67 	Mapa de produtos no chunk principal
+PPU38CQFUNN Session Express 	$47 	"Unlock Session Express · $47" (env
+NEXT_PUBLIC_EXPRESS_CHECKOUT_URL)
+PPU38CQH2GQ Session Express (mapa "express") 	$47 	Mapa de produtos
+PPU38CQH2GS WebCash — sites de review em aiengineclub.com 	n/d 	Mapa "webcash" + SitesInviteProvider
+PPU38CQH2H0 Ultra Booster 	n/d 	Mapa "ultra"
+PPU38CQH2H2 Infinity Pass 	n/d 	Mapa "infinity"
+PPU38CQGK1J Infinity Pass (env
+NEXT_PUBLIC_INFINITY_PASS_CHECKOUT_URL)
+n/d 	Popup Infinity no app
+PPU38CQH2H4 Prize Wheel 	$20 	"Unlock my spin — $20" (mapa "wheel")
+PPU38CQGN9M Prize Wheel (env
+NEXT_PUBLIC_PRIZE_WHEEL_CHECKOUT_URL)
+$20 	Página /demo
+Rewrite dinâmico de checkout
+O helper checkoutUrlFor(produto, email, …) pode reescrever qualquer link para https://checkout.centerpag.com/upsell/<slug>/<PPU…
+>?email=<email> — upsell com e-mail pré-preenchido (1-click). Os IDs H2G* / FQKI / FUNN / GK1J / GN9M são fallbacks embutidos no código.
+
+-- 4 of 17 --
+
+7. Área de membros — riseaiclub.com (13 rotas)
+Rota 	Função
+/login 	Login (e-mail usado no checkout)
+/inicio 	Home pós-login (destino do redirect de login)
+/trade 	Tela de trade com sinais — chama /api/signals/increment; logos TradingView
+/accelerator 	Accelerator — /api/accelerator/save
+/ranking 	Ranking de membros (prova social)
+/wallet 	Carteira e pedidos de saque — /api/intl/withdraw
+/wheel 	Prize Wheel (roleta, $20/giro) — /api/intl/roulette*
+/invite 	Indicação — "You earned $200" — /api/intl/invite
+/profile 	Perfil — /api/auth/profile
+/help 	Ajuda / AI coach (chat) — /api/chat/*; vende Session Express
+/demo 	Demo com venda da Prize Wheel (PPU38CQGN9M)
+/terms 	Termos de uso
+/admin 	Painel "Money Club — Admin" — protegido por token — /api/admin/*
+A rota / retorna 404 mas renderiza o shell (header + bottom nav: Home, Accelerator, Trade, Ranking). Providers no bootstrap: GeoProvider, AuthProvider,
+VipPopupProvider, SitesInviteProvider. Rotas testadas e inexistentes: /register, /signup, /dashboard, /deposit, /settings, /vip, /withdraw, /forgot-password, /lab, /a/b, /a/i.
+8. APIs do app (Next.js API routes)
+Endpoint 	Grupo 	Função / status
+/api/geo 	Geo 	Aberto (200): {"{"}country, edition, isBrazil, ip{"}"} via x-
+vercel-ip-country
+/api/auth/login · /me · /logout · /profile 	Auth 	Sessão do membro — 401 sem login
+/api/chat/session · /messages · /triggers 	AI coach 	Chat interno; triggers disparam popups de venda — 401
+/api/intl/session · /session/start 	Sessão 	Controle das sessões de "trading" — 401
+/api/intl/withdraw 	Saque 	Pedido de saque (alimenta /api/admin/withdrawals) — 401
+/api/intl/invite 	Indicação 	Recompensas ($200/convite) — 401
+/api/intl/sites-invite 	WebCash 	Convite cross-sell p/ aiengineclub.com — 401
+/api/intl/roulette · /close · /credit 	Prize
+Wheel
+Giros e crédito de prêmio — 401
+/api/signals/increment 	Trade 	Contador de sinais consumidos — 401
+/api/accelerator/save 	Accelerator 	Persistência — 401
+/api/broadcast 	Tempo real 	OPTIONS 204 (CORS); GET 404 — provável POST/SSE
+/api/admin/verify · /logout · /invite · /users/retention ·
+/withdrawals
+Admin 	Painel interno — 401 "Token não encontrado"
+
+-- 5 of 17 --
+
+9. Infraestrutura e tracking
+Camada 	Detalhe
+Páginas do funil 	Next.js App Router na Vercel; sem APIs próprias; redirect 100% client-side
+App de
+membros
+Next.js Turbopack + Supabase (zjyhssrabkqeiwvelzuf) — anon key pública no HTML
+Gateways 	CenterPag (plataforma Perfect Pay; suporte support@centerpag.com) + Hotmart
+Tracking 	Utmify (cdn.utmify.com.br/scripts/utms/latest.js + pixel/pixel.js); parâmetros xcod e sck propagados de ponta a ponta (quiz →
+checkout → app)
+Vídeo 	Vturb (param sck) e ConverteAI (scripts/images.converteai.net) dentro do app
+Trade 	Logos s3-symbol-logo.tradingview.com; sessões via /api/intl/session
+Referral
+corretora
+u3.shortink.io/register?utm_campaign=835286&utm_source=affiliate&ac=app-mnc-pd-in-sb&sub_id1=<email> —
+comissão por primeiro depósito (FTD)
+Certificados
+(crt.sh)
+Wildcard em todos os domínios; subdomínios ativos: go.riseaiclub.com, get.aiengineclub.com
+
+-- 6 of 17 --
+
+9B. O FRONT REAL — rotas ocultas /pv13, /pv14 e /back
+Correção crítica da análise anterior
+O quiz da home (/quiz-wt) é a página white. Os fronts de verdade — para onde os anúncios apontam — ficam em rotas não linkadas, não
+indexadas e bloqueadas no robots.txt do mesmo domínio: /pv11, /pv12, /pv13, /pv14 e /back (PV11/PV12 = versões anteriores do mesmo
+simulador, mesmo initialBalance:50, rota /pvNN/trading). Há ainda /wt, advertorial "TradeGuide AI" indexável com tripwire de US$ 1 (seção
+9C). Nas páginas em si não há cloaker; a seleção black/white acontece nos trackers de entrada (seção 9C). Quem chega pela home vê educação
+financeira; quem chega pelo link do anúncio vê um simulador de trading com agente de voz.
+Fluxo do front PV13 (4 etapas no mesmo domínio)
+Etapa 	Rota 	O que acontece
+1. Landing 	/pv13 	"AI · Trade"
