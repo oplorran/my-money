@@ -36,8 +36,16 @@ export default function VslPage() {
         if (gen.current !== my) return;
         const line = VOICE[id];
         if (!line) continue;
-        setCaption(line.text);
-        await play(id);
+        const words = line.text.split(/\s+/);
+        let shown = -1;
+        setCaption("");
+        // o áudio dita o ritmo: as palavras aparecem conforme são faladas
+        await play(id, (ratio) => {
+          const n = Math.min(words.length, Math.max(1, Math.ceil(ratio * words.length)));
+          if (n === shown) return;
+          shown = n;
+          setCaption(words.slice(0, n).join(" "));
+        });
       }
       if (gen.current === my) setCaption("");
     },
@@ -302,8 +310,8 @@ export default function VslPage() {
       </header>
 
       <div className="relative z-10 flex-1 flex flex-col min-h-0 px-4">
-        {/* legenda grande, como fala ao vivo */}
-        <div className="pt-5 pb-2 min-h-[112px] flex items-center justify-center">
+        {/* legenda grande, como fala ao vivo; cresce conforme o áudio e é ancorada embaixo */}
+        <div className="pt-5 pb-2 min-h-[112px] flex items-end justify-center">
           <p className={`text-center font-semibold tracking-tight leading-[1.35] text-[clamp(17px,4.6vw,21px)] ${caption ? "text-white" : "text-slate-500"}`}>
             {caption || (speaking ? "…" : "Line connected.")}
           </p>

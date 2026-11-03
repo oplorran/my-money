@@ -75,7 +75,7 @@ export function useVoice() {
 
   /** Toca uma URL e resolve quando termina, falha ou estoura o tempo. */
   const playUrl = useCallback(
-    (src: string, fallbackMs: number) => {
+    (src: string, fallbackMs: number, onRatio?: (ratio: number) => void) => {
       return new Promise<void>((resolve) => {
         const a = ensure();
         let settled = false;
@@ -86,8 +86,11 @@ export function useVoice() {
           clearTimeout(guard);
           a.onended = null;
           a.onerror = null;
+          a.ontimeupdate = null;
           if (finishRef.current === finish) finishRef.current = null;
           setSpeaking(false);
+          // falha/estouro de tempo: revela a linha inteira para o texto não ficar pela metade
+          onRatio?.(1);
           resolve();
         };
         finishRef.current = finish;
@@ -95,6 +98,12 @@ export function useVoice() {
         a.muted = mutedRef.current;
         a.onended = finish;
         a.onerror = () => window.setTimeout(finish, fallbackMs);
+        if (onRatio) {
+          a.ontimeupdate = () => {
+            const d = a.duration;
+            if (Number.isFinite(d) && d > 0) onRatio(Math.min(1, a.currentTime / d));
+          };
+        }
         a.src = src;
         try { a.currentTime = 0; } catch {}
         setSpeaking(true);
@@ -106,7 +115,7 @@ export function useVoice() {
   );
 
   const play = useCallback(
-    (id: number) => {
+    (id: number, onRatio?: (ratio: number) => void) => {
       return new Promise<void>((resolve) => {
         const line = VOICE[id];
         if (!line) {
@@ -117,7 +126,7 @@ export function useVoice() {
         const name = nameRef.current;
 
         if (!name || !VOCATIVE.has(id)) {
-          void playUrl(`/voice/${line.file}`, fallback).then(resolve);
+          void playUrl(`/voice/${line.file}`, fallback, onRatio).then(resolve);
           return;
         }
 
@@ -128,7 +137,7 @@ export function useVoice() {
             new Promise<null>((r) => setTimeout(() => r(null), NAME_WAIT)),
           ]);
           if (clip) await playUrl(clip, 1200);
-          await playUrl(`/voice/${line.file}`, fallback);
+          await playUrl(`/voice/${line.file}`, fallback, onRatio);
           resolve();
         })();
       });
