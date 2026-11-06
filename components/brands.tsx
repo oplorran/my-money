@@ -103,10 +103,10 @@ export function brandLabel(b: BrandKey) {
 
 export function BrandChip({ brand }: { brand: BrandKey }) {
   return (
-    <div className="w-[68px] h-[68px] rounded-2xl border border-white/10 bg-white/[.04] flex flex-col items-center justify-center gap-0.5">
-      <span className="text-white/70"><Glyph brand={brand} size={17} /></span>
-      <span className="text-[13px] leading-none font-bold tracking-tight text-white/70">{LABEL[brand]}</span>
-      <span className="text-[7px] font-semibold uppercase tracking-[0.16em] text-white/30">AI · Trade</span>
+    <div className="flex h-[68px] w-[68px] flex-col items-center justify-center gap-0.5 rounded-[18px] border border-[#303030] bg-[#111111]">
+      <span className="text-[#888888]"><Glyph brand={brand} size={17} /></span>
+      <span className="text-[13px] font-bold leading-none tracking-tight text-[#cccccc]">{LABEL[brand]}</span>
+      <span className="text-[7px] font-semibold uppercase tracking-[0.16em] text-[#666666]">AI · Trade</span>
     </div>
   );
 }

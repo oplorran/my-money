@@ -38,6 +38,8 @@ const MAKERS = [
   { id: "microsoft", bg: "linear-gradient(160deg,#36BEF6 0%,#04ADF4 55%,#0288C2 100%)", color: "#fff" },
 ] as const;
 
+/** Mantém as logos reconhecíveis, mas com a moldura escura do guia. */
+
 export function Pv13Landing() {
   const router = useRouter();
   const [loading, setLoading] = useState(false);
@@ -68,7 +70,7 @@ export function Pv13Landing() {
                 style={{
                   background: m.bg,
                   color: m.color,
-                  boxShadow: "0 0 0 2px #0a0a0c, 0 6px 14px -4px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.28)",
+                  boxShadow: "0 0 0 2px #090909, 0 0 0 3px #303030",
                 }}
               >
                 <AiMaker brand={m.id} size={19} />
@@ -76,25 +78,25 @@ export function Pv13Landing() {
             ))}
           </div>
 
-          <div className="rounded-2xl border border-zinc-500/25 bg-zinc-500/[.08] px-3 py-1.5 backdrop-blur-md">
-            <p className="mb-0.5 text-[8px] font-bold uppercase leading-tight tracking-[0.16em] text-zinc-500">
+          <div className="rounded-2xl border border-[#303030] bg-[#111111] px-3 py-1.5">
+            <p className="mb-0.5 text-[8px] font-bold uppercase leading-tight tracking-[0.16em] text-[#666666]">
               Balance
             </p>
             <p className="flex items-baseline gap-0.5">
-              <span className="text-[11px] font-bold text-zinc-400">$</span>
+              <span className="text-[11px] font-bold text-[#888888]">$</span>
               <span className="tabular text-lg font-bold leading-none tracking-tight text-white">50.00</span>
             </p>
           </div>
         </div>
 
         <div className="relative z-10 flex flex-1 items-center justify-center px-4 py-3">
-          <div className="w-full max-w-[340px] rounded-3xl border border-zinc-500/20 bg-[#121215]/85 p-4 text-center backdrop-blur-md mc-pop">
-            {/* selo com o check verde, como no original */}
+          <div className="mc-pop w-full max-w-[340px] rounded-[30px] border border-[#303030] bg-[#111111] p-4 text-center">
+            {/* selo com o check, como no original */}
             <div className="mb-3 flex justify-center">
               <div className="relative flex h-[62px] w-[62px] items-center justify-center">
-                <span className="absolute inset-0 rounded-full bg-emerald-500/25 blur-md mc-breathe" />
-                <span className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full border-2 border-emerald-500/60 bg-emerald-500/10 shadow-[0_0_30px_rgba(16,185,129,.35)]">
-                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
+                <span className="absolute inset-0 rounded-full bg-[#a8ff16]/20 blur-md mc-breathe" />
+                <span className="relative flex h-[62px] w-[62px] items-center justify-center rounded-full border-2 border-[#a8ff16]/50 bg-[#151b0d]">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="2.6" strokeLinecap="round" strokeLinejoin="round">
                     <path d="M20 6 9 17l-5-5" />
                   </svg>
                 </span>
@@ -104,24 +106,24 @@ export function Pv13Landing() {
             <h1 className="mb-2 text-[21px] font-black leading-tight tracking-tight text-white">
               Congratulations!
             </h1>
-            <p className="mb-3 px-1 text-[13px] leading-snug text-zinc-300">
+            <p className="mb-3 px-1 text-[13px] leading-snug text-[#cccccc]">
               You just won 1 free license of the official AI from{" "}
-              <span className="font-bold text-orange-500">GPT, Microsoft and Google</span>.
+              <span className="font-bold text-[#a8ff16]">GPT, Microsoft and Google</span>.
             </p>
 
-            <div className="mb-3 h-px bg-white/10" />
+            <div className="mb-3 h-px bg-[#292929]" />
 
-            <p className="mb-1 text-[14px] leading-snug text-zinc-200">
-              Take it — you already earned <span className="font-extrabold text-orange-500">$50.00</span>
+            <p className="mb-1 text-[14px] leading-snug text-white">
+              Take it — you already earned <span className="font-extrabold text-[#a8ff16]">$50.00</span>
             </p>
-            <p className="mb-4 text-[12px] leading-snug text-zinc-400">
+            <p className="mb-4 text-[12px] leading-snug text-[#888888]">
               Activate the AI and multiply your balance in 60 seconds.
             </p>
 
             <button
               onClick={activate}
               disabled={loading}
-              className="mc-cta mc-pulse flex w-full items-center justify-center gap-2 rounded-2xl py-3 text-[15px] font-bold tracking-wide text-white active:scale-[.98] disabled:opacity-90"
+              className="mc-cta mc-pulse flex w-full items-center justify-center gap-2 rounded-[18px] py-3 text-[15px] font-bold tracking-wide active:scale-[.98] disabled:opacity-90"
             >
               START NOW
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
@@ -129,7 +131,7 @@ export function Pv13Landing() {
               </svg>
             </button>
 
-            <p className="mt-2 text-[10px] text-zinc-500">1 free license · no card needed to test</p>
+            <p className="mt-2 text-[10px] text-[#666666]">1 free license · no card needed to test</p>
           </div>
         </div>
       </div>

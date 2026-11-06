@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Pv13Landing } from "@/components/pv13-landing";
 
 export const metadata: Metadata = {
-  title: "AI · Trade · My Money",
+  title: "AI · Trade · Cash Club",
   description: "You just won 1 free license. Activate the AI and multiply your balance in 60 seconds.",
 };
 

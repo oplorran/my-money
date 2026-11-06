@@ -24,30 +24,30 @@ export default function Back() {
       <div className="mc-glow" />
       <div className="relative z-10 flex-1 flex flex-col justify-center px-5 pb-8 max-w-md mx-auto w-full">
         <div className="text-center mb-5">
-          <div className="inline-flex items-center gap-2 rounded-full border border-amber-400/40 bg-amber-500/10 px-3 py-1 mb-3">
-            <span className="w-2 h-2 rounded-full bg-amber-400 animate-pulse" />
-            <span className="text-amber-300 text-[10px] font-bold tracking-[0.18em]">WELCOME BACK</span>
+          <div className="inline-flex items-center gap-2 rounded-full border border-[#a8ff16]/30 bg-[#a8ff16]/10 px-3 py-1 mb-3">
+            <span className="w-2 h-2 rounded-full bg-[#a8ff16] animate-pulse" />
+            <span className="text-[#a8ff16] text-[10px] font-bold tracking-[0.18em]">WELCOME BACK</span>
           </div>
           <h1 className="text-[28px] font-black text-white leading-tight mb-2">Your verification is still open</h1>
-          <p className="text-slate-400 text-[13px]">If you leave now, the process resets from zero. Finish it while it&apos;s open.</p>
+          <p className="text-[#888888] text-[13px]">If you leave now, the process resets from zero. Finish it while it&apos;s open.</p>
         </div>
 
-        <div className="mc-card rounded-2xl p-5 mb-4">
-          <p className="text-slate-400 text-[10px] uppercase tracking-wider mb-1">{down ? "Reduced access" : "Full access"}</p>
+        <div className="mc-card rounded-[20px] p-5 mb-4">
+          <p className="text-[#888888] text-[10px] uppercase tracking-wider mb-1">{down ? "Reduced access" : "Full access"}</p>
           <p className="text-white font-black text-5xl tabular mb-1">
             ${price.toFixed(2)}
           </p>
-          <p className="text-slate-400 text-[12px]">
+          <p className="text-[#888888] text-[12px]">
             {down ? "One-time reduced activation — today only" : "One-time activation. Withdrawals released right after."}
           </p>
         </div>
 
-        <button onClick={go} className="mc-cta mc-pulse w-full py-4 rounded-2xl font-bold text-lg">
+        <button onClick={go} className="mc-cta mc-pulse w-full py-4 rounded-[20px] font-bold text-lg">
           {down ? "Activate reduced access" : "Activate my account"} · ${price.toFixed(2)}
         </button>
 
         {!down && (
-          <button onClick={() => { setDown(true); track("back_down", { tier, ...trackingParams() }); }} className="w-full text-center text-[12px] text-slate-400 py-3">
+          <button onClick={() => { setDown(true); track("back_down", { tier, ...trackingParams() }); }} className="w-full text-center text-[12px] text-[#888888] py-3">
             Too expensive — show me the reduced version
           </button>
         )}

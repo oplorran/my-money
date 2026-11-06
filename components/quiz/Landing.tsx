@@ -5,50 +5,51 @@ import { track, trackingParams } from "@/lib/track";
 
 export function Landing({ onStart }: { onStart: () => void }) {
   return (
-    <div className="relative z-10 max-w-lg mx-auto px-5 py-10 min-h-screen flex flex-col justify-center">
+    <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-5 py-10">
       <div className="text-center">
-        <div className="relative inline-flex qa-rise">
-          <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(99,102,241,.5), transparent 70%)" }} />
-          <div className="relative w-20 h-20 rounded-[24px] qa-glass flex items-center justify-center">
+        <div className="qa-rise relative inline-flex">
+          <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(168,255,22,.28), transparent 70%)" }} />
+          <div className="qa-glass relative flex h-20 w-20 items-center justify-center rounded-[24px]">
             <Mark size={52} uid="hero" />
           </div>
         </div>
 
-        <div className="mt-5 qa-rise qa-d1">
-          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full qa-glass-soft mb-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-500 animate-pulse" />
-            <span className="text-slate-600 text-xs font-semibold tracking-wide">QUIZ · AI · FINANCE</span>
+        <div className="qa-rise qa-d1 mt-5">
+          <div className="qa-glass-soft mb-3 inline-flex items-center gap-2 rounded-full px-4 py-1.5">
+            <span className="h-2 w-2 animate-pulse rounded-full bg-[#a8ff16]" />
+            <span className="text-xs font-semibold tracking-wide text-[#888888]">QUIZ · AI · FINANCE</span>
           </div>
-          <h1 className="text-[26px] sm:text-4xl font-black text-slate-900 leading-[1.1] mb-3 tracking-tight">
-            Discover how{" "}
-            <span className="bg-gradient-to-r from-indigo-600 via-violet-600 to-cyan-500 bg-clip-text text-transparent">Artificial Intelligence</span>{" "}
-            can help you with your finances
+          <h1 className="mb-3 text-[26px] font-black leading-[1.1] tracking-tight text-white sm:text-4xl">
+            Discover how <span className="text-[#a8ff16]">Artificial Intelligence</span> can help you with your finances
           </h1>
-          <p className="text-slate-500 text-base max-w-md mx-auto">Discover your profile for the new digital era in 2 minutes.</p>
+          <p className="mx-auto max-w-md text-base text-[#888888]">Discover your profile for the new digital era in 2 minutes.</p>
         </div>
 
-        <div className="qa-glass rounded-3xl p-4 mt-5 qa-rise qa-d3 text-left">
-          <p className="text-[11px] font-bold tracking-wider text-slate-400 mb-3">HOW IT WORKS</p>
+        <div className="qa-glass qa-rise qa-d3 mt-5 rounded-3xl p-4 text-left">
+          <p className="mb-3 text-[11px] font-bold uppercase tracking-[0.16em] text-[#666666]">How it works</p>
           <div className="flex items-start justify-between gap-2">
             {[
               { t: "Answer", d: "10 quick questions" },
               { t: "We analyze", d: "AI evaluates your profile" },
               { t: "Get", d: "Your personalized plan" },
             ].map((s, i) => (
-              <div key={s.t} className="flex-1 flex flex-col items-center relative">
-                {i < 2 && <div className="absolute top-6 left-1/2 w-full h-[2px] bg-gradient-to-r from-indigo-200 to-transparent" />}
-                <div className="relative w-12 h-12 rounded-2xl bg-white border border-slate-100 shadow-sm flex items-center justify-center z-10">
-                  <span className="w-5 h-5 rounded-full bg-gradient-to-br from-indigo-500 to-violet-600 text-white text-[10px] font-bold flex items-center justify-center">{i + 1}</span>
+              <div key={s.t} className="relative flex flex-1 flex-col items-center">
+                {i < 2 && <div className="absolute left-1/2 top-6 h-[2px] w-full bg-[#292929]" />}
+                <div className="relative z-10 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#303030] bg-[#111111]">
+                  <span className="flex h-5 w-5 items-center justify-center rounded-full bg-[#a8ff16] text-[10px] font-bold text-[#090909]">{i + 1}</span>
                 </div>
-                <div className="mt-2.5 font-bold text-slate-800 text-sm">{s.t}</div>
-                <div className="text-[11px] text-slate-400 leading-tight mt-0.5 text-center">{s.d}</div>
+                <div className="mt-2.5 text-sm font-bold text-white">{s.t}</div>
+                <div className="mt-0.5 text-center text-[11px] leading-tight text-[#888888]">{s.d}</div>
               </div>
             ))}
           </div>
         </div>
 
-        <div className="mt-5 space-y-3.5 qa-rise qa-d4">
-          <button onClick={() => { track("landing_start", trackingParams()); onStart(); }} className="relative overflow-hidden w-full rounded-2xl font-bold flex items-center justify-center gap-3 bg-gradient-to-r from-indigo-600 via-violet-600 to-blue-600 text-white shadow-[0_18px_40px_-10px_rgba(99,102,241,.6)] py-4 text-xl active:scale-[.98] transition-transform">
+        <div className="qa-rise qa-d4 mt-5 space-y-3.5">
+          <button
+            onClick={() => { track("landing_start", trackingParams()); onStart(); }}
+            className="mc-cta relative flex w-full items-center justify-center gap-3 overflow-hidden rounded-[18px] py-4 text-xl font-bold transition-transform active:scale-[.98]"
+          >
             <span aria-hidden className="qa-shine" />
             <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="relative z-10">
               <path d="M9.9 15.5a2 2 0 0 0-1.4-1.4l-6.1-1.6a.5.5 0 0 1 0-1l6.1-1.5A2 2 0 0 0 9.9 8.5l1.6-6.1a.5.5 0 0 1 1 0l1.5 6.1a2 2 0 0 0 1.4 1.4l6.1 1.6a.5.5 0 0 1 0 1l-6.1 1.5a2 2 0 0 0-1.4 1.4l-1.6 6.1a.5.5 0 0 1-1 0z" />
@@ -58,16 +59,16 @@ export function Landing({ onStart }: { onStart: () => void }) {
 
           <div className="flex items-center justify-center gap-3">
             <div className="flex -space-x-2.5">
-              {["M", "S", "J", "A", "L"].map((l, i) => (
-                <div key={l} className={`w-8 h-8 rounded-full border-2 border-white flex items-center justify-center text-white text-xs font-bold bg-gradient-to-br ${["from-indigo-500 to-violet-600", "from-cyan-500 to-blue-600", "from-fuchsia-500 to-purple-600", "from-emerald-500 to-teal-600", "from-amber-500 to-orange-600"][i]}`}>{l}</div>
+              {["M", "S", "J", "A", "L"].map((l) => (
+                <div key={l} className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#090909] bg-[#1b1b1d] text-xs font-bold text-[#a8ff16]">{l}</div>
               ))}
             </div>
             <div className="text-left">
               <div className="flex items-center gap-1">
                 <Stars />
-                <span className="text-xs font-bold text-slate-700 ml-1">4.9</span>
+                <span className="ml-1 text-xs font-bold text-white">4.9</span>
               </div>
-              <div className="text-[11px] text-slate-400">15,000+ people have already taken it</div>
+              <div className="text-[11px] text-[#666666]">15,000+ people have already taken it</div>
             </div>
           </div>
         </div>

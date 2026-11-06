@@ -43,25 +43,27 @@ export function Swipe({
 
   return (
     <div>
-      <p className="text-[11px] font-bold tracking-wider text-slate-400 mb-1">SWIPE</p>
-      <p className="text-xl font-bold text-slate-900 mb-1">Swipe the cards based on what feels true</p>
-      <p className="text-[13px] text-slate-400 mb-4">Right for yes, left for no — {remaining} left</p>
+      <p className="mb-1 text-[11px] font-bold uppercase tracking-[0.16em] text-[#666666]">Swipe</p>
+      <p className="mb-1 text-xl font-bold text-white">Swipe the cards based on what feels true</p>
+      <p className="mb-4 text-[13px] text-[#888888]">Right for yes, left for no — {remaining} left</p>
 
-      <div className="space-y-2.5 mb-4">
+      <div className="mb-4 space-y-2.5">
         {cards.map((card, i) => {
           const v = vals[i];
           return (
             <div
               key={card}
-              className={`qa-glass-soft rounded-2xl p-3.5 flex items-center justify-between gap-3 transition-opacity ${v === null ? "" : "opacity-70"}`}
+              className={`qa-glass-soft flex items-center justify-between gap-3 p-3.5 transition-opacity ${v === null ? "" : "opacity-70"}`}
             >
-              <p className="text-[13px] font-medium text-slate-700 leading-snug">{card}</p>
-              <div className="flex gap-1.5 shrink-0">
+              <p className="text-[13px] font-medium leading-snug text-[#cccccc]">{card}</p>
+              <div className="flex shrink-0 gap-1.5">
                 <button
                   onClick={() => set(i, false)}
                   aria-label="No"
                   aria-pressed={v === false}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center border ${v === false ? "bg-rose-500 border-rose-500 text-white" : "bg-white/70 border-slate-200 text-slate-400"}`}
+                  className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
+                    v === false ? "border-[#303030] bg-[#1b1b1d] text-white" : "border-[#303030] bg-[#111111] text-[#666666]"
+                  }`}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round"><path d="M18 6 6 18M6 6l12 12" /></svg>
                 </button>
@@ -69,7 +71,9 @@ export function Swipe({
                   onClick={() => set(i, true)}
                   aria-label="Yes"
                   aria-pressed={v === true}
-                  className={`w-9 h-9 rounded-full flex items-center justify-center border ${v === true ? "bg-emerald-500 border-emerald-500 text-white" : "bg-white/70 border-slate-200 text-slate-400"}`}
+                  className={`flex h-9 w-9 items-center justify-center rounded-full border transition-colors ${
+                    v === true ? "border-[#a8ff16] bg-[#a8ff16] text-[#090909]" : "border-[#303030] bg-[#111111] text-[#666666]"
+                  }`}
                 >
                   <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
                 </button>
@@ -83,7 +87,7 @@ export function Swipe({
         Continue ({decided}/{cards.length})
       </Cta>
       {decided < cards.length && decided > 0 && (
-        <p className="text-center text-[11px] text-slate-400 mt-2">
+        <p className="mt-2 text-center text-[11px] text-[#666666]">
           {serialize(vals)} · responda todos para um resultado mais preciso
         </p>
       )}

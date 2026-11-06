@@ -24,39 +24,35 @@ export function Analyzing() {
   }, []);
 
   return (
-    <div className="text-center py-8">
-      <div className="relative w-32 h-32 mx-auto mb-8">
-        <svg viewBox="0 0 120 120" className="w-32 h-32 -rotate-90">
-          <circle cx="60" cy="60" r="52" stroke="#e2e8f0" strokeWidth="8" fill="none" />
+    <div className="py-8 text-center">
+      <div className="relative mx-auto mb-8 h-32 w-32">
+        <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90">
+          <circle cx="60" cy="60" r="52" stroke="#1b1b1d" strokeWidth="8" fill="none" />
           <circle
-            cx="60" cy="60" r="52" stroke="url(#pg)" strokeWidth="8" fill="none"
+            cx="60" cy="60" r="52" stroke="#a8ff16" strokeWidth="8" fill="none"
             strokeLinecap="round"
             strokeDasharray={2 * Math.PI * 52}
             strokeDashoffset={2 * Math.PI * 52 * (1 - pct / 100)}
             className="transition-all duration-200"
           />
-          <defs>
-            <linearGradient id="pg" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0%" stopColor="#6366f1" />
-              <stop offset="100%" stopColor="#06b6d4" />
-            </linearGradient>
-          </defs>
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
-          <span className="text-3xl font-black text-slate-800 tabular">{Math.round(pct)}%</span>
-          <span className="text-[10px] font-bold tracking-wider text-slate-400">ANALYZING</span>
+          <span className="tabular text-3xl font-black text-white">{Math.round(pct)}%</span>
+          <span className="text-[10px] font-bold tracking-[0.16em] text-[#666666]">ANALYZING</span>
         </div>
       </div>
 
-      <div className="space-y-2 text-left max-w-xs mx-auto">
+      <div className="mx-auto max-w-xs space-y-2 text-left">
         {STEPS.map((s, i) => (
           <div key={s} className="flex items-center gap-2.5">
-            <span className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 ${i < step ? "bg-emerald-500" : i === step ? "bg-indigo-500 animate-pulse" : "bg-slate-200"}`}>
+            <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
+              i < step ? "bg-[#a8ff16]" : i === step ? "animate-pulse border border-[#a8ff16] bg-[#151b0d]" : "bg-[#1b1b1d]"
+            }`}>
               {i < step ? (
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#fff" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#090909" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               ) : null}
             </span>
-            <span className={`text-[13px] ${i <= step ? "text-slate-700" : "text-slate-400"}`}>{s}</span>
+            <span className={`text-[13px] ${i <= step ? "text-[#cccccc]" : "text-[#666666]"}`}>{s}</span>
           </div>
         ))}
       </div>

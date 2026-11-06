@@ -9,12 +9,12 @@ type Props = ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export function Cta({ children, full = true, className = "", ...rest }: Props) {
   const base = rest.disabled
-    ? "bg-slate-200 text-slate-400 cursor-not-allowed"
+    ? "bg-[#1b1b1d] text-[#666666] cursor-not-allowed border border-[#303030]"
     : "mc-cta active:scale-[.98]";
   return (
     <button
       {...rest}
-      className={`relative overflow-hidden rounded-2xl font-bold flex items-center justify-center gap-2.5 transition-all ${full ? "w-full" : ""} ${base} ${className}`}
+      className={`relative flex items-center justify-center gap-2.5 overflow-hidden rounded-[18px] font-bold transition-all ${full ? "w-full" : ""} ${base} ${className}`}
     >
       {children}
     </button>
@@ -23,7 +23,7 @@ export function Cta({ children, full = true, className = "", ...rest }: Props) {
 
 export function Ghost({ children, onClick, className = "" }: { children: ReactNode; onClick: () => void; className?: string }) {
   return (
-    <button onClick={onClick} className={`w-full text-center text-[13px] text-slate-400 hover:text-slate-200 transition-colors py-2 ${className}`}>
+    <button onClick={onClick} className={`w-full py-2 text-center text-[13px] text-[#888888] transition-colors hover:text-white ${className}`}>
       {children}
     </button>
   );

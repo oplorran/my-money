@@ -1,21 +1,18 @@
 /**
- * Troca a marca do roteiro em texto e áudio.
+ * Reescreve a marca falada no roteiro (texto + áudio).
  *
- *   node scripts/rebrand.mjs "My Money"
- *   node scripts/rebrand.mjs "My Money" --dry      (só mostra o texto, não sintetiza)
+ *   node scripts/rebrand.mjs "Cash Club"
+ *   node scripts/rebrand.mjs "Cash Club" --dry   (só mostra o texto, não sintetiza)
  *
- * Reescreve lib/voice-lines.json e regrava public/voice/<id>.mp3 na mesma voz
- * (Inworld "Nate", 48 kHz / 64 kbps), mantendo o nome do arquivo para não mexer no código.
+ * Regras aplicadas, na ordem:
+ *   - "The My Money A I"    -> "The Cash Club A I"
+ *   - "The My Money income" -> "The Cash Club income"
+ *   - "My Money" / "Money Club" -> marca nova
  *
- * Regras aplicadas:
- *   - "Money Club" cru        -> "My Money"
- *   - "The Money Club A I"    -> "The My Money A I"
- *   - "The Money Club income" -> "The My Money income"
- *
- * Voz: usa /api/tts local (sua rota) e cai para a API do site original se ela falhar.
+ * Backup dos MP3 antigos em public/voice/_bak/, mantendo o nome do arquivo.
  */
 
-import { readFile, writeFile, copyFile } from "node:fs/promises";
+import { readFile, writeFile, copyFile, mkdir } from "node:fs/promises";
 import { join, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -31,28 +28,24 @@ if (brand.length < 2) {
   process.exit(1);
 }
 
-/** Linhas que citam a marca hoje. */
-const TARGETS = [1, 3, 7, 20, 41, 56, 83, 85];
-
 function rewrite(text) {
   return text
+    .replace(/\bThe My Money A I\b/g, `The ${brand} A I`)
+    .replace(/\bMy Money A I\b/g, `${brand} A I`)
+    .replace(/\bThe My Money income\b/g, `The ${brand} income`)
     .replace(/\bThe Money Club A I\b/g, `The ${brand} A I`)
     .replace(/\bThe Money Club income\b/g, `The ${brand} income`)
+    .replace(/\bMy Money\b/g, brand)
     .replace(/\bMoney Club\b/g, brand);
 }
 
 const lines = JSON.parse(await readFile(LINES, "utf8"));
 const changed = [];
 
-for (const id of TARGETS) {
-  const line = lines.find((l) => l.id === id);
-  if (!line) {
-    console.warn(`linha ${id} inexistente, pulando`);
-    continue;
-  }
+for (const line of lines) {
   const next = rewrite(line.text);
   if (next === line.text) continue;
-  changed.push({ id, before: line.text, after: next });
+  changed.push({ id: line.id, file: line.file, before: line.text, after: next });
 }
 
 if (!changed.length) {
@@ -100,10 +93,8 @@ for (const c of changed) {
     console.error(`[${c.id}] FALHOU ao sintetizar, texto não alterado`);
     continue;
   }
-  await copyFile(file, join(VOICE, "_bak", line.file)).catch(async () => {
-    await (await import("node:fs/promises")).mkdir(join(VOICE, "_bak"), { recursive: true });
-    await copyFile(file, join(VOICE, "_bak", line.file));
-  });
+  await mkdir(join(VOICE, "_bak"), { recursive: true }).catch(() => {});
+  await copyFile(file, join(VOICE, "_bak", line.file)).catch(() => {});
   await writeFile(file, buf);
   line.text = c.after;
   ok++;

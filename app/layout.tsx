@@ -11,7 +11,7 @@ const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["lati
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 export const metadata: Metadata = {
-  title: "My Money",
+  title: "Cash Club",
   description: "Discover cutting-edge solutions that transform the way you interact with technology.",
   appleWebApp: { capable: true, statusBarStyle: "black-translucent" },
   // o funil é noindex por padrão; páginas que devem ser indexadas sobrescrevem
@@ -21,7 +21,7 @@ export const metadata: Metadata = {
 export const viewport: Viewport = {
   width: "device-width",
   initialScale: 1,
-  themeColor: "#050814",
+  themeColor: "#090909",
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {

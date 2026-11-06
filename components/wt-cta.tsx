@@ -10,7 +10,7 @@ export function WtCta() {
   };
 
   return (
-    <button onClick={go} className="w-full rounded-xl bg-indigo-600 py-3.5 font-bold text-white">
+    <button onClick={go} className="mc-cta w-full rounded-[18px] py-3.5 font-bold">
       Activate Your Potential - $1
     </button>
   );

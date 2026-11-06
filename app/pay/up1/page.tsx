@@ -1,76 +1,131 @@
 "use client";
 
-import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { checkoutUrl, goExternal, readState } from "@/lib/funnel";
+import { UP1_CHECKOUT, checkoutUrl, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
-const PLANS = [
-  { id: "PPU38CQFOA4", name: "Conservative", price: 37, per: "15 analyses/day", win: "85%", feats: ["15 AI analyses per day", "85% win rate", "Standard support"], badge: null },
-  { id: "PPU38CQFOEP", name: "Growth", price: 47, per: "25 analyses/day", win: "88%", feats: ["25 AI analyses per day", "88% win rate", "Priority support"], badge: "MOST POPULAR" },
-  { id: "PPU38CQFOEQ", name: "Elite", price: 57, per: "40 analyses/day", win: "92%", feats: ["40 AI analyses per day", "92% win rate", "Dedicated account manager"], badge: null },
+const BENEFITS = [
+  { label: "40+ analyses per day", note: "5x more market opportunities", color: "#a8ff16" },
+  { label: "92% win rate", note: "maximum AI precision", color: "#a8ff16" },
+  { label: "Personal Account Manager", note: "dedicated support", color: "#a8ff16" },
+  { label: "$800–$1,000/day", note: "earning potential", color: "#a8ff16" },
 ];
 
 export default function Up1() {
   const router = useRouter();
-  const [spots] = useState(14);
-  const st = readState();
 
-  const buy = (id: string, plan: string) => {
-    track("upsell1_click", { plan, ...trackingParams() });
-    goExternal(checkoutUrl(id, { upsell: true }));
+  const buy = () => {
+    track("upsell1_click", { plan: "premium", price: 297, ...trackingParams() });
+    goExternal(checkoutUrl(UP1_CHECKOUT, { upsell: true }));
   };
 
   const skip = () => {
     track("upsell1_skip", trackingParams());
-    router.push("/pay/up2");
+    router.push("/hot/up2");
   };
 
   return (
-    <main className="mc-shell relative min-h-[100svh] overflow-hidden">
+    <main className="mc-shell relative min-h-[100svh] overflow-hidden pb-8">
       <div className="mc-glow" />
-      <div className="relative z-10 max-w-md mx-auto px-4 pt-5 pb-8">
-        <div className="text-center mb-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-emerald-400/40 bg-emerald-500/10 px-3 py-1 mb-3">
-            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-            <span className="text-emerald-300 text-[10px] font-bold tracking-[0.18em]">PAYMENT CONFIRMED</span>
-          </div>
-          <h1 className="text-[24px] font-black text-white leading-tight mb-1.5">Congratulations! You now have access to My Money</h1>
-          <p className="text-slate-400 text-[13px]">Last step: lock in your plan. This choice is permanent.</p>
-        </div>
 
-        <div className="flex items-center justify-center gap-2 mb-3 rounded-full bg-orange-500/15 border border-orange-400/30 py-1.5">
-          <span className="text-orange-300 text-[11px] font-bold">Only {spots} spots left in this session</span>
-        </div>
-        <p className="text-center text-slate-500 text-[11px] mb-3">Members at this level earn an average of $200–$1,000/day</p>
+      <div className="relative z-10 border-b border-[#303030] bg-[#0a0a0a] px-4 py-3">
+        <p className="text-center text-[12.5px] font-bold leading-snug text-white">
+          Attention! Your APP access is not 100% complete yet…
+        </p>
+      </div>
 
-        <div className="space-y-2.5 mb-4">
-          {PLANS.map((p) => (
-            <button key={p.id} onClick={() => buy(p.id, p.name)} className={`w-full relative rounded-2xl border p-4 text-left transition-transform active:scale-[.99] ${p.badge ? "border-emerald-400/60 bg-emerald-500/8" : "border-white/12 bg-white/4"}`}>
-              {p.badge && <span className="absolute -top-2 right-3 rounded-full bg-emerald-500 text-white text-[9px] font-bold px-2 py-0.5 tracking-wider">{p.badge}</span>}
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-white font-bold text-base">{p.name}</span>
-                <span className="text-white font-black text-xl tabular">${p.price}</span>
-              </div>
-              <p className="text-slate-400 text-[11px] mb-2">{p.per} · {p.win} win rate</p>
-              <ul className="space-y-1">
-                {p.feats.map((f) => (
-                  <li key={f} className="flex items-center gap-1.5 text-[11px] text-slate-300">
-                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#34d399" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </button>
+      <div className="relative z-10 mx-auto w-full max-w-md px-4 pt-5">
+        {/* stepper dos 3 passos */}
+        <div className="mb-5 flex items-start justify-between px-1">
+          {[
+            { t: "Step 1", lines: ["Sign-Up"], done: true },
+            { t: "Step 2", lines: ["Complete"], done: true },
+            { t: "Step 3", lines: ["Activate", "Your", "Plan"], active: true },
+          ].map((st) => (
+            <div key={st.t} className="flex flex-1 flex-col items-center">
+              <p className={`text-[10.5px] font-bold uppercase tracking-wider ${st.active ? "text-[#a8ff16]" : "text-[#888888]"}`}>
+                {st.t}
+              </p>
+              <span
+                className={`mt-1.5 flex h-6 w-6 items-center justify-center rounded-full text-[11px] font-black ${
+                  st.done ? "bg-[#a8ff16] text-white" : "bg-red-800 text-white"
+                }`}
+              >
+                {st.done ? "✓" : "3"}
+              </span>
+              {st.lines.map((l, i) => (
+                <p key={l} className={`${i === 0 ? "mt-1" : "mt-0.5"} text-[10px] font-black leading-tight ${st.active ? "text-white" : "text-white"}`}>
+                  {l}
+                </p>
+              ))}
+            </div>
           ))}
+          <div className="flex flex-1 flex-col items-center opacity-55">
+            <p className="text-[10.5px] font-bold uppercase tracking-wider text-[#666666]">Done</p>
+            <span className="mt-1.5 flex h-6 w-6 items-center justify-center rounded-full border border-[#303030] text-[11px] text-[#666666]">
+              ✓
+            </span>
+            <p className="mt-1 text-[10px] font-black text-[#666666]">Completed</p>
+          </div>
         </div>
 
-        <button onClick={skip} className="w-full text-center text-[12px] text-slate-400 py-2.5">
+        <h1 className="mb-2 text-[25px] font-black leading-tight text-white">
+          Congratulations! You now have access to Cash Club.
+        </h1>
+        <p className="mb-4 text-[13px] leading-relaxed text-[#888888]">
+          Before you start trading, activate your premium plan to unlock the full potential of the AI.
+        </p>
+
+        <h2 className="mb-2 text-[16px] font-black text-white">What does the Premium Plan include?</h2>
+        <ul className="mb-4 space-y-1.5">
+          {BENEFITS.map((b) => (
+            <li key={b.label} className="flex items-start gap-2 text-[12px] leading-snug text-[#cccccc]">
+              <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke={b.color} strokeWidth="3" strokeLinecap="round" strokeLinejoin="round" className="mt-0.5 shrink-0">
+                <path d="M20 6 9 17l-5-5" />
+              </svg>
+              <span>
+                <span className="font-bold" style={{ color: b.color }}>{b.label}</span> — {b.note}
+              </span>
+            </li>
+          ))}
+        </ul>
+
+        <div className="relative mt-6 rounded-[20px] border border-[#303030] bg-[#111111] p-5">
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#a8ff16] to-[#7fc400] px-3 py-1 text-[10px] font-bold tracking-wider text-[#090909]">
+            ⭐ PREMIUM PLAN
+          </span>
+          <p className="mb-1 text-center text-[11.5px] text-[#888888]">Unlock everything for:</p>
+          <p className="mb-0.5 flex items-baseline justify-center gap-1">
+            <span className="text-[12px] font-bold text-white/50">US</span>
+            <span className="tabular text-[44px] font-black leading-none text-white">$297</span>
+          </p>
+          <p className="mb-4 text-center text-[11px] text-[#666666]">one-time payment</p>
+
+          <ul className="mb-4 space-y-1.5">
+            {[
+              "40+ AI analyses per day",
+              "92% win rate (maximum precision)",
+              "Personal Account Manager",
+              "Earning potential: $800–$1,000/day",
+              "Priority 24/7 support",
+            ].map((f) => (
+              <li key={f} className="flex items-center gap-2 text-[11.5px] text-[#cccccc]">
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="3.2" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M20 6 9 17l-5-5" />
+                </svg>
+                {f}
+              </li>
+            ))}
+          </ul>
+
+          <button onClick={buy} className="mc-cta mc-pulse w-full rounded-[16px] py-3.5 text-[15px] font-bold text-[#090909]">
+            ACTIVATE PREMIUM
+          </button>
+        </div>
+
+        <button onClick={skip} className="mt-3 w-full py-2.5 text-center text-[12px] text-[#666666] underline decoration-[#303030] underline-offset-2">
           No thanks, I want to stay on the basic plan
         </button>
-        <p className="text-center text-[10px] text-slate-500 leading-relaxed mt-1">
-          Your plan is locked after this step. {st.firstName ? `${st.firstName}, ` : ""}you can upgrade later but never return to these prices.
-        </p>
       </div>
     </main>
   );

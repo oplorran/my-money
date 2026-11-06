@@ -80,7 +80,7 @@ export function Quiz() {
 
   if (stage === "analyzing") {
     return (
-      <div className="relative z-10 max-w-lg mx-auto px-5 min-h-screen flex flex-col justify-center">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-5">
         <Analyzing />
       </div>
     );
@@ -88,7 +88,7 @@ export function Quiz() {
 
   if (stage === "result") {
     return (
-      <div className="relative z-10 max-w-lg mx-auto px-5 py-10 min-h-screen flex flex-col justify-center">
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-5 py-10">
         <Result profile={profile} onContinue={() => setStage("offer")} />
       </div>
     );
@@ -108,11 +108,11 @@ export function Quiz() {
     const block = QUESTIONS[index].block;
     const insight = INSIGHTS[block - 1] ?? INSIGHTS[0];
     return (
-      <div className="relative z-10 max-w-lg mx-auto px-5 py-10 min-h-screen flex flex-col justify-center">
-        <div className="qa-glass rounded-3xl p-6 qa-rise">
-          <p className="text-[11px] font-bold tracking-[0.18em] text-indigo-500 mb-2">DID YOU KNOW?</p>
-          <p className="text-lg font-bold text-slate-900 leading-snug mb-2">Technology changed the rules</p>
-          <p className="text-sm text-slate-600 leading-relaxed">{insight}</p>
+      <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col justify-center px-5 py-10">
+        <div className="qa-glass qa-rise rounded-3xl p-6">
+          <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-[#a8ff16]">DID YOU KNOW?</p>
+          <p className="mb-2 text-lg font-bold leading-snug text-white">Technology changed the rules</p>
+          <p className="text-sm leading-relaxed text-[#888888]">{insight}</p>
         </div>
         <Cta onClick={afterInsight} className="mt-4 py-3.5 text-base">
           Continue
@@ -126,7 +126,7 @@ export function Quiz() {
   const current = index + 1;
 
   return (
-    <div className="relative z-10 max-w-lg mx-auto px-5 py-6 min-h-screen flex flex-col">
+    <div className="relative z-10 mx-auto flex min-h-screen max-w-lg flex-col px-5 py-6">
       <Progress current={current} total={QUESTIONS.length} />
       <div className="flex-1">
         {q.type === "swipe" && (
@@ -147,15 +147,15 @@ export function Quiz() {
         )}
         {q.type === "choice" && (
           <div>
-            <p className="text-xl font-bold text-slate-900 mb-5 leading-snug">{q.question}</p>
+            <p className="mb-5 text-xl font-bold leading-snug text-white">{q.question}</p>
             <div className="space-y-2">
               {q.options.map((opt) => (
                 <button
                   key={opt}
                   onClick={() => commit(q.id, opt)}
-                  className={`qa-choice w-full text-left rounded-2xl p-4 border transition-all active:scale-[.99] ${answers[q.id] === opt ? "qa-choice-on" : "qa-choice-off"}`}
+                  className={`qa-choice w-full rounded-2xl border p-4 text-left transition-all active:scale-[.99] ${answers[q.id] === opt ? "qa-choice-on" : ""}`}
                 >
-                  <span className="text-[14px] font-medium text-slate-800">{opt}</span>
+                  <span className="text-[14px] font-medium text-[#cccccc]">{opt}</span>
                 </button>
               ))}
             </div>
@@ -163,13 +163,13 @@ export function Quiz() {
         )}
         {q.type === "text" && (
           <div>
-            <p className="text-xl font-bold text-slate-900 mb-5 leading-snug">{q.question}</p>
+            <p className="mb-5 text-xl font-bold leading-snug text-white">{q.question}</p>
             <textarea
               value={text}
               onChange={(e) => setText(e.target.value)}
               placeholder={q.placeholder}
               rows={4}
-              className="qa-glass-soft w-full rounded-2xl p-4 text-sm text-slate-800 outline-none resize-none placeholder:text-slate-400"
+              className="w-full resize-none rounded-[20px] border border-[#303030] bg-[#111111] p-4 text-sm text-white outline-none placeholder:text-[#666666] focus:border-[#a8ff16]/50"
             />
             <Cta onClick={() => commit(q.id, text)} disabled={text.trim().length < 3} className="mt-3 py-3.5 text-base">
               Continue

@@ -3,7 +3,7 @@ import { Blobs } from "@/components/marks";
 import { Quiz } from "@/components/quiz/Quiz";
 
 export const metadata: Metadata = {
-  title: "My Money · Discover your profile",
+  title: "Cash Club · Discover your profile",
   description: "Discover how artificial intelligence can help you with your finances in 2 minutes.",
   robots: { index: true, follow: true },
 };
