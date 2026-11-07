@@ -54,7 +54,7 @@ export function BankLoader({ amount, onDone }: { amount: string; onDone: () => v
               <div
                 key={s.t}
                 className={`flex items-start gap-2.5 rounded-[16px] border px-3 py-2 transition-colors ${
-                  state === "idle" ? "border-[#262626] bg-[#0d0d0d] opacity-45" : "border-[#303030] bg-[#111111]"
+                  state === "idle" ? "border-[#292929] bg-[#0d0d0d] opacity-45" : "border-[#303030] bg-[#111111]"
                 }`}
               >
                 <span className={`mt-0.5 flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${state === "done" ? "bg-[#a8ff16]" : state === "run" ? "border border-[#a8ff16] bg-[#151b0d]" : "bg-[#1b1b1d]"}`}>

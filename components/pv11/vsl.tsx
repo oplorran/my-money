@@ -162,7 +162,7 @@ export function Pv11Vsl({ fallback, expires = 24 * 60 + 30, next, event }: Props
 
         {/* player */}
         <div className="relative overflow-hidden rounded-[20px] border border-[#303030] bg-[#0d0d0d]">
-          <div className="relative aspect-video w-full bg-[radial-gradient(circle_at_50%_35%,rgba(168,255,22,.14),transparent_65%),linear-gradient(160deg,#121212,#0a0a0a)]">
+          <div className="relative aspect-video w-full bg-[radial-gradient(circle_at_50%_35%,rgba(168,255,22,.14),transparent_65%),linear-gradient(160deg,#1b1b1d,#090909)]">
             {!playing && (
               <>
                 <button

@@ -213,11 +213,11 @@ export default function TradingPage() {
                       className="absolute inset-y-0 left-0 transition-all duration-150"
                       style={{
                         width: `${slider}%`,
-                        background: "linear-gradient(90deg,#4d4d4d 0%,#a8ff16 100%) 0% 0%/200% 100% no-repeat",
+                        background: "linear-gradient(90deg,#666666 0%,#a8ff16 100%) 0% 0%/200% 100% no-repeat",
                       }}
                     />
                     {[16, 50, 84].map((p) => (
-                      <span key={p} className="pointer-events-none absolute inset-y-0 z-[1] w-px bg-[#3a3a3a]" style={{ left: `${p}%`, transform: "translateX(-50%)" }} />
+                      <span key={p} className="pointer-events-none absolute inset-y-0 z-[1] w-px bg-[#303030]" style={{ left: `${p}%`, transform: "translateX(-50%)" }} />
                     ))}
                   </div>
                   <input

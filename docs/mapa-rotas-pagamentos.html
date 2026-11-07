@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<title>Mapa de rotas, checkouts e preços — Cash Club</title>
+<style>
+  @page { size: A4; margin: 14mm 12mm; }
+  * { box-sizing: border-box; }
+  body {
+    font-family: -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+    font-size: 9.5pt; line-height: 1.45; color: #16181d; margin: 0;
+    background: #fff;
+  }
+  h1 { font-size: 20pt; margin: 0 0 4px; letter-spacing: -0.02em; }
+  h2 { font-size: 12.5pt; margin: 20px 0 7px; padding-bottom: 4px;
+       border-bottom: 2px solid #111; letter-spacing: -0.01em; }
+  h3 { font-size: 10.5pt; margin: 14px 0 5px; color: #111; }
+  p { margin: 0 0 7px; }
+  .sub { color: #5b6270; font-size: 9pt; }
+  .cover { border-bottom: 3px solid #a8ff16; padding-bottom: 12px; margin-bottom: 14px; }
+  .meta { font-size: 8pt; color: #5b6270; margin-top: 8px; }
+  .meta b { color: #16181d; }
+  table { width: 100%; border-collapse: collapse; margin: 6px 0 12px; font-size: 8.4pt; }
+  th { background: #111; color: #fff; text-align: left; padding: 5px 6px; font-weight: 600; }
+  td { padding: 4px 6px; border-bottom: 1px solid #dfe2e7; vertical-align: top; }
+  tr:nth-child(even) td { background: #f7f8fa; }
+  code, .mono { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.2pt; }
+  code { background: #eef0f3; padding: 1px 3px; border-radius: 3px; }
+  .path { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.2pt; font-weight: 600; }
+  .id { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.2pt;
+        background: #111; color: #a8ff16; padding: 2px 5px; border-radius: 3px; }
+  .price { font-family: "Cascadia Mono", Consolas, monospace; font-weight: 700; white-space: nowrap; }
+  .tag { display: inline-block; font-size: 7.4pt; font-weight: 600; font-family: "Cascadia Mono", Consolas, monospace;
+         padding: 1px 5px; border-radius: 3px; border: 1px solid #c3c8d1;
+         color: #444; white-space: nowrap; }
+  .lbl { display: inline-block; font-size: 7pt; font-weight: 700; text-transform: uppercase;
+         letter-spacing: .07em; padding: 1px 5px; border-radius: 3px; white-space: nowrap; }
+  .t-pay { background: #eaffd0; border-color: #8fd11a; color: #3d6b00; }
+  .t-redir { background: #e8eefc; border-color: #8ba7e8; color: #24418c; }
+  .t-ext { background: #fff2d8; border-color: #e2b563; color: #8a5c00; }
+  .t-in { background: #f0f1f3; border-color: #cfd3da; color: #4b515c; }
+  .box { border: 1px solid #dfe2e7; border-left: 3px solid #111; background: #fafbfc;
+         padding: 8px 10px; margin: 8px 0 12px; font-size: 8.8pt; }
+  .warn { border-left-color: #c98a00; background: #fffaef; }
+  .danger { border-left-color: #d33; background: #fff5f5; }
+  .flow { font-family: "Cascadia Mono", Consolas, monospace; font-size: 8.2pt;
+          background: #0e1014; color: #e6e9ee; padding: 9px 11px; border-radius: 5px;
+          line-height: 1.7; margin: 6px 0 12px; }
+  .flow b { color: #a8ff16; font-weight: 700; }
+  .flow .s { color: #7f8794; }
+  ul { margin: 4px 0 10px; padding-left: 17px; }
+  li { margin-bottom: 3px; }
+  .pb { page-break-before: always; }
+  .nobreak { page-break-inside: avoid; }
+  footer { margin-top: 22px; padding-top: 8px; border-top: 1px solid #dfe2e7;
+           font-size: 7.6pt; color: #6b7280; }
+  .kpi { display: flex; gap: 8px; margin: 10px 0 4px; }
+  .kpi div { flex: 1; border: 1px solid #dfe2e7; border-radius: 5px; padding: 7px 9px; background: #fafbfc; }
+  .kpi b { display: block; font-size: 15pt; font-family: "Cascadia Mono", Consolas, monospace; }
+  .kpi span { font-size: 7.4pt; text-transform: uppercase; letter-spacing: .06em; color: #5b6270; }
+</style>
+</head>
+<body>
+
+<div class="cover">
+  <h1>Mapa de rotas, checkouts e preços</h1>
+  <p class="sub">Cash Club — funis PV, upsells, área de membros e destinos de pagamento.</p>
+  <p class="meta">
+    Projeto: <b>my-money</b> · Base: <b>https://go.centerpag.com</b> ·
+    Gerado em: <b>07/11/2026</b> · Escopo: <b>app/, pay/, pv11–pv14, hot/, hotwt/, back, wt</b>
+  </p>
+</div>
+
+<div class="box">
+  <b>Como usar este documento.</b> Cada linha traz o caminho, o preço exibido, o ID de checkout e o
+  destino do clique. A seção <b>“Onde cada preço mora”</b> aponta arquivo e linha exatos para edição.
+  A seção <b>“Checkouts”</b> é o registro central de IDs — é o único lugar que precisa ser conferido
+  ao trocar links de pagamento.
+</div>
+
+<div class="kpi">
+  <div><b>33</b><span>rotas de página</span></div>
+  <div><b>14</b><span>IDs de checkout</span></div>
+  <div><b>8</b><span>faixas de preço</span></div>
+  <div><b>6</b><span>redirecionadores</span></div>
+</div>
+
+<h2>1. Checkouts — registro central</h2>
+
+<p>Todos os IDs são servidos por <code>checkoutUrl()</code> em <code>lib/funnel.ts:107</code>, que monta
+<code>https://go.centerpag.com/&lt;ID&gt;</code> e anexa <code>?upsell=true</code> e/ou <code>?email=</code>
+quando chamado com essas opções.</p>
+
+<table class="nobreak">
+  <thead>
+    <tr><th style="width:26%">Grupo</th><th style="width:14%">Preço</th><th style="width:26%">ID</th><th>Onde é usado</th></tr>
+  </thead>
+  <tbody>
+    <tr><td>Quiz — faixa 17 (cheio)</td><td class="price">$17,00</td><td><span class="id">PPU38CQG07H</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 17 (reduzido)</td><td class="price">$9,90</td><td><span class="id">PPU38CQG07N</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 27 (cheio)</td><td class="price">$27,00</td><td><span class="id">PPU38CQG07I</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 27 (reduzido)</td><td class="price">$14,90</td><td><span class="id">PPU38CQG07O</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 47 (cheio)</td><td class="price">$47,00</td><td><span class="id">PPU38CQG07K</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 47 (reduzido)</td><td class="price">$24,90</td><td><span class="id">PPU38CQG07P</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 67 (cheio)</td><td class="price">$67,00</td><td><span class="id">PPU38CQG07L</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 67 (reduzido)</td><td class="price">$34,90</td><td><span class="id">PPU38CQG07R</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 97 (cheio)</td><td class="price">$97,00</td><td><span class="id">PPU38CQG07M</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Quiz — faixa 97 (reduzido)</td><td class="price">$49,90</td><td><span class="id">PPU38CQG07S</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
+    <tr><td>Upsell 1 — Premium</td><td class="price">$297,00</td><td><span class="id">PPU38CQHH1O</span></td><td><code>app/pay/up1</code></td></tr>
+    <tr><td>Upsell 2 — AI Multiplier</td><td class="price">$197,00</td><td><span class="id">PPU38CQHH1P</span></td><td><code>app/pay/up2</code></td></tr>
+    <tr><td>Upsell 3 — Acesso vitalício</td><td class="price">$67,00</td><td><span class="id">PPU38CQHH1Q</span></td><td><code>app/pay/up3</code></td></tr>
+    <tr><td>Ativação na chamada (cheio)</td><td class="price">$29,90</td><td><span class="id">PPU38CQFUFH</span></td><td>PV11, PV12, PV13, PV14 (VSL → <code>/hotwt/up1</code>)</td></tr>
+    <tr><td>Ativação na chamada (reduzido)</td><td class="price">$29,90</td><td><span class="id">PPU38CQFUFG</span></td><td><code>lib/funnel.ts</code> — <b>declarado e sem uso</b></td></tr>
+    <tr><td>Article tripwire</td><td class="price">$1,00</td><td><span class="id">PPU38CQ513F</span></td><td><code>components/wt-cta.tsx</code></td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <b>Divergência de preço no PV14.</b> O card de oferta exibe <b>$27</b>
+  (<code>components/pv14/call.tsx:445</code>), mas o CTA usa <code>BACK_CHECKOUT_FULL</code> —
+  o mesmo checkout de <b>$29,90</b> dos outros funis. Quem paga vê $27 na tela e é cobrado conforme o
+  valor configurado no CenterPag para <code>PPU38CQFUFH</code>. Para o PV14 ter preço próprio é preciso
+  criar um checkout novo e apontar só ele aqui.
+</div>
+
+<h2>2. Funil principal — quiz</h2>
+
+<p>Entrada de tráfego. A faixa de preço vem do score das respostas: <code>tierFor()</code> em
+<code>lib/funnel.ts:82</code> mapeia score 0–1 → 17, 2–3 → 27, 4–6 → 47, 7–8 → 67, 9+ → 97.</p>
+
+<div class="flow">
+<b>/</b> <span class="s">quiz → landing, 10 perguntas</span><br>
+&nbsp;&nbsp;└─ <b>Offer</b> <span class="s">preço do tier + botão “reduced version”</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ cheio&nbsp;&nbsp;→ <span class="s">CHECKOUTS[tier].full → go.centerpag.com</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ reduzido → <span class="s">CHECKOUTS[tier].down → go.centerpag.com</span>
+</div>
+
+<table class="nobreak">
+  <thead><tr><th style="width:16%">Rota</th><th style="width:30%">Tela</th><th>Saída</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/</td><td>Quiz de perfil (10 perguntas, 2 insights)</td><td><span class="tag t-pay">checkout</span> CenterPag, tier + versão</td></tr>
+    <tr><td class="path">/back</td><td>Recuperação de abandono — “Your verification is still open”</td><td><span class="tag t-pay">checkout</span> CenterPag, tier + versão</td></tr>
+  </tbody>
+</table>
+
+<div class="box">
+  A âncora de valor em <code>components/quiz/Offer.tsx:23</code> soma os itens de
+  <code>INCLUDED</code> (<code>lib/quiz.ts:143</code>) ao preço do tier. Se o tier mudar, a âncora
+  acompanha sozinha; os itens, não.
+</div>
+
+<h2 class="pb">3. Rotas de upsell — /pay</h2>
+
+<p>Sequência pós-compra. Cada tela tem um CTA de compra e um escape que segue para a próxima etapa.
+Os escapes usam <code>router.push</code> direto, sem redirector intermediário.</p>
+
+<table class="nobreak">
+  <thead><tr><th style="width:14%">Rota</th><th style="width:22%">Oferta</th><th style="width:12%">Preço</th><th style="width:16%">CTA compra</th><th>Escape</th></tr></thead>
+  <tbody>
+    <tr>
+      <td class="path">/pay/up1</td>
+      <td>Plano Premium (40+ análises, 92% acerto, gerente)</td>
+      <td class="price">$297 <span class="sub">(risco $497)</span></td>
+      <td><span class="tag t-pay">PPU38CQHH1O</span><br><code>page.tsx:66</code></td>
+      <td><span class="tag t-in">/pay/up2</span><br><code>page.tsx:71</code></td>
+    </tr>
+    <tr>
+      <td class="path">/pay/up2</td>
+      <td>AI Multiplier — 3 perguntas, “perfil pronto”, pitch, oferta</td>
+      <td class="price">$197</td>
+      <td><span class="tag t-pay">PPU38CQHH1P</span><br><code>page.tsx:53</code></td>
+      <td><span class="tag t-in">/pay/up3</span><br><code>page.tsx:58</code></td>
+    </tr>
+    <tr>
+      <td class="path">/pay/up3</td>
+      <td>Acesso vitalício — urgência de 6 meses</td>
+      <td class="price">$67</td>
+      <td><span class="tag t-pay">PPU38CQHH1Q</span><br><code>page.tsx:16</code></td>
+      <td><span class="tag t-in">/app/login</span><br><code>page.tsx:21</code> (<code>MEMBERS_URL</code>)</td>
+    </tr>
+  </tbody>
+</table>
+
+<div class="box">
+  <code>MEMBERS_URL</code> (<code>lib/funnel.ts:39</code>) é o único ponto que define onde o funil
+  termina. Hoje aponta para <code>/app/login</code>, a área de membros local.
+</div>
+
+<h2>4. Aliases de redirect — /hot e /hotwt</h2>
+
+<p>Existem para preservar as URLs do funil original. Seguram ~1,2 s, exibem um rótulo e saem.
+Repassam <code>to</code>, <code>sck</code>, <code>xcod</code> e UTMs.</p>
+
+<table class="nobreak">
+  <thead><tr><th style="width:16%">Rota</th><th style="width:20%">Fallback</th><th>Comportamento</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/hotwt/[step]</td><td><span class="tag t-in">/pay/up1</span></td><td>Sai para o <code>?to=</code> se o host estiver na lista branca; senão cai no fallback</td></tr>
+    <tr><td class="path">/hot/up2</td><td><span class="tag t-in">/pay/up2</span></td><td>Alias direto</td></tr>
+    <tr><td class="path">/hot/up3a</td><td><span class="tag t-in">/pay/up3</span></td><td>Alias direto</td></tr>
+  </tbody>
+</table>
+
+<div class="box warn">
+  <b>Lista branca de hosts</b> em <code>components/redirector.tsx:15</code>:
+  <code>go.centerpag.com</code>, <code>checkout.centerpag.com</code>, <code>pay.hotmart.com</code>,
+  <code>riseaiclub.com</code>, <code>growaiclub.com</code>, <code>transitaclub.com</code>.
+  Um link de checkout em domínio novo é <b>descartado em silêncio</b> e o redirector cai no fallback.
+  Ao trocar de processador, atualize esta lista.
+</div>
+
+<h2 class="pb">5. Funis PV — PV11 a PV14</h2>
+
+<p>Quatro funis de tráfego frio com a mesma espinha: presell com saldo creditado → sessão de “trading”
+com valores fixos → popup ou saque → verificação → oferta de ativação → upsells. Diferem no saldo, na
+série de operações, na presença de áudio e no preço final.</p>
+
+<table class="nobreak">
+  <thead><tr><th style="width:10%">Funil</th><th style="width:12%">Saldo</th><th style="width:16%">Série de operações</th><th style="width:14%">Oferta</th><th>Gatilho de cobrança</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/pv11</td><td class="price">$200</td><td>3 (2 ganhos, 1 perda)</td><td class="price">$29,90</td><td>Play na VSL → <code>ACTIVATE MY ACCESS</code></td></tr>
+    <tr><td class="path">/pv12</td><td class="price">$50</td><td>5 (4 ganhos, 1 perda)</td><td class="price">$29,90</td><td>Play na VSL → <code>ACTIVATE MY ACCESS</code></td></tr>
+    <tr><td class="path">/pv13</td><td class="price">$50</td><td>5 (todas ganhas)</td><td class="price">$29,90</td><td>Chamada de voz completa → <code>Tap to activate</code></td></tr>
+    <tr><td class="path">/pv14</td><td class="price">$50</td><td>5 (todas ganhas)</td><td class="price">$27</td><td>Chamada de voz completa → <code>Tap to activate</code></td></tr>
+  </tbody>
+</table>
+
+<h3>5.1 Cadeia de navegação</h3>
+
+<div class="flow">
+<b>/pv11</b> → /pv11/trading <span class="s">popup “Profit confirmed”</span> → /pv11/vsl → <b>/hotwt/up1?to=$29,90</b><br>
+<b>/pv12</b> → /pv12/trading <span class="s">slider de risco</span> → popup → /pv12/withdraw → /pv12/vsl → <b>/hotwt/up1?to=$29,90</b><br>
+<b>/pv13</b> → /pv13/trading <span class="s">slider + saque retido</span> → /pv13/withdraw → /pv13/vsl <span class="s">chamada</span> → <b>/hotwt/up1?to=$29,90</b><br>
+<b>/pv14</b> → /pv14/trading <span class="s">sem popup</span> → /pv14/withdraw → /pv14/vsl <span class="s">handshake + chamada</span> → <b>/hotwt/up1?to=$29,90</b>
+</div>
+
+<h3>5.2 Tabela de rotas</h3>
+
+<table>
+  <thead><tr><th style="width:15%">Rota</th><th style="width:34%">Tela</th><th>Saída</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/pv11</td><td>Presell — licença grátis, saldo $200</td><td><span class="tag t-in">/pv11/trading</span></td></tr>
+    <tr><td class="path">/pv11/trading</td><td>Sessão, 3 operações, popup</td><td><span class="tag t-in">/pv11/vsl</span> · <code>trading.tsx:150,171</code></td></tr>
+    <tr><td class="path">/pv11/vsl</td><td>VSL com contador 24:30</td><td><span class="tag t-redir">/hotwt/up1?to=…</span> · <code>vsl.tsx:120</code></td></tr>
+    <tr><td class="path">/pv11/withdraw</td><td>Saque (rota paralela)</td><td><span class="tag t-in">/pv11/vsl</span></td></tr>
+    <tr><td class="path">/pv12</td><td>Presell — saldo $50</td><td><span class="tag t-in">/pv12/trading</span></td></tr>
+    <tr><td class="path">/pv12/trading</td><td>Slider de risco + sessão</td><td><span class="tag t-in">/pv12/vsl</span> (via popup)</td></tr>
+    <tr><td class="path">/pv12/withdraw</td><td>Saque aprovado</td><td><span class="tag t-in">/pv12/vsl</span></td></tr>
+    <tr><td class="path">/pv12/vsl</td><td>VSL com contador 32:30</td><td><span class="tag t-redir">/hotwt/up1?to=…</span></td></tr>
+    <tr><td class="path">/pv13</td><td>Presell com header e ticker</td><td><span class="tag t-in">/pv13/trading</span></td></tr>
+    <tr><td class="path">/pv13/trading</td><td>Sessão → saque retido</td><td><span class="tag t-in">/pv13/withdraw</span> · <code>page.tsx:106</code></td></tr>
+    <tr><td class="path">/pv13/withdraw</td><td>Método + handshake + nome</td><td><span class="tag t-in">/pv13/vsl</span> · <code>page.tsx:72</code></td></tr>
+    <tr><td class="path">/pv13/vsl</td><td>Chamada de voz (Alex Parker)</td><td><span class="tag t-redir">/hotwt/up1?to=…</span> · <code>page.tsx:243</code></td></tr>
+    <tr><td class="path">/pv14</td><td>Presell — saldo $50</td><td><span class="tag t-in">/pv14/trading</span></td></tr>
+    <tr><td class="path">/pv14/trading</td><td>Slider + sessão, sem popup</td><td><span class="tag t-in">/pv14/withdraw</span></td></tr>
+    <tr><td class="path">/pv14/withdraw</td><td>Método de recebimento</td><td><span class="tag t-in">/pv14/vsl?m=…</span> · <code>withdraw.tsx:41</code></td></tr>
+    <tr><td class="path">/pv14/vsl</td><td>Handshake + chamada (Daniel Torres)</td><td><span class="tag t-redir">/hotwt/up1?to=…</span> · <code>call.tsx:246</code></td></tr>
+  </tbody>
+</table>
+
+<div class="box">
+  O <code>?to=</code> carrega o checkout codificado. É o único dado que atravessa o redirector — o
+  saldo e o nome ficam em <code>sessionStorage</code> e não vão na URL.
+</div>
+
+<h2 class="pb">6. Área de membros — /app</h2>
+
+<p>Protegida pelo <code>MemberShell</code>. Sem cobrança; o único link externo é a corretora.</p>
+
+<table class="nobreak">
+  <thead><tr><th style="width:16%">Rota</th><th style="width:34%">Tela</th><th>Saída</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/app</td><td>Redirect de índice</td><td><span class="tag t-in">/app/inicio</span></td></tr>
+    <tr><td class="path">/app/login</td><td>Entrada por e-mail (sem senha)</td><td><span class="tag t-in">/app/inicio</span></td></tr>
+    <tr><td class="path">/app/inicio</td><td>Trilha de ativação, 5 aulas, card de instalação</td><td><span class="tag t-ext">corretora</span> · <span class="tag t-in">/app/accelerator</span></td></tr>
+    <tr><td class="path">/app/trade</td><td>Sinais de IA</td><td><span class="tag t-ext">corretora</span> · <span class="tag t-in">/app/inicio</span></td></tr>
+    <tr><td class="path">/app/accelerator</td><td>Projeção por meta</td><td><span class="tag t-ext">corretora</span> · <span class="tag t-in">/app/inicio</span></td></tr>
+    <tr><td class="path">/app/ranking</td><td>Ranking mensal</td><td>—</td></tr>
+  </tbody>
+</table>
+
+<h3>6.1 Link externo da corretora</h3>
+
+<p class="mono" style="word-break:break-all;background:#eef0f3;padding:6px 8px;border-radius:4px;">
+https://u3.shortink.io/register?utm_campaign=835286&amp;utm_source=affiliate&amp;utm_medium=sr&amp;a=9vDAHKuinZMdbX&amp;al=1758302&amp;ac=app-mnc-pd-in-sb&amp;cid=954055
+</p>
+
+<p>Definido em <code>lib/member.ts:41</code> como <code>POCKET_URL</code>. A função
+<code>pocketUrl(email)</code> (<code>lib/member.ts:45</code>) anexa <code>&amp;sub_id1=&lt;email&gt;</code>
+para atribuição. Chamado em <code>app/app/inicio/page.tsx:170</code>,
+<code>app/app/trade/page.tsx:413</code> e <code>app/app/accelerator/page.tsx:187</code>.</p>
+
+<h2>7. Article e painel</h2>
+
+<table class="nobreak">
+  <thead><tr><th style="width:16%">Rota</th><th style="width:34%">Tela</th><th>Saída</th></tr></thead>
+  <tbody>
+    <tr><td class="path">/wt</td><td>Artigo “Research, not a pitch” — isca de $1</td><td><span class="tag t-pay">PPU38CQ513F</span> · <code>wt-cta.tsx:9</code></td></tr>
+    <tr><td class="path">/painel</td><td>Catálogo interno dos roteiros PV11–PV14</td><td><span class="tag t-in">/</span></td></tr>
+    <tr><td class="path">/paniel</td><td>Alias de digitação</td><td><span class="tag t-in">/painel</span></td></tr>
+  </tbody>
+</table>
+
+<h2 class="pb">8. Onde cada preço mora</h2>
+
+<p>Preços aparecem em dois lugares: a constante que o checkout usa e o literal que a tela exibe.
+<b>Os dois precisam mudar juntos</b> — nenhum dos dois lê o outro.</p>
+
+<table>
+  <thead><tr><th style="width:18%">Preço</th><th style="width:34%">Arquivo : linha</th><th>Papel</th></tr></thead>
+  <tbody>
+    <tr><td class="price">$297</td><td><code>app/pay/up1/page.tsx:65</code> · <code>:172</code></td><td>track + exibição</td></tr>
+    <tr><td class="price">$497</td><td><code>app/pay/up1/page.tsx:173</code></td><td>preço riscado (âncora)</td></tr>
+    <tr><td class="price">$197</td><td><code>app/pay/up2/page.tsx:52</code> · <code>:182</code></td><td>track + exibição</td></tr>
+    <tr><td class="price">$67</td><td><code>app/pay/up3/page.tsx:15</code> · <code>:84</code></td><td>track + exibição</td></tr>
+    <tr><td class="price">$27</td><td><code>components/pv14/call.tsx:445</code></td><td>exibição do card</td></tr>
+    <tr><td class="price">$29,90</td><td><code>lib/funnel.ts:36</code> (<code>VSL_PRICE</code>)</td><td>exibição nas VSLs PV11/PV12</td></tr>
+    <tr><td class="price">17 / 27 / 47 / 67 / 97</td><td><code>lib/funnel.ts:25</code> (<code>TIER_PRICE</code>)</td><td>preço cheio do quiz</td></tr>
+    <tr><td class="price">9,90 / 14,90 / 24,90 / 34,90 / 49,90</td><td><code>lib/funnel.ts:26</code> (<code>TIER_DOWN</code>)</td><td>versão reduzida</td></tr>
+    <tr><td class="price">âncora do quiz</td><td><code>lib/quiz.ts:143</code> (<code>INCLUDED</code>)</td><td>soma em <code>includedTotal()</code>, <code>:151</code></td></tr>
+    <tr><td class="price">$1</td><td><code>components/wt-cta.tsx:9</code></td><td>botão do artigo</td></tr>
+  </tbody>
+</table>
+
+<h3>8.1 IDs de checkout</h3>
+
+<p>Todos centralizados em <code>lib/funnel.ts:18–35</code>. Para trocar um link de pagamento, edite
+ali — <code>CHECKOUTS</code> (linhas 18–22), <code>UP1_CHECKOUT</code> (29), <code>UP2_CHECKOUT</code> (30),
+<code>UP3_CHECKOUT</code> (31), <code>BACK_CHECKOUT_FULL</code> (34) e <code>BACK_CHECKOUT_DOWN</code> (35).
+O <code>PPU38CQ513F</code> do artigo é o único fora do arquivo (<code>components/wt-cta.tsx:9</code>).</p>
+
+<h2>9. Pontos de atenção</h2>
+
+<div class="box danger">
+  <b>1. Preço divergente no PV14.</b> Tela mostra $27, checkout é o de $29,90.
+</div>
+
+<div class="box danger">
+  <b>2. <code>BACK_CHECKOUT_DOWN</code> sem uso.</b> Declarado em <code>lib/funnel.ts:35</code>, nenhum
+  componente o importa. O botão “reduced version” da VSL não existe — só o do quiz e o do <code>/back</code>.
+</div>
+
+<div class="box warn">
+  <b>3. Preço duplicado entre tela e constante.</b> Nenhuma tela lê <code>TIER_PRICE</code> ou
+  <code>VSL_PRICE</code> para os upsells: up1/up2/up3 e pv14 têm os valores escritos no JSX. Alterar só
+  a constante deixa a tela mentindo.
+</div>
+
+<div class="box warn">
+  <b>4. Parâmetro <code>upsell=true</code> inconsistente.</b> Presente em up1, up2, up3 e <code>/back</code>;
+  ausente no <code>Offer</code> do quiz e nas VSLs. Se o CenterPag usa esse parâmetro para order bump ou
+  rastreio, dois caminhos ficam fora.
+</div>
+
+<div class="box warn">
+  <b>5. Lista branca de hosts.</b> Um checkout em domínio novo é descartado sem erro e o usuário cai em
+  <code>/pay/up1</code>. Atualize <code>components/redirector.tsx:15</code> antes de trocar de processador.
+</div>
+
+<h2>10. Arquivos por responsabilidade</h2>
+
+<table class="nobreak">
+  <thead><tr><th style="width:40%">Arquivo</th><th>Responsabilidade</th></tr></thead>
+  <tbody>
+    <tr><td><code>lib/funnel.ts</code></td><td>IDs, preços por faixa, <code>VSL_PRICE</code>, <code>MEMBERS_URL</code>, <code>checkoutUrl()</code>, <code>tierFor()</code></td></tr>
+    <tr><td><code>components/redirector.tsx</code></td><td>Lista branca de hosts, repasse de <code>to</code>/<code>sck</code>/<code>xcod</code>/UTMs</td></tr>
+    <tr><td><code>components/quiz/Offer.tsx</code></td><td>Oferta do quiz, âncora, versão reduzida</td></tr>
+    <tr><td><code>app/back/page.tsx</code></td><td>Recuperação de abandono com tier do quiz</td></tr>
+    <tr><td><code>app/pay/up1 · up2 · up3</code></td><td>Upsells e a cadeia de escapes</td></tr>
+    <tr><td><code>app/pv11 … pv14</code></td><td>Presells, sessões, saques e ofertas de ativação</td></tr>
+    <tr><td><code>components/wt-cta.tsx</code></td><td>Isca de $1 do artigo</td></tr>
+    <tr><td><code>lib/member.ts</code></td><td><code>POCKET_URL</code> e <code>pocketUrl()</code> — corretora</td></tr>
+    <tr><td><code>lib/track.ts</code></td><td>Telemetria: <code>dataLayer</code>, <code>fbq</code>, <code>gtag</code></td></tr>
+    <tr><td><code>lib/quiz.ts</code></td><td>Perguntas, itens da âncora, score</td></tr>
+  </tbody>
+</table>
+
+<footer>
+  Documento gerado por leitura direta do código-fonte. Os valores refletem o estado do repositório na
+  data de geração e não consultam o painel do CenterPag — a conferência final de valor cobrado é sempre
+  do lado do processador.
+</footer>
+
+</body>
+</html>

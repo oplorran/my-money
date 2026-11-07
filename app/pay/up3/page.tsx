@@ -1,11 +1,16 @@
 "use client";
 
+"use client";
+
+import { useRouter } from "next/navigation";
 import { UP3_CHECKOUT, MEMBERS_URL, checkoutUrl, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
 const ACTIVATED = ["Your premium plan", "AI Multiplier", "Pro Mode"];
 
 export default function Up3() {
+  const router = useRouter();
+
   const buy = () => {
     track("upsell3_click", { plan: "lifetime", price: 67, ...trackingParams() });
     goExternal(checkoutUrl(UP3_CHECKOUT, { upsell: true }));
@@ -13,7 +18,7 @@ export default function Up3() {
 
   const skip = () => {
     track("upsell3_skip", trackingParams());
-    goExternal(MEMBERS_URL);
+    router.push(MEMBERS_URL);
   };
 
   return (

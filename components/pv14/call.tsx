@@ -367,7 +367,7 @@ export function Pv14Call({ fallback }: { fallback: number }) {
               </svg>
               Monthly target
             </p>
-            <label className="relative flex min-h-[64px] items-center gap-2 rounded-[18px] border-2 border-[#3a3a3a] bg-[#161616] px-4 py-3">
+            <label className="relative flex min-h-[64px] items-center gap-2 rounded-[18px] border-2 border-[#303030] bg-[#1b1b1d] px-4 py-3">
               <span className="select-none text-[26px] font-semibold leading-none text-[#888888]">$</span>
               <span
                 aria-hidden
@@ -404,7 +404,7 @@ export function Pv14Call({ fallback }: { fallback: number }) {
                 <button
                   key={o}
                   onClick={pick}
-                  className="w-full rounded-[18px] border border-[#303030] bg-[#141414] px-4 py-3 text-left text-[13.5px] font-semibold leading-snug text-white transition-colors active:bg-[#1e1e1e]"
+                  className="w-full rounded-[18px] border border-[#303030] bg-[#1b1b1d] px-4 py-3 text-left text-[13.5px] font-semibold leading-snug text-white transition-colors active:bg-[#111111]"
                 >
                   {o}
                 </button>

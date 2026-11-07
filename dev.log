@@ -551,3 +551,214 @@ https://react.dev/link/hydration-mismatch
  GET /pv14/withdraw 200 in 40ms (next.js: 2ms, application-code: 38ms)
  GET /pv14/vsl?m=bank 200 in 38ms (next.js: 1.4ms, application-code: 37ms)
 ✓ Compiled in 150ms
+ GET / 200 in 70ms (next.js: 13ms, application-code: 57ms)
+ GET / 200 in 27ms (next.js: 1.6ms, application-code: 25ms)
+ GET / 200 in 23ms (next.js: 0.7ms, application-code: 23ms)
+ GET /pv13 200 in 55ms (next.js: 1.1ms, application-code: 54ms)
+ GET /pv14 200 in 48ms (next.js: 1.0ms, application-code: 48ms)
+ GET /pv12 200 in 49ms (next.js: 1.4ms, application-code: 47ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="pv12/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/pv12" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="pv12/page.tsx">
+                  <SegmentTrieNode>
+                  <Page>
+                    <main className="mc-shell r...">
+                      <div>
+                      <Pv11Landing balance={50} speed={2} next="/pv12/trading" event="pv12">
+                        <div className="relative z...">
+                          <GridWall>
+                          <div className="relative z...">
+                            <div>
+                            <div className="rounded-2x...">
+                              <p
+                                className="mb-0.5 text-[8px] font-bold uppercase leading-tight tracking-[0.18em] text-..."
+-                               data-cursor-ref="e2"
+                              >
++                               Balance
+                              ...
+                          <div className="relative z...">
+                            <div className="pv11-pop w...">
+                              <div>
+                              <h1
+                                className="mb-3 text-[23px] font-bold tracking-tight text-white"
+-                               data-cursor-ref="e3"
+                              >
++                               Congratulations!
+                              <p
+                                className="mb-4 px-1 text-[15px] leading-snug text-[#cccccc]"
+-                               data-cursor-ref="e4"
+                              >
+                              <div>
+                              <p
+                                className="mb-2 text-[16px] leading-snug text-white"
+-                               data-cursor-ref="e5"
+                              >
+                              <p
+                                className="mb-6 text-[14px] leading-snug text-[#888888]"
+-                               data-cursor-ref="e6"
+                              >
++                               Activate the AI and multiply your balance in 60 seconds.
+                              <div className="pv11-cta-p...">
+                                <button
+                                  onClick={function start}
+                                  disabled={false}
+                                  className="mc-cta flex w-full items-center justify-center gap-2 rounded-[18px] px-6 ..."
+-                                 data-cursor-ref="e0"
+                                >
+                ...
+              ...
+    ...
+ 
+ GET /pv12/trading 200 in 30ms (next.js: 4ms, application-code: 26ms)
+ GET /pv11 200 in 49ms (next.js: 1.0ms, application-code: 48ms)
+ GET /pv13 200 in 61ms (next.js: 0.8ms, application-code: 60ms)
+ GET /pv14 200 in 57ms (next.js: 0.9ms, application-code: 56ms)
+ GET /pv13 200 in 78ms (next.js: 3ms, application-code: 75ms)
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <ErrorBoundary errorComponent={undefined} errorStyles={undefined} errorScripts={undefined}>
+      <LoadingBoundary name="pv13/" loading={null}>
+        <HTTPAccessFallbackBoundary notFound={undefined} forbidden={undefined} unauthorized={undefined}>
+          <RedirectBoundary>
+            <RedirectErrorBoundary router={{...}}>
+              <InnerLayoutRouter url="/pv13" tree={[...]} params={{}} renderTree={{...}} segmentPath={[...]} ...>
+                <SegmentViewNode type="page" pagePath="pv13/page.tsx">
+                  <SegmentTrieNode>
+                  <Page>
+                    <main className="mc-shell r...">
+                      <div>
+                      <Pv13Landing>
+                        <Ticker>
+                        <div className="relative z...">
+                          <AppHeader>
+                          <div className="relative z...">
+                            <div>
+                            <div className="rounded-2x...">
+                              <p
+                                className="mb-0.5 text-[8px] font-bold uppercase leading-tight tracking-[0.16em] text-..."
+-                               data-cursor-ref="e2"
+                              >
++                               Balance
+                              <p
+                                className="flex items-baseline gap-0.5"
+-                               data-cursor-ref="e3"
+                              >
+                          <div className="relative z...">
+                            <div className="mc-pop w-f...">
+                              <div>
+                              <h1
+                                className="mb-2 text-[21px] font-black leading-tight tracking-tight text-white"
+-                               data-cursor-ref="e4"
+                              >
++                               Congratulations!
+                              <p
+                                className="mb-3 px-1 text-[13px] leading-snug text-[#cccccc]"
+-                               data-cursor-ref="e5"
+                              >
+                              <div>
+                              <p
+                                className="mb-1 text-[14px] leading-snug text-white"
+-                               data-cursor-ref="e6"
+                              >
+                              <p
+                                className="mb-4 text-[12px] leading-snug text-[#888888]"
+-                               data-cursor-ref="e7"
+                              >
++                               Activate the AI and multiply your balance in 60 seconds.
+                              <button
+                                onClick={function activate}
+                                disabled={false}
+                                className="mc-cta mc-pulse flex w-full items-center justify-center gap-2 rounded-[18px..."
+-                               data-cursor-ref="e0"
+                              >
+                              <p
+                                className="mt-2 text-[10px] text-[#666666]"
+-                               data-cursor-ref="e8"
+                              >
++                               1 free license · no card needed to test
+                ...
+              ...
+    ...
+ 
+ GET /pv14 200 in 66ms (next.js: 1.2ms, application-code: 65ms)
+ GET /pv11 200 in 53ms (next.js: 1.5ms, application-code: 51ms)
+ GET /pay/up1 200 in 53ms (next.js: 6ms, application-code: 46ms)
+ GET /pv12 200 in 52ms (next.js: 1.0ms, application-code: 51ms)
+ GET /pv12?x=1 200 in 57ms (next.js: 1.4ms, application-code: 56ms)
+ GET /pv12?y=2 200 in 64ms (next.js: 1.3ms, application-code: 62ms)
+✓ Compiled in 145ms
+✓ Compiled in 141ms
+✓ Compiled in 97ms
+ GET /pv12 200 in 56ms (next.js: 3ms, application-code: 54ms)
+✓ Compiled in 134ms
+ GET /pay/up1 200 in 45ms (next.js: 1.6ms, application-code: 43ms)
+ GET /pay/up2 200 in 42ms (next.js: 7ms, application-code: 35ms)
+ GET /pv13/trading 200 in 50ms (next.js: 1.7ms, application-code: 48ms)
+ GET /pv13 200 in 60ms (next.js: 1.1ms, application-code: 59ms)
+ GET /pv13/withdraw 200 in 36ms (next.js: 2ms, application-code: 34ms)
+ GET /pv11/trading 200 in 41ms (next.js: 3ms, application-code: 38ms)
+✓ Compiled in 288ms
+✓ Compiled in 87ms
+ GET /pv13/vsl 200 in 37ms (next.js: 1.9ms, application-code: 35ms)
+ GET /pay/up1 200 in 33ms (next.js: 0.8ms, application-code: 32ms)
+ GET /pay/up1 200 in 36ms (next.js: 1.0ms, application-code: 35ms)
+ GET /pv13/withdraw 200 in 34ms (next.js: 0.9ms, application-code: 33ms)
+✓ Compiled in 79ms
+✓ Compiled in 79ms
+ GET /pv14/vsl 200 in 55ms (next.js: 4ms, application-code: 51ms)
+✓ Compiled in 177ms
+ GET / 200 in 145ms (next.js: 16ms, application-code: 129ms)
+ GET /pv14/vsl 200 in 77ms (next.js: 5ms, application-code: 72ms)
+ GET /pv14/vsl 200 in 596ms (next.js: 10ms, application-code: 586ms)
+ GET / 200 in 596ms (next.js: 45ms, application-code: 551ms)
+ GET /painel 200 in 99ms (next.js: 11ms, application-code: 88ms)
+ GET /painel 200 in 54ms (next.js: 0.8ms, application-code: 53ms)
+✓ Compiled in 132ms
+ GET /painel 200 in 73ms (next.js: 3ms, application-code: 71ms)
+✓ Compiled in 55ms
+ GET /painel 200 in 60ms (next.js: 1.5ms, application-code: 59ms)
+ GET /paniel 307 in 114ms (next.js: 19ms, application-code: 95ms)
+ GET /painel 200 in 106ms (next.js: 4ms, application-code: 102ms)
+Error: Route "/paniel": Could not validate `instant` because an error prevented the target segment from rendering.
+    at ignore-listed frames {
+  [cause]: Error: NEXT_REDIRECT
+      at Paniel (app\paniel\page.tsx:8:11)
+     6 | /** Alias de digitação: `/paniel` → `/painel`. */
+     7 | export default function Paniel() {
+  >  8 |   redirect("/painel");
+       |           ^
+     9 | }
+    10 | {
+    environmentName: 'Prerender',
+    digest: 'NEXT_REDIRECT;replace;/painel;307;'
+  }
+}
+[?25h

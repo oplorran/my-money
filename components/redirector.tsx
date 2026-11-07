@@ -1,11 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { useRouter } from "next/navigation";
 
 /**
  * Redirector "white" do funil: segura a página ~1,2 s (como o original), preserva
  * `sck`/`xcod`/UTMs e só então sai. Aceita destino externo via `?to=` (só hosts da
  * lista branca) e cai no mapa interno quando não há destino.
+ *
+ * A URL crua não aparece mais na tela: o rodapé só mostra o rótulo do destino.
  */
 const PASSTHROUGH = ["sck", "xcod", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
@@ -30,8 +33,10 @@ function safeTarget(raw: string): string | null {
   }
 }
 
-export function Redirector({ fallback }: { fallback: string }) {
-  const [dest, setDest] = useState<string | null>(null);
+export function Redirector({ fallback, label }: { fallback: string; label?: string }) {
+  const router = useRouter();
+  const [external, setExternal] = useState(false);
+  const [caption, setCaption] = useState(label ?? "");
 
   useEffect(() => {
     const sp = new URLSearchParams(window.location.search);
@@ -50,12 +55,19 @@ export function Redirector({ fallback }: { fallback: string }) {
       }
     }
 
-    if (!url) url = fallback;
+    const dest = url ?? fallback;
+    const isExternal = /^https?:/i.test(dest);
 
-    setDest(url);
-    const t = window.setTimeout(() => window.location.replace(url!), 1200);
+    setExternal(isExternal);
+    setCaption(label ?? (isExternal ? "Connecting to the payment page" : "Opening the next step"));
+
+    const t = window.setTimeout(() => {
+      if (isExternal) window.location.replace(dest);
+      else router.replace(dest);
+    }, 1200);
+
     return () => window.clearTimeout(t);
-  }, [fallback]);
+  }, [fallback, label, router]);
 
   return (
     <main className="mc-shell relative flex min-h-[100svh] flex-col items-center justify-center gap-4">
@@ -64,10 +76,10 @@ export function Redirector({ fallback }: { fallback: string }) {
         <svg className="animate-spin" width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="2.2" strokeLinecap="round">
           <path d="M21 12a9 9 0 1 1-6.219-8.56" />
         </svg>
-        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#888888]">
-          Connecting to the payment page
-        </p>
-        <p className="max-w-[240px] break-all text-[10px] leading-snug text-[#666666]">{dest}</p>
+        <p className="text-[11px] font-semibold uppercase tracking-[0.18em] text-[#888888]">{caption}</p>
+        {external && (
+          <p className="max-w-[240px] break-all text-[10px] leading-snug text-[#666666]">Secure checkout</p>
+        )}
       </div>
     </main>
   );

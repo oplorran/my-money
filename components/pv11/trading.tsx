@@ -180,7 +180,7 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
         <div className="relative z-10 flex w-full max-w-[360px] flex-col items-center">
           <div className="relative h-[180px] w-[180px]">
             <div className="absolute inset-2 rounded-full border border-[#303030]" />
-            <div className="absolute inset-5 rounded-full border border-[#262626]" />
+            <div className="absolute inset-5 rounded-full border border-[#292929]" />
 
             <svg viewBox="0 0 180 180" className="pointer-events-none absolute inset-0 h-full w-full">
               {[0, 120, 240].map((deg) => (
@@ -296,7 +296,7 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
 
           <div
             className="mb-4 overflow-hidden rounded-[22px] border p-4 transition-colors duration-300"
-            style={{ background: "#161616", borderColor: `rgba(${ACC[mode].rgb},.3)` }}
+            style={{ background: "#1b1b1d", borderColor: `rgba(${ACC[mode].rgb},.3)` }}
           >
             <div className="text-center">
               <span
@@ -358,13 +358,13 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
                   className="absolute inset-y-0 left-0 transition-all duration-150"
                   style={{
                     width: `${slider}%`,
-                    background: "linear-gradient(90deg,#4d4d4d 0%,#a8ff16 100%) 0% 0%/200% 100% no-repeat",
+                    background: "linear-gradient(90deg,#666666 0%,#a8ff16 100%) 0% 0%/200% 100% no-repeat",
                   }}
                 />
                 {[16, 50, 84].map((p) => (
                   <span
                     key={p}
-                    className="pointer-events-none absolute inset-y-0 z-[1] w-px bg-[#3a3a3a]"
+                    className="pointer-events-none absolute inset-y-0 z-[1] w-px bg-[#303030]"
                     style={{ left: `${p}%`, transform: "translateX(-50%)" }}
                   />
                 ))}
@@ -511,7 +511,7 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
                           ? "#1b1b1d"
                           : win
                             ? "linear-gradient(140deg,#a8ff16,#7ec600)"
-                            : "linear-gradient(140deg,#ff6b6b,#c93b3b)",
+                            : "linear-gradient(140deg,#ff6b6b,#e05555)",
                     }}
                   >
                     {o.status === "running" ? (

@@ -36,7 +36,7 @@ export const BACK_CHECKOUT_DOWN = "PPU38CQFUFG";
 export const VSL_PRICE = 29.9;
 
 /** Área de membros de destino depois dos upsells. */
-export const MEMBERS_URL = "https://riseaiclub.com/login";
+export const MEMBERS_URL = "/app/login";
 
 const KEY = "mc_funnel_v1";
 

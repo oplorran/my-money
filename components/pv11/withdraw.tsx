@@ -73,7 +73,7 @@ export function Pv11Withdraw({ fallback, next, event }: Props) {
                 <div
                   key={s}
                   className={`flex items-center gap-2.5 rounded-[16px] border px-3 py-2 ${
-                    on ? "border-[#303030] bg-[#151515] opacity-100" : "border-[#262626] opacity-40"
+                    on ? "border-[#303030] bg-[#1b1b1d] opacity-100" : "border-[#292929] opacity-40"
                   }`}
                 >
                   <span className={`flex h-4 w-4 shrink-0 items-center justify-center rounded-full ${on ? "bg-[#a8ff16]" : "bg-[#1b1b1d]"}`}>

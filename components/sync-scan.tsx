@@ -15,11 +15,13 @@ const TINT: Record<StockKey, string> = {
   META: "0, 129, 251",
   AAPL: "85, 85, 85",
   MSFT: "0, 164, 239",
+  BABA: "255, 106, 0",
   GOOGL: "66, 133, 244",
   AMZN: "255, 153, 0",
   NFLX: "229, 9, 20",
   TSLA: "204, 0, 0",
   V: "26, 31, 113",
+  INTC: "0, 104, 181",
   NVDA: "118, 185, 0",
 };
 
@@ -156,7 +158,7 @@ export function SyncOrbit() {
   return (
     <div className="relative mx-auto h-[180px] w-[180px]">
       <div className="absolute inset-2 rounded-full border border-[#303030]" />
-      <div className="absolute inset-5 rounded-full border border-[#262626]" />
+      <div className="absolute inset-5 rounded-full border border-[#292929]" />
 
       <svg viewBox="0 0 180 180" className="pointer-events-none absolute inset-0 h-full w-full">
         {[0, 60, 120].map((deg) => (

@@ -490,7 +490,7 @@ export default function VslPage() {
                   <button
                     key={opt.label}
                     onClick={() => pick(ask.id, opt)}
-                    className="flex w-full items-center justify-between gap-3 rounded-[20px] border border-[#303030] bg-[#151515] px-4 py-3 text-left text-[13.5px] font-semibold leading-snug text-white transition-all hover:border-[#a8ff16]/45 hover:bg-[#1b1b1d] active:scale-[.99]"
+                    className="flex w-full items-center justify-between gap-3 rounded-[20px] border border-[#303030] bg-[#1b1b1d] px-4 py-3 text-left text-[13.5px] font-semibold leading-snug text-white transition-all hover:border-[#a8ff16]/45 hover:bg-[#1b1b1d] active:scale-[.99]"
                   >
                     <span className="min-w-0">{opt.label}</span>
                     <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round" className="shrink-0 text-[#888888]">
@@ -558,7 +558,7 @@ function ScenePad({ scene, target }: { scene: Scene; target: number }) {
         </div>
         <div className="grid grid-cols-2 gap-1.5">
           {["HEDGE FUNDS", "INVESTMENT BANKS", "PROP DESKS", "MARKET MAKERS"].map((i) => (
-            <p key={i} className="rounded-[14px] bg-[#0a0a0a] px-2 py-1.5 text-[8.5px] font-bold tracking-wider text-[#888888]">
+            <p key={i} className="rounded-[14px] bg-[#090909] px-2 py-1.5 text-[8.5px] font-bold tracking-wider text-[#888888]">
               {i}
             </p>
           ))}
@@ -661,7 +661,7 @@ function ScenePad({ scene, target }: { scene: Scene; target: number }) {
             <span
               key={v}
               className={`tabular flex-1 rounded-[14px] py-1.5 text-center text-[12px] font-bold ${
-                i === 0 ? "bg-[#151515] text-[#666666] line-through" : "bg-[#1b1b1d] text-[#cccccc]"
+                i === 0 ? "bg-[#1b1b1d] text-[#666666] line-through" : "bg-[#1b1b1d] text-[#cccccc]"
               }`}
             >
               {v}

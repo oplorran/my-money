@@ -112,7 +112,7 @@ export function Quiz() {
         <div className="qa-glass qa-rise rounded-3xl p-6">
           <p className="mb-2 text-[11px] font-bold tracking-[0.18em] text-[#a8ff16]">DID YOU KNOW?</p>
           <p className="mb-2 text-lg font-bold leading-snug text-white">Technology changed the rules</p>
-          <p className="text-sm leading-relaxed text-[#888888]">{insight}</p>
+          <p className="text-sm leading-relaxed text-[#8fa3bd]">{insight}</p>
         </div>
         <Cta onClick={afterInsight} className="mt-4 py-3.5 text-base">
           Continue
@@ -155,7 +155,7 @@ export function Quiz() {
                   onClick={() => commit(q.id, opt)}
                   className={`qa-choice w-full rounded-2xl border p-4 text-left transition-all active:scale-[.99] ${answers[q.id] === opt ? "qa-choice-on" : ""}`}
                 >
-                  <span className="text-[14px] font-medium text-[#cccccc]">{opt}</span>
+                  <span className="text-[14px] font-medium text-[#c3d2e4]">{opt}</span>
                 </button>
               ))}
             </div>
@@ -169,7 +169,7 @@ export function Quiz() {
               onChange={(e) => setText(e.target.value)}
               placeholder={q.placeholder}
               rows={4}
-              className="w-full resize-none rounded-[20px] border border-[#303030] bg-[#111111] p-4 text-sm text-white outline-none placeholder:text-[#666666] focus:border-[#a8ff16]/50"
+              className="w-full resize-none rounded-[20px] border border-[#2a3448] bg-[#101827] p-4 text-sm text-white outline-none placeholder:text-[#63778f] focus:border-[#a8ff16]/55"
             />
             <Cta onClick={() => commit(q.id, text)} disabled={text.trim().length < 3} className="mt-3 py-3.5 text-base">
               Continue

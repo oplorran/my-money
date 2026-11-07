@@ -27,18 +27,24 @@ export function Analyzing() {
     <div className="py-8 text-center">
       <div className="relative mx-auto mb-8 h-32 w-32">
         <svg viewBox="0 0 120 120" className="h-32 w-32 -rotate-90">
-          <circle cx="60" cy="60" r="52" stroke="#1b1b1d" strokeWidth="8" fill="none" />
+          <circle cx="60" cy="60" r="52" stroke="#162132" strokeWidth="8" fill="none" />
           <circle
-            cx="60" cy="60" r="52" stroke="#a8ff16" strokeWidth="8" fill="none"
+            cx="60" cy="60" r="52" stroke="url(#analyzing)" strokeWidth="8" fill="none"
             strokeLinecap="round"
             strokeDasharray={2 * Math.PI * 52}
             strokeDashoffset={2 * Math.PI * 52 * (1 - pct / 100)}
             className="transition-all duration-200"
           />
+          <defs>
+            <linearGradient id="analyzing" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stopColor="#a8ff16" />
+              <stop offset="100%" stopColor="#a8ff16" />
+            </linearGradient>
+          </defs>
         </svg>
         <div className="absolute inset-0 flex flex-col items-center justify-center">
           <span className="tabular text-3xl font-black text-white">{Math.round(pct)}%</span>
-          <span className="text-[10px] font-bold tracking-[0.16em] text-[#666666]">ANALYZING</span>
+          <span className="text-[10px] font-bold tracking-[0.16em] text-[#63778f]">ANALYZING</span>
         </div>
       </div>
 
@@ -46,13 +52,13 @@ export function Analyzing() {
         {STEPS.map((s, i) => (
           <div key={s} className="flex items-center gap-2.5">
             <span className={`flex h-5 w-5 shrink-0 items-center justify-center rounded-full ${
-              i < step ? "bg-[#a8ff16]" : i === step ? "animate-pulse border border-[#a8ff16] bg-[#151b0d]" : "bg-[#1b1b1d]"
+              i < step ? "bg-[#a8ff16]" : i === step ? "animate-pulse border border-[#a8ff16] bg-[#151b0d]" : "bg-[#162132]"
             }`}>
               {i < step ? (
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#090909" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round"><path d="M20 6 9 17l-5-5" /></svg>
               ) : null}
             </span>
-            <span className={`text-[13px] ${i <= step ? "text-[#cccccc]" : "text-[#666666]"}`}>{s}</span>
+            <span className={`text-[13px] ${i <= step ? "text-[#c3d2e4]" : "text-[#63778f]"}`}>{s}</span>
           </div>
         ))}
       </div>

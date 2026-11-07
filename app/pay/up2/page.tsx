@@ -55,7 +55,7 @@ export default function Up2() {
 
   const skip = () => {
     track("upsell2_skip", trackingParams());
-    router.push("/hot/up3a");
+    router.push("/pay/up3");
   };
 
   const next = () => {
@@ -79,7 +79,7 @@ export default function Up2() {
             </p>
             <div className="h-1 flex-1 overflow-hidden rounded-full bg-[#1b1b1d]">
               <div
-                className="h-full rounded-full bg-gradient-to-r from-[#4d7a00] to-[#a8ff16] transition-all duration-500"
+                className="h-full rounded-full bg-gradient-to-r from-[#6fbf00] to-[#a8ff16] transition-all duration-500"
                 style={{ width: `${((step + 1) / QUESTIONS.length) * 100}%` }}
               />
             </div>
@@ -136,7 +136,7 @@ export default function Up2() {
       <main className="mc-shell relative flex min-h-[100svh] items-center justify-center px-5">
         <div className="mc-glow" />
         <div className="mc-pop relative z-10 w-full max-w-sm">
-          <span className="mb-3 inline-block rounded-full border border-red-800/50 bg-red-950/40 px-3 py-1 text-[10px] font-bold tracking-[0.16em] text-[#a8ff16]">
+          <span className="mb-3 inline-block rounded-full border border-[#303030] bg-[#111111] px-3 py-1 text-[10px] font-bold tracking-[0.16em] text-[#a8ff16]">
             AI MULTIPLIER
           </span>
           <h1 className="mb-2 text-[23px] font-black leading-tight text-white">
@@ -173,7 +173,7 @@ export default function Up2() {
         </p>
 
         <div className="relative rounded-[20px] border border-[#303030] bg-[#111111] p-5">
-          <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#4d7a00] to-[#a8ff16] px-3 py-1 text-[10px] font-bold tracking-wider text-[#090909]">
+          <span className="absolute -top-3 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-full bg-gradient-to-r from-[#6fbf00] to-[#a8ff16] px-3 py-1 text-[10px] font-bold tracking-wider text-[#090909]">
             AI MULTIPLIER
           </span>
           <p className="mb-1 text-center text-[11.5px] text-[#888888]">Unlock the multiplier for:</p>
