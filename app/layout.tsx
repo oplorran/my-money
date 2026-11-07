@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { INSTALL_BOOTSTRAP } from "@/lib/install-store";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const poppins = Poppins({ variable: "--font-poppins", subsets: ["latin"], weight: ["400", "500", "600", "700", "800", "900"] });
@@ -12,6 +13,7 @@ const jetbrains = JetBrains_Mono({ variable: "--font-jetbrains", subsets: ["lati
 const GTM_ID = process.env.NEXT_PUBLIC_GTM_ID;
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Cash Club",
   description: "Discover cutting-edge solutions that transform the way you interact with technology.",
   applicationName: "Cash Club",
@@ -26,6 +28,13 @@ export const metadata: Metadata = {
   },
   // o funil é noindex por padrão; páginas que devem ser indexadas sobrescrevem
   robots: { index: false, follow: false },
+  openGraph: {
+    type: "website",
+    siteName: "Cash Club",
+    locale: "en_US",
+    images: [{ url: "/icons/icon-512.png", width: 512, height: 512, alt: "Cash Club" }],
+  },
+  twitter: { card: "summary_large_image", images: ["/icons/icon-512.png"] },
 };
 
 export const viewport: Viewport = {
