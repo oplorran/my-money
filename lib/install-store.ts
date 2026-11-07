@@ -19,6 +19,8 @@ type State = {
   canInstall: boolean;
   installed: boolean;
   ios: boolean;
+  /** Opera nunca dispara `beforeinstallprompt` (não implementa PWA). */
+  opera: boolean;
   ready: boolean;
 };
 
@@ -27,6 +29,7 @@ type Bridge = {
   canInstall: boolean;
   installed: boolean;
   ios: boolean;
+  opera: boolean;
 };
 
 declare global {
@@ -36,26 +39,44 @@ declare global {
 }
 
 const listeners = new Set<() => void>();
-let cache: State = { canInstall: false, installed: false, ios: false, ready: false };
+let cache: State = { canInstall: false, installed: false, ios: false, opera: false, ready: false };
 
 function commit(patch: Partial<State>) {
   cache = { ...cache, ...patch };
   listeners.forEach((l) => l());
 }
 
+/** Opera (GX incluído) é Chromium mas não implementa o fluxo de instalação de PWA. */
+function isOpera() {
+  const ua = navigator.userAgent;
+  return /\bOPR\/|\bOpera\b|Opera GX/i.test(ua) || "opr" in navigator;
+}
+
 function bridge(): Bridge {
   if (typeof window === "undefined") {
-    return { event: null, canInstall: false, installed: false, ios: false };
+    return { event: null, canInstall: false, installed: false, ios: false, opera: false };
   }
   if (!window.__ccInstall) {
-    window.__ccInstall = { event: null, canInstall: false, installed: false, ios: /iphone|ipad|ipod/i.test(navigator.userAgent) };
+    window.__ccInstall = {
+      event: null,
+      canInstall: false,
+      installed: false,
+      ios: /iphone|ipad|ipod/i.test(navigator.userAgent),
+      opera: isOpera(),
+    };
   }
   return window.__ccInstall;
 }
 
 function sync() {
   const b = bridge();
-  commit({ canInstall: b.canInstall && !b.installed, installed: b.installed, ios: b.ios, ready: true });
+  commit({
+    canInstall: b.canInstall && !b.installed,
+    installed: b.installed,
+    ios: b.ios,
+    opera: b.opera,
+    ready: true,
+  });
 }
 
 function boot() {
@@ -75,7 +96,7 @@ function subscribe(listener: () => void) {
   return () => listeners.delete(listener);
 }
 
-const EMPTY: State = { canInstall: false, installed: false, ios: false, ready: false };
+const EMPTY: State = { canInstall: false, installed: false, ios: false, opera: false, ready: false };
 
 export function useInstall() {
   return useSyncExternalStore(subscribe, () => cache, () => EMPTY);
@@ -103,8 +124,9 @@ export async function promptInstall() {
 export const INSTALL_BOOTSTRAP = `(function(){
   if (window.__ccInstall) return;
   var ios = /iphone|ipad|ipod/i.test(navigator.userAgent);
+  var opera = /\\bOPR\\/|\\bOpera\\b/i.test(navigator.userAgent) || 'opr' in navigator;
   var standalone = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
-  var b = window.__ccInstall = { event: null, canInstall: false, installed: standalone, ios: ios };
+  var b = window.__ccInstall = { event: null, canInstall: false, installed: standalone, ios: ios, opera: opera };
   addEventListener('beforeinstallprompt', function(e){
     e.preventDefault();
     b.event = e;

@@ -11,10 +11,19 @@ import { cue } from "@/lib/member";
  * antigo ou evento já consumido), abre uma folha com o passo a passo.
  */
 export function InstallButton() {
-  const { canInstall, installed, ios, ready } = useInstall();
+  const { canInstall, installed, ios, opera, ready } = useInstall();
   const [open, setOpen] = useState(false);
   const [busy, setBusy] = useState(false);
+  const [copied, setCopied] = useState(false);
   const [host, setHost] = useState<HTMLElement | null>(null);
+
+  // Rota de instalação normalizada, usada para abrir em outro navegador.
+  const installUrl =
+    typeof window === "undefined" ? "/app/inicio" : `${window.location.origin}/app/inicio`;
+
+  // No desktop o Windows ainda aceita atalho manual; no Android o caminho é outro.
+  const canDesktopShortcut =
+    typeof navigator !== "undefined" && !/android|iphone|ipad|ipod/i.test(navigator.userAgent);
 
   // A folha sai da barra: o backdrop-filter do .ma-topbar vira containing block
   // para descendentes "fixed", o que cortava o overlay nos 64px do header.
@@ -106,17 +115,34 @@ export function InstallButton() {
               </div>
 
               <p className="mb-3 text-[11.5px] leading-relaxed text-[#888888]">
-                Cash Club opens in its own window, one click away — no need to type the address again.
+                {opera
+                  ? canDesktopShortcut
+                    ? "O Opera não instala apps pela interface — mas você pode fixar o Cash Club na barra de tarefas com um atalho. Copie o link e crie o atalho abaixo."
+                    : "O Opera no celular não instala apps. Adicione o Cash Club à tela inicial pelo menu do navegador."
+                  : "Cash Club opens in its own window, one click away — no need to type the address again."}
               </p>
 
               <ol className="space-y-2">
-                {(ios
-                  ? ["Tap the Share button in Safari.", "Choose “Add to Home Screen”.", "Confirm — the icon becomes an app."]
-                  : [
-                      "Click the install icon in the address bar.",
-                      "Or open the browser menu (⋮) → Install Cash Club.",
-                      "Confirm to pin it to the taskbar.",
-                    ]
+                {(opera
+                  ? canDesktopShortcut
+                    ? [
+                        "Copy the link below.",
+                        "Right-click an empty spot on the Desktop → New → Shortcut.",
+                        "Paste the link, name it Cash Club and finish.",
+                        "Right-click the new shortcut → Pin to taskbar.",
+                      ]
+                    : [
+                        "Copy the link below.",
+                        "Open it in Chrome or Edge (they install apps natively).",
+                        "Use the install icon in the address bar and confirm.",
+                      ]
+                  : ios
+                    ? ["Tap the Share button in Safari.", "Choose “Add to Home Screen”.", "Confirm — the icon becomes an app."]
+                    : [
+                        "Click the install icon in the address bar.",
+                        "Or open the browser menu (⋮) → Install Cash Club.",
+                        "Confirm to pin it to the taskbar.",
+                      ]
                 ).map((step, i) => (
                   <li key={step} className="flex items-start gap-2.5 text-[12px] leading-snug text-[#cccccc]">
                     <span className="flex h-5 w-5 shrink-0 items-center justify-center rounded-md bg-[#1b1b1d] text-[10px] font-black text-[#a8ff16]">
@@ -126,6 +152,39 @@ export function InstallButton() {
                   </li>
                 ))}
               </ol>
+
+              {opera && (
+                <div className="mt-4 space-y-2">
+                  {canDesktopShortcut && (
+                    <button
+                      type="button"
+                      onClick={() => {
+                        cue("tap");
+                        window.location.href = `microsoft-edge:${installUrl}`;
+                      }}
+                      className="mc-cta w-full rounded-[14px] py-3 text-[13px] font-bold"
+                    >
+                      Open in Edge
+                    </button>
+                  )}
+                  <button
+                    type="button"
+                    onClick={async () => {
+                      cue("tap");
+                      try {
+                        await navigator.clipboard.writeText(installUrl);
+                        setCopied(true);
+                        window.setTimeout(() => setCopied(false), 1800);
+                      } catch {
+                        setCopied(false);
+                      }
+                    }}
+                    className="w-full rounded-[14px] border border-[#303030] bg-[#111111] py-3 text-[12px] font-bold text-[#cccccc]"
+                  >
+                    {copied ? "Link copied" : "Copy link"}
+                  </button>
+                </div>
+              )}
 
               {canInstall && (
                 <button
