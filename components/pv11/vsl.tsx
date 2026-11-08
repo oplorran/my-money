@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AiMaker } from "@/components/brands";
+import { VslCta, VturbPlayer } from "@/components/vturb-player";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
@@ -72,17 +73,17 @@ type Props = {
   event: string;
 };
 
-export function Pv11Vsl({ fallback, expires = 24 * 60 + 30, next, event }: Props) {
+export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props) {
   const router = useRouter();
   const [balance] = useState(() => {
     const b = readState().balance;
     return b > fallback ? b : fallback;
   });
   const [left, setLeft] = useState(expires);
-  const [playing, setPlaying] = useState(false);
-  const [pct, setPct] = useState(0);
+  const [watched, setWatched] = useState(0);
   const [watchers, setWatchers] = useState(1243);
   const started = useRef(false);
+  const lastTracked = useRef(-1);
 
   // contador do saldo expirando
   useEffect(() => {
@@ -99,20 +100,16 @@ export function Pv11Vsl({ fallback, expires = 24 * 60 + 30, next, event }: Props
     return () => window.clearInterval(id);
   }, []);
 
-  // progresso do player falso
-  useEffect(() => {
-    if (!playing) return;
-    const id = window.setInterval(() => setPct((p) => (p >= 100 ? 100 : p + 0.35)), 220);
-    return () => window.clearInterval(id);
-  }, [playing]);
-
   const clock = `${String(Math.floor(left / 60)).padStart(2, "0")}:${String(left % 60).padStart(2, "0")}`;
 
   const play = () => {
     if (started.current) return;
     started.current = true;
-    setPlaying(true);
     track(`${event}_vsl_play`, trackingParams());
+  };
+
+  const finish = () => {
+    track(`${event}_vsl_finish`, { balance, ...trackingParams() });
   };
 
   const activate = useCallback(() => {
@@ -161,56 +158,20 @@ export function Pv11Vsl({ fallback, expires = 24 * 60 + 30, next, event }: Props
         </div>
 
         {/* player */}
-        <div className="relative overflow-hidden rounded-[20px] border border-[#303030] bg-[#0d0d0d]">
-          <div className="relative aspect-video w-full bg-[radial-gradient(circle_at_50%_35%,rgba(168,255,22,.14),transparent_65%),linear-gradient(160deg,#1b1b1d,#090909)]">
-            {!playing && (
-              <>
-                <button
-                  onClick={play}
-                  aria-label="Play video"
-                  className="absolute inset-0 flex flex-col items-center justify-center gap-2.5"
-                >
-                  <span className="flex h-14 w-14 items-center justify-center rounded-full bg-[#a8ff16] shadow-[0_0_30px_rgba(168,255,22,.55)]">
-                    <svg width="22" height="22" viewBox="0 0 24 24" fill="#090909">
-                      <path d="M8 5v14l11-7z" />
-                    </svg>
-                  </span>
-                  <span className="text-[10px] font-bold uppercase tracking-[0.18em] text-[#888888]">
-                    Press play to start
-                  </span>
-                </button>
-                <span className="absolute left-2.5 top-2.5 rounded-full bg-[#090909]/80 px-2 py-0.5 text-[9px] font-bold uppercase tracking-wider text-[#cccccc]">
-                  4:00
-                </span>
-              </>
-            )}
+        <div className="overflow-hidden rounded-[20px] border border-[#303030] bg-[#0d0d0d]">
+          <VturbPlayer
+            onPlay={play}
+            onProgress={(t) => {
+              setWatched(t);
+              const mark = Math.floor(t / 15);
+              if (mark === lastTracked.current) return;
+              lastTracked.current = mark;
+              track(`${event}_vsl_progress`, { t: Math.floor(t), ...trackingParams() });
+            }}
+            onFinish={finish}
+          />
 
-            {playing && (
-              <>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <div className="text-center">
-                    <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#666666]">AI Program</p>
-                    <p className="mt-1 text-[26px] font-black leading-none tracking-tight text-white">
-                      83.33<span className="text-[#a8ff16]">%</span>
-                    </p>
-                    <p className="mt-1 text-[9.5px] uppercase tracking-[0.18em] text-[#666666]">Accuracy rate</p>
-                  </div>
-                </div>
-                <div className="absolute inset-x-0 bottom-0 h-1 bg-[#1b1b1d]">
-                  <div className="h-full bg-[#a8ff16] transition-all duration-200" style={{ width: `${pct}%` }} />
-                </div>
-              </>
-            )}
-          </div>
-
-          {playing && (
-            <button
-              onClick={activate}
-              className="pv11-cta-pulse w-full bg-[#a8ff16] py-3 text-[15px] font-extrabold uppercase tracking-wide text-[#090909]"
-            >
-              ACTIVATE MY ACCESS
-            </button>
-          )}
+          <VslCta watched={watched} onActivate={activate} />
         </div>
 
         {/* audiência */}

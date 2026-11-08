@@ -1,8 +1,8 @@
 "use client";
 
-import { Redirector } from "@/components/redirector";
+import { Up3Offer } from "@/components/up3-offer";
 
-/** `/hot/up3a` — alias do funil original para o upsell vitalício. */
+/** `/hot/up3a` — upsell vitalício (rota usada pelo funil original). */
 export default function Page() {
-  return <Redirector fallback="/pay/up3" label="Opening your next step" />;
+  return <Up3Offer />;
 }

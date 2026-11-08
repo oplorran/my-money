@@ -85,15 +85,16 @@ export const RABICHO: Etapa[] = [
   },
   {
     n: "R.4",
-    rota: "/pay/up3 · $67",
+    rota: "/hot/up3a · também em /pay/up3 · $67",
     titulo: "Upsell 3 — Acesso vitalício",
     tipo: "upsell",
     en: "WARNING: Your Cash Club access expires in 6 months!",
     pt: "AVISO: seu acesso ao Cash Club expira em 6 meses!",
     obs: [
+      "As duas rotas renderizam o mesmo componente `components/up3-offer.tsx`.",
       "Urgência por contrato de parceria semestral.",
       "Três consequências: conta desativada, perda da IA, ganhos param.",
-      "CTA `ACTIVATE LIFETIME ACCESS`. Escape → área de membros (`riseaiclub.com/login`).",
+      "CTA `ACTIVATE LIFETIME ACCESS`. Escape → área de membros (`/app/login`).",
     ],
   },
   {

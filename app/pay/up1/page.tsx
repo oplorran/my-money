@@ -68,7 +68,7 @@ export default function Up1() {
 
   const skip = () => {
     track("upsell1_skip", trackingParams());
-    router.push("/pay/up2");
+    router.push("/hot/up2");
   };
 
   return (

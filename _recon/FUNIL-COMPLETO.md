@@ -175,13 +175,15 @@ Quatro estados no mesmo componente:
 Todos os CTAs internos passam por um redirector (padrão `/hotwt/<step>?to=…`) que
 repassa `sck`, `xcod` e UTMs e só então sai para o gateway.
 
-Verificado ao vivo em 05/nov/2026:
+Verificado ao vivo em 08/nov/2026:
 
-- `/pay/up1` e `/pay/up2` existem e são servidos nesses caminhos.
-- `/pay/up3` **não** existe (`404`); o upsell 3 mora em `/hot/up3a`.
-- Os CTAs de compra dos upsells apontam para `/br/wt/up1` e `/br/wt/up3` com
-  `?to=<checkout>` — o mesmo redirector branco, só com prefixo de idioma.
-- Os skips usam `/hot/up2` (up1) e `riseaiclub.com/login` (up3).
+- `/pay/up1`, `/pay/up2` e `/hot/up3a` existem e são servidos nesses caminhos.
+- `/pay/up3` é um alias do mesmo upsell vitalício de `/hot/up3a`; os dois renderizam
+  `components/up3-offer.tsx`.
+- Os CTAs de compra dos upsells apontam para `/br/wt/up1`, `/br/wt/up2` e `/br/wt/up3`
+  com `?to=<checkout>` — o mesmo redirector branco, só com prefixo de idioma.
+- Os skips usam `/hot/up2` (up1) e `/hot/up3a` (up2); o skip do up3 vai para a área de
+  membros.
 
 ## 9. Área de membros (`riseaiclub.com/login`)
 
