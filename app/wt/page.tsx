@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { WtCta } from "@/components/wt-cta";
+import { Logo } from "@/components/marks";
 
 export const metadata: Metadata = {
   title: "The quiet rise of AI tools for everyday investors · Cash Club",
@@ -13,9 +14,7 @@ export default function Wt() {
       <div className="mc-glow" />
       <header className="sticky top-0 z-10 border-b border-[#292929] bg-[#090909]/85 backdrop-blur">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-5 py-3">
-          <span className="text-lg font-bold text-white">
-            Cash <span className="text-[#a8ff16]">Club</span>
-          </span>
+          <Logo height={17} />
           <span className="text-[11px] text-[#666666]">Research, not a pitch</span>
         </div>
       </header>

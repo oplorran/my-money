@@ -1,24 +1,43 @@
 "use client";
 
-/** Marca do Cash Club: traço ascendente em verde neon sobre superfície carvão. */
-export function Mark({ size = 48, uid = "m" }: { size?: number; uid?: string }) {
+import Image from "next/image";
+
+const LOGO = "/logo-cash-club.png";
+const LOGO_MARK = "/logo-mark.png";
+const LOGO_W = 464;
+const LOGO_H = 94;
+const MARK_W = 360;
+const MARK_H = 462;
+
+/**
+ * Marca do Cash Club a partir dos arquivos de logo. `variant="full"` usa o
+ * wordmark (cabeçalhos) e `variant="mark"` só o símbolo (espaços quadrados).
+ */
+export function Logo({
+  height = 22,
+  variant = "full",
+  className = "",
+  priority = false,
+}: {
+  height?: number;
+  variant?: "full" | "mark";
+  className?: string;
+  priority?: boolean;
+}) {
+  const isMark = variant === "mark";
+  const src = isMark ? LOGO_MARK : LOGO;
+  const w = isMark ? Math.round((height * MARK_W) / MARK_H) : Math.round((height * LOGO_W) / LOGO_H);
+
   return (
-    <svg width={size} height={size} viewBox="0 0 48 48" fill="none" aria-hidden>
-      <defs>
-        <linearGradient id={`g${uid}`} x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0%" stopColor="#6fbf00" />
-          <stop offset="55%" stopColor="#a8ff16" />
-          <stop offset="100%" stopColor="#d8ff8a" />
-        </linearGradient>
-      </defs>
-      <g stroke={`url(#g${uid})`} strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M9 33 L18 24 L27 28 L39 13" fill="none" />
-      </g>
-      <circle cx="9" cy="33" r="3.2" fill="#a8ff16" opacity=".55" />
-      <circle cx="18" cy="24" r="3" fill="#a8ff16" opacity=".75" />
-      <circle cx="27" cy="28" r="3" fill="#a8ff16" opacity=".9" />
-      <circle cx="39" cy="13" r="4.2" fill="#a8ff16" />
-    </svg>
+    <Image
+      src={src}
+      alt="Cash Club"
+      width={w}
+      height={height}
+      priority={priority}
+      className={`select-none ${className}`}
+      unoptimized
+    />
   );
 }
 

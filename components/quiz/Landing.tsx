@@ -1,6 +1,6 @@
 "use client";
 
-import { Mark, Stars } from "../marks";
+import { Logo, Stars } from "../marks";
 import { track, trackingParams } from "@/lib/track";
 
 export function Landing({ onStart }: { onStart: () => void }) {
@@ -9,8 +9,8 @@ export function Landing({ onStart }: { onStart: () => void }) {
       <div className="text-center">
         <div className="qa-rise relative inline-flex">
           <div className="absolute inset-0 rounded-full" style={{ background: "radial-gradient(circle, rgba(168,255,22,.30), transparent 70%)" }} />
-          <div className="qa-glass relative flex h-20 w-20 items-center justify-center rounded-[24px]">
-            <Mark size={52} uid="hero" />
+          <div className="qa-glass relative flex h-20 w-20 items-center justify-center rounded-[24px] px-2.5">
+            <Logo height={40} variant="mark" priority />
           </div>
         </div>
 

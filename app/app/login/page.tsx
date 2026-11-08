@@ -2,7 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
-import { Mark } from "@/components/marks";
+import { Logo } from "@/components/marks";
 import { cue } from "@/lib/member";
 import { session, useSession } from "@/lib/session-store";
 
@@ -42,7 +42,7 @@ export default function MemberLogin() {
     <div className="mx-auto w-full max-w-md px-5 pt-8">
       <div className="ma-in flex flex-col items-center text-center">
         <span className="mb-4 flex h-14 w-14 items-center justify-center rounded-2xl border border-[#303030] bg-[#111111]">
-          <Mark size={30} uid="login" />
+          <Logo height={40} variant="mark" priority />
         </span>
         <span className="ma-badge mb-4">
           <span className="h-1.5 w-1.5 rounded-full bg-[#a8ff16]" />

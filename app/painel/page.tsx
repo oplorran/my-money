@@ -2,6 +2,7 @@
 
 import { useMemo, useState } from "react";
 import Link from "next/link";
+import { Logo } from "@/components/marks";
 import { FUNIS, RABICHO, TIPO_LABEL } from "./roteiros";
 import type { Etapa, Funil } from "./roteiros";
 
@@ -86,7 +87,7 @@ export default function Painel() {
         <div className="mx-auto w-full max-w-[760px] px-4 pb-3 pt-4">
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0">
-              <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-[#666666]">Cash Club</p>
+              <Logo height={12} priority />
               <h1 className="mt-1 text-[19px] font-black leading-tight tracking-tight text-white">
                 Painel de roteiros
               </h1>

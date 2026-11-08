@@ -6,6 +6,7 @@ import { LESSONS, cue, pocketUrl } from "@/lib/member";
 import type { Lesson } from "@/lib/member";
 import { session, useSession } from "@/lib/session-store";
 import { InstallCard } from "@/components/install-card";
+import { Logo } from "@/components/marks";
 
 
 function Step({ n, title, minutes, done }: { n: number; title: string; minutes: string; done: boolean }) {
@@ -194,10 +195,8 @@ export default function Home() {
       {welcome && (
         <div className="fixed inset-0 z-[200] flex items-center justify-center bg-black/80 px-5 backdrop-blur-sm">
           <div className="ma-card ma-in w-full max-w-sm p-6 text-center">
-            <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#a8ff16]/35 bg-[#a8ff16]/12">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="2.2" strokeLinecap="round" strokeLinejoin="round">
-                <path d="m12 3 2.4 5.6 6.1.6-4.6 4 1.3 6-5.2-3.1L6.8 19l1.3-6-4.6-4 6.1-.6z" />
-              </svg>
+            <span className="mx-auto mb-4 flex h-12 w-12 items-center justify-center rounded-2xl border border-[#a8ff16]/35 bg-[#a8ff16]/12 p-2">
+              <Logo variant="mark" height={26} />
             </span>
             <h2 className="text-[19px] font-black leading-tight text-white">Welcome to Cash Club!</h2>
             <p className="mt-2 text-[12.5px] leading-relaxed text-[#888888]">

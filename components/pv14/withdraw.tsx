@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { money, readState, writeState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
+import { Logo } from "@/components/marks";
 
 type Method = "bank" | "paypal";
 
@@ -46,7 +47,8 @@ export function Pv14Withdraw({ fallback, next, event }: Props) {
       <div className="mc-glow" />
 
       <div className="relative z-10 mx-auto w-full max-w-[420px] px-5 pb-8 pt-6">
-        <div className="mb-5 text-center">
+        <div className="mb-5 flex flex-col items-center text-center">
+          <Logo variant="mark" height={24} className="mb-3 opacity-90" />
           <div className="mb-3 flex justify-center">
             <span className="inline-flex items-center gap-1.5 rounded-full border border-[#a8ff16]/30 bg-[#a8ff16]/10 px-3 py-1">
               <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="2.4" strokeLinecap="round" strokeLinejoin="round">

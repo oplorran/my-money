@@ -32,9 +32,9 @@ export const metadata: Metadata = {
     type: "website",
     siteName: "Cash Club",
     locale: "en_US",
-    images: [{ url: "/icons/icon-512.png", width: 512, height: 512, alt: "Cash Club" }],
+    images: [{ url: "/og-cash-club.png", width: 1200, height: 630, alt: "Cash Club" }],
   },
-  twitter: { card: "summary_large_image", images: ["/icons/icon-512.png"] },
+  twitter: { card: "summary_large_image", images: ["/og-cash-club.png"] },
 };
 
 export const viewport: Viewport = {

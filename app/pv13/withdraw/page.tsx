@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { cleanName } from "@/lib/name";
 import { money, readState, writeState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
+import { Logo } from "@/components/marks";
 
 type Phase = "method" | "handshake" | "verify";
 
@@ -179,8 +180,8 @@ export default function WithdrawPage() {
     <main className="mc-shell relative min-h-[100svh] overflow-hidden">
       <div className="mc-glow" />
       <div className="relative z-10 mx-auto w-full max-w-[380px] px-5 pb-8 pt-8">
-        <div className="mb-5 text-center">
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#666666]">AI Program</p>
+        <div className="mb-5 flex flex-col items-center text-center">
+          <Logo variant="mark" height={22} className="mb-2 opacity-90" />
           <p className="mb-2 text-[12px] font-semibold text-[#cccccc]">
             Your Cash Club withdrawal is approved
           </p>

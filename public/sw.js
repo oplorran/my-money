@@ -1,6 +1,6 @@
 /* Service worker mínimo: torna o app instalável e mantém o shell offline. */
-const CACHE = "cashclub-shell-v2";
-const SHELL = ["/app/inicio", "/icons/icon-192.png", "/icons/icon-512.png", "/manifest.webmanifest"];
+const CACHE = "cashclub-shell-v3";
+const SHELL = ["/app/inicio", "/icons/icon-192.png", "/icons/icon-512.png", "/logo-cash-club.png", "/manifest.webmanifest"];
 
 self.addEventListener("install", (event) => {
   event.waitUntil(

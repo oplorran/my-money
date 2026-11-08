@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { money, readState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
+import { Logo } from "@/components/marks";
 
 type Phase = "method" | "handshake";
 
@@ -102,8 +103,8 @@ export function Pv11Withdraw({ fallback, next, event }: Props) {
     <main className="mc-shell relative min-h-[100svh] overflow-hidden">
       <div className="mc-glow" />
       <div className="relative z-10 mx-auto w-full max-w-[380px] px-5 pb-8 pt-8">
-        <div className="mb-5 text-center">
-          <p className="mb-1 text-[10px] font-bold uppercase tracking-[0.18em] text-[#666666]">AI Program</p>
+        <div className="mb-5 flex flex-col items-center text-center">
+          <Logo variant="mark" height={22} className="mb-2 opacity-90" />
           <span className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-[#a8ff16]/25 bg-[#a8ff16]/10 px-3 py-1">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="#a8ff16" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
               <path d="M20 6 9 17l-5-5" />

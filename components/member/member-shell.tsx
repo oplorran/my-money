@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { Mark } from "@/components/marks";
+import { Logo } from "@/components/marks";
 import { InstallButton } from "@/components/install-button";
 import { cue } from "@/lib/member";
 import { session, useSession } from "@/lib/session-store";
@@ -100,8 +100,7 @@ export function MemberShell({ children }: { children: React.ReactNode }) {
       <header className="ma-topbar">
         <div className="mx-auto flex h-16 w-full max-w-[500px] items-center justify-between px-5">
           <Link href="/app/inicio" className="flex items-center gap-2.5">
-            <Mark size={30} uid="app" />
-            <span className="text-[13px] font-bold tracking-tight text-white">Cash Club</span>
+            <Logo height={20} priority />
           </Link>
 
           <div className="flex items-center gap-2">
