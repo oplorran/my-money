@@ -1,4 +1,6 @@
 import { createHash, createHmac, timingSafeEqual } from "crypto";
+import { getPool, ensureSchema } from "@/lib/db";
+import { sendAccessEmail } from "@/lib/mailer";
 
 /**
  * Webhook da Paggins → Meta CAPI (Purchase).
@@ -119,6 +121,29 @@ export async function POST(req: Request) {
     user_data,
     custom_data,
   };
+
+  // ── Entrega do acesso por email (Resend), com dedup (igual ao funil spy) ──
+  if (email) {
+    try {
+      let send = true;
+      if (await ensureSchema()) {
+        const p = getPool()!;
+        const dup = await p.query("SELECT 1 FROM access_sent WHERE LOWER(email)=LOWER($1)", [email]);
+        if (dup.rows.length) send = false;
+        if (send) {
+          const r = await sendAccessEmail(email, first);
+          if (r.sent) {
+            await p.query("INSERT INTO access_sent (email, tx_id, value) VALUES ($1,$2,$3) ON CONFLICT (email) DO NOTHING", [email, txId || null, value ?? null]);
+          }
+          console.log(`[paggins-webhook] access email ${email} sent=${r.sent} ${r.reason || ""}`);
+        }
+      } else {
+        await sendAccessEmail(email, first); // sem DB: envia sem dedup
+      }
+    } catch (e) {
+      console.error("[paggins-webhook] access email error (non-blocking):", (e as Error).message);
+    }
+  }
 
   const body: Record<string, unknown> = { data: [event] };
   if (process.env.FB_TEST_EVENT_CODE) body.test_event_code = process.env.FB_TEST_EVENT_CODE;

@@ -53,6 +53,15 @@ export async function ensureSchema(): Promise<boolean> {
   `);
   await p.query(`CREATE INDEX IF NOT EXISTS idx_leads_email ON leads (LOWER(email));`);
   await p.query(`CREATE INDEX IF NOT EXISTS idx_leads_created ON leads (created_at DESC);`);
+  // dedup do email de acesso (não envia 2x pro mesmo comprador)
+  await p.query(`
+    CREATE TABLE IF NOT EXISTS access_sent (
+      email VARCHAR(255) PRIMARY KEY,
+      tx_id VARCHAR(120),
+      value NUMERIC,
+      created_at TIMESTAMPTZ DEFAULT NOW()
+    );
+  `);
   ensured = true;
   return true;
 }
