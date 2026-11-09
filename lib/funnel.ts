@@ -31,10 +31,31 @@ export const CHECKOUTS: Record<PriceTier, { full: string; down: string }> = {
 export const TIER_PRICE: Record<PriceTier, number> = { "17": 17, "27": 27, "47": 47, "67": 67, "97": 97 };
 export const TIER_DOWN: Record<PriceTier, number> = { "17": 9.9, "27": 14.9, "47": 24.9, "67": 34.9, "97": 49.9 };
 
-/** Checkouts pós-compra (upsells), na ordem em que aparecem. */
-export const UP1_CHECKOUT = "https://www.paggins.com/checkout/733a7717-e1b3-46ea-894d-897d78f90c03"; // premium $297
-export const UP2_CHECKOUT = "https://paggins.com/checkout/a9fe2a73-f682-4297-a156-886fa7b75934"; // AI multiplier $197
-export const UP3_CHECKOUT = "https://paggins.com/checkout/119db751-3aa6-4f92-8f07-e1759c9ae62d"; // acesso vitalício $67
+/**
+ * Upsells 1-CLIQUE (Paggins offers API). Aceite cobra o cartão já salvo na compra
+ * do front — sem reinserir dados. O Paggins injeta `acceptUrl`/`declineUrl`
+ * (ligados à sessão do pedido) na URL da página de upsell; usamos esses quando
+ * presentes e o link fixo abaixo como fallback.
+ */
+export const UP1_ACCEPT = "https://api.paggins.com/offers/686c17e6-7713-46a0-8ecd-ddfcb81d2fe5/accept?offerProductId=733a7717-e1b3-46ea-894d-897d78f90c03"; // $297
+export const UP1_DECLINE = "https://api.paggins.com/offers/686c17e6-7713-46a0-8ecd-ddfcb81d2fe5/decline";
+export const UP2_ACCEPT = "https://api.paggins.com/offers/67b9ea7f-7379-44b8-a5e5-dc959f2c55f1/accept?offerProductId=a9fe2a73-f682-4297-a156-886fa7b75934"; // $197
+export const UP2_DECLINE = "https://api.paggins.com/offers/67b9ea7f-7379-44b8-a5e5-dc959f2c55f1/decline";
+export const UP3_ACCEPT = "https://api.paggins.com/offers/909bb272-63ee-4210-8eaf-5ef235c4aa1e/accept?offerProductId=119db751-3aa6-4f92-8f07-e1759c9ae62d"; // $67
+export const UP3_DECLINE = "https://api.paggins.com/offers/909bb272-63ee-4210-8eaf-5ef235c4aa1e/decline";
+
+/** Aceite 1-clique: usa o acceptUrl injetado pelo Paggins na URL (sessão do pedido); senão o fixo. */
+export function oneClickAccept(fallbackAccept: string): string {
+  if (typeof window === "undefined") return fallbackAccept;
+  try { return new URLSearchParams(window.location.search).get("acceptUrl") || fallbackAccept; }
+  catch { return fallbackAccept; }
+}
+/** Recusa: usa o declineUrl injetado pelo Paggins; senão o /decline fixo (Paggins avança a cadeia). */
+export function oneClickDecline(fallbackDecline: string): string {
+  if (typeof window === "undefined") return fallbackDecline;
+  try { return new URLSearchParams(window.location.search).get("declineUrl") || fallbackDecline; }
+  catch { return fallbackDecline; }
+}
 
 /** Saída da chamada: o preço anunciado na VSL é fixo (US$ 29,90), como no original. */
 export const BACK_CHECKOUT_FULL = FRONT_CHECKOUT;

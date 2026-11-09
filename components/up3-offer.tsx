@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { UP3_CHECKOUT, MEMBERS_URL, checkoutUrl, goExternal } from "@/lib/funnel";
+import { UP3_ACCEPT, MEMBERS_URL, oneClickAccept, oneClickDecline, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
 const ACTIVATED = ["Your premium plan", "AI Multiplier", "Pro Mode"];
@@ -13,12 +13,13 @@ export function Up3Offer() {
 
   const buy = () => {
     track("upsell3_click", { plan: "lifetime", price: 67, ...trackingParams() });
-    goExternal(checkoutUrl(UP3_CHECKOUT, { upsell: true }));
+    goExternal(oneClickAccept(UP3_ACCEPT)); // aceite 1-clique
   };
 
   const skip = () => {
     track("upsell3_skip", trackingParams());
-    router.push(MEMBERS_URL);
+    const inj = oneClickDecline(""); // último upsell: se o Paggins injetou declineUrl usa; senão vai pra área de membros
+    if (inj) goExternal(inj); else router.push(MEMBERS_URL);
   };
 
   return (

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { UP2_CHECKOUT, checkoutUrl, goExternal } from "@/lib/funnel";
+import { UP2_ACCEPT, UP2_DECLINE, oneClickAccept, oneClickDecline, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
 type Stage = "survey" | "ready" | "pitch" | "offer";
@@ -131,12 +131,12 @@ export default function Up2() {
 
   const buy = () => {
     track("upsell2_click", { plan: "multiplier", price: 197, ...trackingParams() });
-    goExternal(checkoutUrl(UP2_CHECKOUT, { upsell: true }));
+    goExternal(oneClickAccept(UP2_ACCEPT)); // aceite 1-clique
   };
 
   const skip = () => {
     track("upsell2_skip", trackingParams());
-    router.push("/hot/up3a");
+    goExternal(oneClickDecline(UP2_DECLINE)); // recusa → Paggins avança
   };
 
   const next = () => {

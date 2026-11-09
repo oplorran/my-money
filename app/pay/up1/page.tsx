@@ -1,7 +1,7 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { UP1_CHECKOUT, checkoutUrl, goExternal } from "@/lib/funnel";
+import { UP1_ACCEPT, UP1_DECLINE, oneClickAccept, oneClickDecline, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
 type Perk = { label: string; note: string; hue: string; icon: React.ReactNode };
@@ -63,12 +63,12 @@ export default function Up1() {
 
   const buy = () => {
     track("upsell1_click", { plan: "premium", price: 297, ...trackingParams() });
-    goExternal(checkoutUrl(UP1_CHECKOUT, { upsell: true }));
+    goExternal(oneClickAccept(UP1_ACCEPT)); // aceite 1-clique (cartão salvo)
   };
 
   const skip = () => {
     track("upsell1_skip", trackingParams());
-    router.push("/hot/up2");
+    goExternal(oneClickDecline(UP1_DECLINE)); // recusa → Paggins avança a cadeia
   };
 
   return (
