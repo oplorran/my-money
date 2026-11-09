@@ -9,12 +9,14 @@
  */
 
 const PIXEL_ID = process.env.NEXT_PUBLIC_FB_PIXEL_ID || "";
+const PIXEL_ID_2 = process.env.NEXT_PUBLIC_FB_PIXEL_ID_2 || "";
+const INITS = [PIXEL_ID, PIXEL_ID_2].filter(Boolean).map((id) => `fbq('init','${id}');`).join("");
 
-/** Script inline que inicializa o fbevents.js + dispara PageView. */
+/** Script inline que inicializa o fbevents.js (1 ou 2 pixels) + dispara PageView. */
 export const PIXEL_SCRIPT = PIXEL_ID
   ? [
-      // fbevents.js + init + PageView
-      `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');fbq('init','${PIXEL_ID}');fbq('track','PageView');`,
+      // fbevents.js + init (todos os pixels) + PageView (dispara pra todos)
+      `!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');${INITS}fbq('track','PageView');`,
       // captura fbclid → _fbc (cookie + localStorage) pra CAPI ter dedup
       `(function(){try{var sp=new URLSearchParams(location.search);var fc=sp.get('fbclid');if(fc){var fbc='fb.1.'+Date.now()+'.'+fc;try{localStorage.setItem('_fbc',fbc)}catch(e){}try{document.cookie='_fbc='+fbc+';max-age=7776000;path=/;SameSite=Lax'}catch(e){}}var p=0,iv=setInterval(function(){var m=document.cookie.match(/_fbp=([^;]+)/);if(m){try{localStorage.setItem('_fbp',m[1])}catch(e){}clearInterval(iv)}if(++p>20)clearInterval(iv)},200)}catch(e){}})();`,
     ].join("\n")

@@ -1,4 +1,5 @@
 import { createHash } from "crypto";
+import { sendCapi, metaPixels } from "@/lib/capi-send";
 
 /**
  * Meta Conversions API (server-side) — espelha o Pixel do navegador e deduplica
@@ -12,8 +13,6 @@ import { createHash } from "crypto";
  */
 
 // Route handlers são dinâmicos por padrão no Next.js 16+ com cacheComponents.
-
-const API_VERSION = process.env.FB_API_VERSION || "v21.0";
 
 function sha256(v?: string | null): string | undefined {
   if (!v) return undefined;
@@ -50,9 +49,7 @@ type Body = {
 };
 
 export async function POST(req: Request) {
-  const pixel = process.env.FB_PIXEL_ID;
-  const token = process.env.FB_CAPI_TOKEN;
-  if (!pixel || !token) {
+  if (!metaPixels().length) {
     return Response.json({ ok: false, error: "capi_not_configured" }, { status: 200 });
   }
 
@@ -89,16 +86,9 @@ export async function POST(req: Request) {
   if (esu) event.event_source_url = esu;
   if (Object.keys(custom_data).length) event.custom_data = custom_data;
 
-  const payload: Record<string, unknown> = { data: [event] };
-  if (process.env.FB_TEST_EVENT_CODE) payload.test_event_code = process.env.FB_TEST_EVENT_CODE;
-
   try {
-    const r = await fetch(
-      `https://graph.facebook.com/${API_VERSION}/${pixel}/events?access_token=${encodeURIComponent(token)}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) },
-    );
-    const fb = await r.json().catch(() => ({}));
-    return Response.json({ ok: r.ok, fb }, { status: 200 });
+    const r = await sendCapi(event);
+    return Response.json({ ok: r.ok, sent: r.sent, total: r.total }, { status: 200 });
   } catch (e) {
     return Response.json({ ok: false, error: (e as Error).message }, { status: 200 });
   }

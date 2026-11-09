@@ -1,5 +1,6 @@
 import { createHash } from "crypto";
 import { getPool, ensureSchema } from "@/lib/db";
+import { sendCapi, metaPixels } from "@/lib/capi-send";
 
 /**
  * Captura de lead (email) do funil → grava no Postgres (tabela `leads`) e dispara
@@ -9,7 +10,6 @@ import { getPool, ensureSchema } from "@/lib/db";
  *              utm_source?, utm_medium?, utm_campaign?, utm_content?, utm_term?, page_url? }
  */
 
-const API_VERSION = process.env.FB_API_VERSION || "v21.0";
 const isEmail = (v: string) => /^[^\s@]+@[^\s@]+\.[a-z]{2,24}$/i.test(v);
 function sha256(v?: string | null) {
   if (!v) return undefined;
@@ -48,9 +48,8 @@ export async function POST(req: Request) {
     console.error("[lead] db error (non-blocking):", (e as Error).message);
   }
 
-  // 2) Lead CAPI (server-side, EMQ alto)
-  const pixel = process.env.FB_PIXEL_ID, token = process.env.FB_CAPI_TOKEN;
-  if (pixel && token) {
+  // 2) Lead CAPI (server-side, EMQ alto) — manda pros 2 pixels
+  if (metaPixels().length) {
     try {
       const user_data: Record<string, unknown> = { client_ip_address: ip || undefined, client_user_agent: ua || undefined };
       const em = sha256(email); if (em) user_data.em = [em];
@@ -66,10 +65,7 @@ export async function POST(req: Request) {
         event_source_url: b.page_url || req.headers.get("referer") || undefined,
         user_data,
       };
-      const payload: Record<string, unknown> = { data: [event] };
-      if (process.env.FB_TEST_EVENT_CODE) payload.test_event_code = process.env.FB_TEST_EVENT_CODE;
-      await fetch(`https://graph.facebook.com/${API_VERSION}/${pixel}/events?access_token=${encodeURIComponent(token)}`,
-        { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(payload) }).catch(() => {});
+      await sendCapi(event).catch(() => {});
     } catch { /* não bloqueia */ }
   }
 

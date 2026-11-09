@@ -1,6 +1,7 @@
 import { createHash, createHmac, timingSafeEqual } from "crypto";
 import { getPool, ensureSchema } from "@/lib/db";
 import { sendAccessEmail } from "@/lib/mailer";
+import { sendCapi, metaPixels } from "@/lib/capi-send";
 
 /**
  * Webhook da Paggins → Meta CAPI (Purchase).
@@ -17,8 +18,6 @@ import { sendAccessEmail } from "@/lib/mailer";
  *   PAGGINS_WEBHOOK_SECRET               whsec_... (assinatura HMAC)
  *   FB_API_VERSION, FB_TEST_EVENT_CODE   (opcionais)
  */
-
-const API_VERSION = process.env.FB_API_VERSION || "v21.0";
 
 function sha256(v?: string | null): string | undefined {
   if (!v) return undefined;
@@ -69,8 +68,6 @@ function isApproved(payload: Record<string, unknown>): boolean {
 }
 
 export async function POST(req: Request) {
-  const pixel = process.env.FB_PIXEL_ID;
-  const token = process.env.FB_CAPI_TOKEN;
   const secret = process.env.PAGGINS_WEBHOOK_SECRET;
 
   const raw = await req.text().catch(() => "");
@@ -87,7 +84,7 @@ export async function POST(req: Request) {
   try { payload = JSON.parse(raw); } catch { return Response.json({ ok: true, skipped: "bad_json" }); }
 
   if (!isApproved(payload)) return Response.json({ ok: true, skipped: "not_approved" });
-  if (!pixel || !token) return Response.json({ ok: false, error: "capi_not_configured" });
+  if (!metaPixels().length) return Response.json({ ok: false, error: "capi_not_configured" });
 
   const data = (payload.data as Record<string, unknown>) || payload;
   const email = String(deepFind(data, /^(email|e_?mail|customer_?email|buyer_?email)$/i) ?? "");
@@ -145,17 +142,10 @@ export async function POST(req: Request) {
     }
   }
 
-  const body: Record<string, unknown> = { data: [event] };
-  if (process.env.FB_TEST_EVENT_CODE) body.test_event_code = process.env.FB_TEST_EVENT_CODE;
-
   try {
-    const r = await fetch(
-      `https://graph.facebook.com/${API_VERSION}/${pixel}/events?access_token=${encodeURIComponent(token)}`,
-      { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
-    );
-    const fb = await r.json().catch(() => ({}));
-    console.log(`[paggins-webhook] Purchase ${email || txId} ${currency} ${value ?? "?"} sig=${sig} -> fb ok=${r.ok}`);
-    return Response.json({ ok: r.ok, sent: { email: !!email, value, currency }, fb });
+    const r = await sendCapi(event);
+    console.log(`[paggins-webhook] Purchase ${email || txId} ${currency} ${value ?? "?"} sig=${sig} -> pixels ${r.sent}/${r.total}`);
+    return Response.json({ ok: r.ok, sent: { email: !!email, value, currency, pixels: `${r.sent}/${r.total}` } });
   } catch (e) {
     return Response.json({ ok: false, error: (e as Error).message });
   }
