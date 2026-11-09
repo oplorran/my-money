@@ -39,7 +39,7 @@ export type AcceleratorPlan = {
 
 /** Saída para a corretora, com o e-mail do membro no subid. */
 export const POCKET_URL =
-  "https://u3.shortink.io/register?utm_campaign=835286&utm_source=affiliate&utm_medium=sr&a=9vDAHKuinZMdbX&al=1758302&ac=app-mnc-pd-in-sb&cid=954055";
+  "https://u3.shortink.io/register?utm_campaign=871380&utm_source=affiliate&utm_medium=sr&a=5kBIfGDhwORb5u&al=1809430&ac=treinamento&cid=990125";
 
 export function pocketUrl(email?: string) {
   if (!email) return POCKET_URL;
