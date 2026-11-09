@@ -166,9 +166,9 @@ export const FOR_YOU = [
 ];
 
 export const TESTIMONIALS = [
-  { name: "Marina C.", role: "Member since 2024", i: "M", avatar: "from-fuchsia-500 to-purple-600", text: "I finally understood how to start organizing my money. They explain it in a really simple way." },
-  { name: "Sofia R.", role: "Member since 2024", i: "S", avatar: "from-cyan-500 to-blue-600", text: "I was scared of all this tech stuff. Now I use it every day." },
-  { name: "Daniel P.", role: "Member since 2025", i: "D", avatar: "from-emerald-500 to-teal-600", text: "It helped me get informed before making decisions. It's worth way more than it costs." },
+  { name: "Marina C.", role: "Member since 2024", avatar: "/depoimentos/pessoa-13.jpg", text: "I finally understood how to start organizing my money. They explain it in a really simple way." },
+  { name: "Sofia R.", role: "Member since 2024", avatar: "/depoimentos/pessoa-15.jpg", text: "I was scared of all this tech stuff. Now I use it every day." },
+  { name: "Daniel P.", role: "Member since 2025", avatar: "/depoimentos/pessoa-14.jpg", text: "It helped me get informed before making decisions. It's worth way more than it costs." },
 ];
 
 export const FAQ = [

@@ -129,7 +129,14 @@ export function Offer({
         {TESTIMONIALS.map((t) => (
           <div key={t.name} className="qa-glass-soft rounded-2xl p-3.5">
             <div className="mb-1.5 flex items-center gap-2">
-              <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#162132] text-xs font-bold text-[#a8ff16] ring-1 ring-[#2a3448]">{t.i}</div>
+              <img
+                src={t.avatar}
+                alt=""
+                width={32}
+                height={32}
+                loading="lazy"
+                className="h-8 w-8 shrink-0 rounded-full object-cover ring-1 ring-[#2a3448]"
+              />
               <div>
                 <p className="text-[12px] font-bold text-white">{t.name}</p>
                 <p className="text-[10px] text-[#63778f]">{t.role}</p>

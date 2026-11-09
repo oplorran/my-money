@@ -13,54 +13,70 @@ const MAKERS = [
   { id: "microsoft", bg: "linear-gradient(160deg,#36BEF6 0%,#04ADF4 55%,#0288C2 100%)", color: "#fff" },
 ] as const;
 
+/** Avatares reais de `public/Depoimentos`, casados por gênero/idade com cada nome. */
+const PEOPLE = {
+  matt: "/depoimentos/pessoa-02.jpg",
+  jessica: "/depoimentos/pessoa-04.jpg",
+  sarah: "/depoimentos/pessoa-03.jpg",
+  robert: "/depoimentos/pessoa-11.jpg",
+  jennifer: "/depoimentos/pessoa-06.jpg",
+  david: "/depoimentos/pessoa-01.jpg",
+} as const;
+
 const COMMENTS = [
   {
     n: "Matt Carter",
+    avatar: PEOPLE.matt,
     t: "58m",
     likes: 198,
     c: "$267 today. $189 yesterday. $341 the day before. I don't have much to write. Just watch the video and stop wasting time. Your life can change in 15 minutes.",
   },
   {
     n: "Jessica Miller",
+    avatar: PEOPLE.jessica,
     t: "1h",
     likes: 82,
     c: "Coming here to confirm what everyone is saying: it's real. Day one I thought it was luck. Day two, a coincidence. By day three I realized the tech actually works. I'm on day 12 and my only regret is not watching this video the first time it showed up.",
   },
   {
     n: "Sarah Thompson",
+    avatar: PEOPLE.sarah,
     t: "2h",
     likes: 89,
     c: "When he explains the 83% accuracy rate and how the AI learns with every trade, it makes SO much sense. I never understood anything about investing — now I just leave the app open and watch my balance go up. Watch until the part where he shows the app live. That's when it'll click.",
   },
   {
     n: "Robert Mitchell",
+    avatar: PEOPLE.robert,
     t: "4h",
     likes: 156,
     c: "I'm 61 years old and I've always been scared of this internet stuff. My grandson helped me set it up — took 5 minutes. Best part is I don't have to do anything, the AI trades on its own. I'm making almost $2,000 a week to supplement my retirement. At my age, this is a blessing.",
   },
   {
     n: "Jennifer Brooks",
+    avatar: PEOPLE.jennifer,
     t: "5h",
     likes: 203,
     c: "Found this in the middle of the night, couldn't sleep thinking about the bills. I thought it was for people who understand markets, but the AI does everything on its own, literally. Yesterday I paid my kids' tuition that was 2 months behind. My husband still doesn't know where the money came from.",
   },
   {
     n: "David Reynolds",
+    avatar: PEOPLE.david,
     t: "6h",
     likes: 241,
     c: "I normally never comment, but I need to leave this here. I was 3 months behind on rent, almost got evicted. Watched this video at 2am out of desperation. Today, 16 days later, every bill is paid and I still have money left over. This video changed my life, no exaggeration.",
   },
 ];
 
-const AVATARS = ["#a8ff16", "#d8ff8a", "#9ad14b", "#c2e57d", "#7ec600", "#e8ffc4"];
-
-function initials(name: string) {
-  return name
-    .split(" ")
-    .map((p) => p[0])
-    .slice(0, 2)
-    .join("");
-}
+/** Fila de rostos para a prova social do topo (só quem não repete nos comentários). */
+const AVATARS = [
+  "/depoimentos/pessoa-05.jpg",
+  "/depoimentos/pessoa-07.jpg",
+  "/depoimentos/pessoa-08.jpg",
+  "/depoimentos/pessoa-09.jpg",
+  "/depoimentos/pessoa-10.jpg",
+  "/depoimentos/pessoa-12.jpg",
+];
 
 type Props = {
   /** fallback do saldo quando a rota é aberta direto */
@@ -190,14 +206,16 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props
 
         <div className="flex items-center justify-center gap-2">
           <div className="flex -space-x-2">
-            {AVATARS.map((c, i) => (
-              <span
-                key={c}
-                className="flex h-8 w-8 items-center justify-center rounded-full border-2 border-[#090909] text-[10px] font-bold text-[#090909]"
-                style={{ background: c }}
-              >
-                {String.fromCharCode(65 + i)}
-              </span>
+            {AVATARS.map((src) => (
+              <img
+                key={src}
+                src={src}
+                alt=""
+                width={32}
+                height={32}
+                loading="lazy"
+                className="h-8 w-8 rounded-full border-2 border-[#090909] object-cover"
+              />
             ))}
           </div>
           <span className="text-[12.5px] text-[#888888]">+487 users completed setup today</span>
@@ -205,14 +223,16 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props
 
         {/* comentários */}
         <div className="space-y-2.5">
-          {COMMENTS.map((c, i) => (
+          {COMMENTS.map((c) => (
             <div key={c.n} className="flex items-start rounded-[20px] border border-[#303030] bg-[#111111] p-3">
-              <span
-                className="mr-3 flex h-10 w-10 shrink-0 items-center justify-center rounded-full text-[12px] font-bold text-[#090909]"
-                style={{ background: AVATARS[i % AVATARS.length] }}
-              >
-                {initials(c.n)}
-              </span>
+              <img
+                src={c.avatar}
+                alt=""
+                width={40}
+                height={40}
+                loading="lazy"
+                className="mr-3 h-10 w-10 shrink-0 rounded-full object-cover"
+              />
               <div className="min-w-0 flex-1">
                 <p className="text-[13px] font-semibold text-[#a8ff16]">{c.n}</p>
                 <p className="mt-1 text-[12.5px] leading-snug text-[#cccccc]">{c.c}</p>

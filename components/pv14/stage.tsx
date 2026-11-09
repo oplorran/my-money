@@ -178,9 +178,21 @@ export function Pv14Stage({
           <span className="text-[8.5px] uppercase tracking-wider text-[#666666]">Received now</span>
         </div>
         <div className="flex gap-1.5">
-          {["María", "James", "Marco"].map((n) => (
-            <span key={n} className="flex-1 rounded-xl bg-[#0d0d0d] py-1.5 text-center text-[10px] font-semibold text-[#cccccc]">
-              {n}
+          {[
+            { n: "María", a: "/depoimentos/pessoa-13.jpg" },
+            { n: "James", a: "/depoimentos/pessoa-07.jpg" },
+            { n: "Marco", a: "/depoimentos/pessoa-10.jpg" },
+          ].map((m) => (
+            <span key={m.n} className="flex-1 rounded-xl bg-[#0d0d0d] px-1 py-1.5 text-center">
+              <img
+                src={m.a}
+                alt=""
+                width={24}
+                height={24}
+                loading="lazy"
+                className="mx-auto mb-1 h-6 w-6 rounded-full object-cover ring-1 ring-[#303030]"
+              />
+              <span className="block text-[9.5px] font-semibold text-[#cccccc]">{m.n}</span>
             </span>
           ))}
         </div>
