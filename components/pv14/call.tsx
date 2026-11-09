@@ -326,7 +326,7 @@ export function Pv14Call({ fallback }: { fallback: number }) {
       <header className="z-40 shrink-0 border-b border-[#303030] bg-[#0d0d0d]/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center gap-3">
           <div className="relative shrink-0">
-            <img src="/pv13/perfil-daniel.jpg" alt="" className="h-10 w-10 rounded-full object-cover ring-2 ring-[#a8ff16]/25" />
+            <img src="/pv13/perfil-daniel.png" alt="" className="h-10 w-10 rounded-full object-cover ring-2 ring-[#a8ff16]/25" />
             <span className="presence-dot absolute -bottom-0.5 -right-0.5 h-3 w-3 rounded-full border-2 border-[#0d0d0d]" />
           </div>
           <div className="min-w-0 flex-1">

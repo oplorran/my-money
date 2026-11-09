@@ -13,6 +13,7 @@ import { useRouter } from "next/navigation";
 const PASSTHROUGH = ["sck", "xcod", "utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"];
 
 const ALLOWED_HOSTS = [
+  "paggins.com",
   "go.centerpag.com",
   "checkout.centerpag.com",
   "pay.hotmart.com",

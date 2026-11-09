@@ -1,12 +1,12 @@
 "use client";
 
-import { checkoutUrl, goExternal } from "@/lib/funnel";
+import { WT_CHECKOUT, checkoutUrl, goExternal } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
 export function WtCta() {
   const go = () => {
     track("wt_tripwire_click", trackingParams());
-    goExternal(checkoutUrl("PPU38CQ513F"));
+    goExternal(checkoutUrl(WT_CHECKOUT));
   };
 
   return (
