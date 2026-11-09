@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/navigation";
 import { AiMaker } from "@/components/brands";
-import { VslCta, VturbPlayer } from "@/components/vturb-player";
+import { OFFER_RATIO, VslCta, VturbPlayer } from "@/components/vturb-player";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 
@@ -87,9 +87,11 @@ type Props = {
   next: string;
   /** prefixo dos eventos de telemetria */
   event: string;
+  /** segundo do vídeo em que a oferta entra (libera o CTA) */
+  ctaAt?: number;
 };
 
-export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props) {
+export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event, ctaAt }: Props) {
   const router = useRouter();
   const [balance] = useState(() => {
     const b = readState().balance;
@@ -97,6 +99,8 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props
   });
   const [left, setLeft] = useState(expires);
   const [watched, setWatched] = useState(0);
+  // segundo em que a oferta entra: explícito no funil ou fração da duração real
+  const [offerAt, setOfferAt] = useState<number | undefined>(ctaAt);
   const [watchers, setWatchers] = useState(1243);
   const started = useRef(false);
   const lastTracked = useRef(-1);
@@ -185,9 +189,10 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event }: Props
               track(`${event}_vsl_progress`, { t: Math.floor(t), ...trackingParams() });
             }}
             onFinish={finish}
+            onMeta={(d) => setOfferAt((prev) => prev ?? Math.round(d * OFFER_RATIO))}
           />
 
-          <VslCta watched={watched} onActivate={activate} />
+          <VslCta watched={watched} onActivate={activate} ctaAt={offerAt} />
         </div>
 
         {/* audiência */}
