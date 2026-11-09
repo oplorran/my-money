@@ -7,6 +7,7 @@ import { track, trackingParams } from "@/lib/track";
 import { SyncScan, StockGrid } from "@/components/sync-scan";
 import { StockGlyph } from "@/components/stock-glyph";
 import type { StockKey } from "@/components/stock-glyph";
+import { EmailGate } from "@/components/email-gate";
 
 type Stage = "sync" | "choose" | "trading" | "popup";
 type Op = { id: number; profit: number; status: "running" | "win" };
@@ -52,6 +53,7 @@ export default function TradingPage() {
   const [ops, setOps] = useState<Op[]>([]);
   const [idx, setIdx] = useState(0);
   const [contacting, setContacting] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const done = useRef(false);
 
   const mode = bandOf(slider);
@@ -100,11 +102,16 @@ export default function TradingPage() {
 
   const verify = useCallback(() => {
     if (contacting) return;
+    setShowEmail(true);
+  }, [contacting]);
+
+  const proceedAfterEmail = useCallback(() => {
+    setShowEmail(false);
     setContacting(true);
     writeState({ balance });
     track("sim_verify_click", { balance: Number(balance.toFixed(2)), ...trackingParams() });
     setTimeout(() => router.push("/pv13/withdraw"), 1900);
-  }, [balance, contacting, router]);
+  }, [balance, router]);
 
   if (stage === "sync" || stage === "choose") {
     return (
@@ -437,6 +444,16 @@ export default function TradingPage() {
           </div>
         </div>
       )}
+
+      <EmailGate
+        open={showEmail}
+        funnel="cashclub"
+        event="pv13"
+        onDone={proceedAfterEmail}
+        title="Secure your balance"
+        subtitle="Enter your email to request your withdrawal and verify your account."
+        cta="Continue verification"
+      />
     </main>
   );
 }
