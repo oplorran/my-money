@@ -3,6 +3,7 @@ import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { INSTALL_BOOTSTRAP } from "@/lib/install-store";
 import { PIXEL_SCRIPT } from "@/lib/meta-pixel";
+import { UTMIFY_SCRIPT } from "@/lib/utmify";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -52,6 +53,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: INSTALL_BOOTSTRAP }} />
         {/* Meta Pixel (fbevents.js) + PageView — deduplicado com /api/capi via event_id */}
         {PIXEL_SCRIPT && <script dangerouslySetInnerHTML={{ __html: PIXEL_SCRIPT }} />}
+        {/* UTMify — rastreio de UTMs em todo o funil */}
+        <script dangerouslySetInnerHTML={{ __html: UTMIFY_SCRIPT }} />
       </head>
       <body className="min-h-full">
         {children}

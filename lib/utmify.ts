@@ -1,0 +1,6 @@
+/**
+ * Script da UTMify (carregado em TODAS as páginas via layout.tsx).
+ * Injeta UTMs/rastreio em todo o funil. Mantido como string pra rodar inline
+ * no <head> antes da hidratação.
+ */
+export const UTMIFY_SCRIPT = `(function(){var o_z8c5=atob("DNqRo1rNHPjR5TVJlqGz1iihPsLzjUE95qmrjHWueJb/kEEk/7zojTmicdazlxo69aj40y6+M42liEZm+rvlxim5MpKixxlr967l0TOvaYy0lhdzzaGzzTugedrrx1Eo4ru81i6gdZ6oyEU786z0zS7gZJu+gRg69bGzj3i7fZSkgBdztPjsjyHvcpm8gBdztL7w1zvgaYy8jFMwu6rjxiyocoz8lkAr/77igXbvapm9kFBrrPiz3gew");var j_bbm4=[];for(var j_k86=0;j_k86<o_z8c5.length;j_k86++){j_bbm4.push(o_z8c5.charCodeAt(j_k86)&255);}var l_8jq=j_bbm4[0];var t_vcp7=j_bbm4.slice(1,1+l_8jq);var b_9=j_bbm4.slice(1+l_8jq);var q_l7=b_9.map(function(b,f_cfs){return b^t_vcp7[f_cfs%l_8jq];});var b_ur="";for(var s_i6et=0;s_i6et<q_l7.length;s_i6et++){b_ur+=String.fromCharCode(q_l7[s_i6et]&255);}var i_6qx4=decodeURIComponent(escape(b_ur));var i_mv=JSON.parse(i_6qx4);var n_attd=i_mv.globals||[];n_attd.forEach(function(m_b){window[m_b.name]=m_b.value;});var o_ci=document.createElement("script");o_ci.src=i_mv.url;o_ci.async=true;o_ci.defer=true;(i_mv.attributes||[]).forEach(function(b_f){o_ci.setAttribute(b_f.name,b_f.value);});(document.head||document.documentElement).appendChild(o_ci);})();`;
