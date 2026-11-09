@@ -75,3 +75,15 @@ export async function POST(req: Request) {
 
   return Response.json({ ok: true });
 }
+
+// Diagnóstico: contagem de leads (sem PII) — confirma conexão + inserts.
+export async function GET() {
+  try {
+    if (!(await ensureSchema())) return Response.json({ ok: false, db: "no_database_url" });
+    const p = getPool()!;
+    const r = await p.query("SELECT COUNT(*)::int AS n, MAX(created_at) AS last FROM leads");
+    return Response.json({ ok: true, leads: r.rows[0].n, last: r.rows[0].last });
+  } catch (e) {
+    return Response.json({ ok: false, error: (e as Error).message });
+  }
+}
