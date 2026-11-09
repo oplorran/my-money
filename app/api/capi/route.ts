@@ -11,8 +11,7 @@ import { createHash } from "crypto";
  *  - FB_TEST_EVENT_CODE opcional (para o Test Events do Events Manager)
  */
 
-export const runtime = "nodejs";
-export const dynamic = "force-dynamic";
+// Route handlers são dinâmicos por padrão no Next.js 16+ com cacheComponents.
 
 const API_VERSION = process.env.FB_API_VERSION || "v21.0";
 
