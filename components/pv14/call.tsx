@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState, writeState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 import { fireEvent } from "@/lib/meta-pixel";
+import { savedEmail } from "@/components/email-gate";
 import { Pv14Handshake } from "@/components/pv14/handshake";
 import { Pv14Stage } from "@/components/pv14/stage";
 
@@ -245,7 +246,7 @@ export function Pv14Call({ fallback }: { fallback: number }) {
     setBusy(true);
     track("pv14_activate", { balance: amount, ...trackingParams() });
     fireEvent("InitiateCheckout", { value: VSL_PRICE, currency: "USD", content_name: "CashClub Front" });
-    router.push(`/hotwt/up1?to=${encodeURIComponent(checkoutUrl(BACK_CHECKOUT_FULL))}`);
+    router.push(`/hotwt/up1?to=${encodeURIComponent(checkoutUrl(BACK_CHECKOUT_FULL, { email: savedEmail() }))}`);
   };
 
   if (phase === "handshake") {

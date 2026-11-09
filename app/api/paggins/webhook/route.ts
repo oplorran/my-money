@@ -1,19 +1,19 @@
-import { createHash } from "crypto";
+import { createHash, createHmac, timingSafeEqual } from "crypto";
 
 /**
  * Webhook da Paggins → Meta CAPI (Purchase).
  *
- * A Paggins chama este endpoint quando uma venda muda de status. Em compra
- * APROVADA, disparamos o evento Purchase server-side pro Pixel (EMQ alto com
- * email/telefone hasheados). Não precisa conectar API da Paggins — só configurar
- * a URL de webhook no painel da conta Paggins:
- *
+ * Em compra APROVADA, dispara Purchase server-side pro Pixel (email/telefone
+ * hasheados, EMQ alto). Não precisa conectar API — só a URL de webhook no Paggins:
  *   https://cashclub.site/api/paggins/webhook
  *
+ * Assinatura: header `X-Paggins-Signature: t=<unix>,v1=<hmac>`, onde
+ *   hmac = HMAC_SHA256(secret, `${t}.${rawBody}`)  (secret = whsec_...).
+ *
  * Envs (Render):
- *   FB_PIXEL_ID, FB_CAPI_TOKEN      (mesmas do /api/capi)
- *   PAGGINS_WEBHOOK_SECRET          (opcional) valida ?secret= ou header
- *   FB_API_VERSION, FB_TEST_EVENT_CODE (opcionais)
+ *   FB_PIXEL_ID, FB_CAPI_TOKEN            (mesmas do /api/capi)
+ *   PAGGINS_WEBHOOK_SECRET               whsec_... (assinatura HMAC)
+ *   FB_API_VERSION, FB_TEST_EVENT_CODE   (opcionais)
  */
 
 const API_VERSION = process.env.FB_API_VERSION || "v21.0";
@@ -29,7 +29,26 @@ function hashPhone(v?: string | null): string | undefined {
   return d.length >= 8 ? createHash("sha256").update(d).digest("hex") : undefined;
 }
 
-/** Busca recursiva do primeiro valor cujo caminho casa com os regex dados. */
+/** Verifica a assinatura HMAC do Paggins (`t=<unix>,v1=<hmac>`). */
+function verifySignature(raw: string, header: string | null, secret?: string): "valid" | "invalid" | "no_secret" | "no_header" | "malformed" {
+  if (!secret) return "no_secret";
+  if (!header) return "no_header";
+  try {
+    const parts: Record<string, string> = {};
+    header.split(",").forEach((kv) => {
+      const i = kv.indexOf("=");
+      if (i > 0) parts[kv.slice(0, i).trim()] = kv.slice(i + 1).trim();
+    });
+    const t = parts.t, v1 = parts.v1;
+    if (!t || !v1) return "malformed";
+    const expected = createHmac("sha256", secret).update(`${t}.${raw}`).digest("hex");
+    const a = Buffer.from(expected), b = Buffer.from(v1);
+    return a.length === b.length && timingSafeEqual(a, b) ? "valid" : "invalid";
+  } catch {
+    return "malformed";
+  }
+}
+
 function deepFind(obj: unknown, rx: RegExp, depth = 0): string | number | undefined {
   if (!obj || typeof obj !== "object" || depth > 6) return undefined;
   for (const [k, v] of Object.entries(obj as Record<string, unknown>)) {
@@ -43,9 +62,7 @@ function deepFind(obj: unknown, rx: RegExp, depth = 0): string | number | undefi
 }
 
 function isApproved(payload: Record<string, unknown>): boolean {
-  const s = String(
-    deepFind(payload, /^(status|payment_?status|order_?status|situacao|situation)$/i) ?? ""
-  ).toLowerCase();
+  const s = String(deepFind(payload, /^(status|payment_?status|order_?status|situacao)$/i) ?? "").toLowerCase();
   return /approv|paid|pago|completed|complete|confirmed|succeeded|success|aprovad/.test(s);
 }
 
@@ -54,31 +71,31 @@ export async function POST(req: Request) {
   const token = process.env.FB_CAPI_TOKEN;
   const secret = process.env.PAGGINS_WEBHOOK_SECRET;
 
-  // validação opcional de segredo (query ?secret= ou header x-webhook-secret)
-  if (secret) {
-    const url = new URL(req.url);
-    const got = url.searchParams.get("secret") || req.headers.get("x-webhook-secret") || "";
-    if (got !== secret) return Response.json({ ok: false, error: "bad_secret" }, { status: 401 });
+  const raw = await req.text().catch(() => "");
+  if (!raw) return Response.json({ ok: true, skipped: "no_body" });
+
+  // Assinatura HMAC (se o secret estiver configurado)
+  const sig = verifySignature(raw, req.headers.get("x-paggins-signature") || req.headers.get("paggins-signature"), secret);
+  if (secret && sig !== "valid") {
+    console.warn(`[paggins-webhook] assinatura ${sig}`);
+    return Response.json({ ok: false, error: "bad_signature", sig }, { status: 401 });
   }
 
   let payload: Record<string, unknown> = {};
-  try { payload = (await req.json()) as Record<string, unknown>; } catch { return Response.json({ ok: true, skipped: "no_body" }); }
+  try { payload = JSON.parse(raw); } catch { return Response.json({ ok: true, skipped: "bad_json" }); }
 
-  if (!isApproved(payload)) {
-    return Response.json({ ok: true, skipped: "not_approved" });
-  }
-  if (!pixel || !token) {
-    return Response.json({ ok: false, error: "capi_not_configured" });
-  }
+  if (!isApproved(payload)) return Response.json({ ok: true, skipped: "not_approved" });
+  if (!pixel || !token) return Response.json({ ok: false, error: "capi_not_configured" });
 
-  const email = String(deepFind(payload, /^(email|e_?mail|customer_?email|buyer_?email)$/i) ?? "");
-  const phone = String(deepFind(payload, /^(phone|telefone|celular|whatsapp|customer_?phone)$/i) ?? "");
-  const name = String(deepFind(payload, /^(name|full_?name|customer_?name|nome)$/i) ?? "");
-  const rawVal = deepFind(payload, /^(amount|value|total|price|valor|order_?value|net_?amount)$/i);
+  const data = (payload.data as Record<string, unknown>) || payload;
+  const email = String(deepFind(data, /^(email|e_?mail|customer_?email|buyer_?email)$/i) ?? "");
+  const phone = String(deepFind(data, /^(phone|telefone|celular|whatsapp|customer_?phone)$/i) ?? "");
+  const name = String(deepFind(data, /^(name|full_?name|customer_?name|nome)$/i) ?? "");
+  const rawVal = deepFind(data, /^(amount|value|total|price|valor|order_?value|net_?amount|charged_?amount)$/i);
   const value = rawVal != null ? Number(String(rawVal).replace(/[^\d.,-]/g, "").replace(",", ".")) : undefined;
-  const currency = String(deepFind(payload, /^(currency|moeda|iso_?currency)$/i) ?? "USD").toUpperCase().slice(0, 3) || "USD";
-  const txId = String(deepFind(payload, /^(transaction_?id|order_?id|sale_?code|id|code|reference)$/i) ?? "");
-  const product = String(deepFind(payload, /^(product_?name|product|plan_?name|item_?name)$/i) ?? "CashClub");
+  const currency = (String(deepFind(data, /^(currency|moeda)$/i) ?? "USD").toUpperCase().slice(0, 3)) || "USD";
+  const txId = String(deepFind(data, /^(transaction_?id|order_?id|sale_?code|id|code|reference)$/i) ?? "");
+  const product = String(deepFind(data, /^(product_?name|product|plan_?name|item_?name)$/i) ?? "CashClub");
 
   const first = name.split(/\s+/)[0] || undefined;
   const last = name.split(/\s+/).slice(1).join(" ") || undefined;
@@ -98,7 +115,6 @@ export async function POST(req: Request) {
     event_name: "Purchase",
     event_time: Math.floor(Date.now() / 1000),
     action_source: "website",
-    // event_id = transação: dedup se a Paggins reenviar o webhook
     event_id: txId ? `pg_${txId}` : undefined,
     user_data,
     custom_data,
@@ -113,14 +129,13 @@ export async function POST(req: Request) {
       { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify(body) }
     );
     const fb = await r.json().catch(() => ({}));
-    console.log(`[paggins-webhook] Purchase ${email || txId} ${currency} ${value ?? "?"} -> fb ok=${r.ok}`);
+    console.log(`[paggins-webhook] Purchase ${email || txId} ${currency} ${value ?? "?"} sig=${sig} -> fb ok=${r.ok}`);
     return Response.json({ ok: r.ok, sent: { email: !!email, value, currency }, fb });
   } catch (e) {
     return Response.json({ ok: false, error: (e as Error).message });
   }
 }
 
-// GET pra teste rápido no navegador (confirma que a rota existe)
 export async function GET() {
-  return Response.json({ ok: true, hint: "POST do webhook da Paggins aqui. Configure esta URL no painel Paggins." });
+  return Response.json({ ok: true, hint: "Configure esta URL no webhook do Paggins." });
 }

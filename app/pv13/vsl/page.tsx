@@ -10,6 +10,7 @@ import { useRingtone } from "@/lib/useRingtone";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState, scoreOf, tierFor, writeState } from "@/lib/funnel";
 import { track, trackingParams } from "@/lib/track";
 import { fireEvent } from "@/lib/meta-pixel";
+import { savedEmail } from "@/components/email-gate";
 
 type Phase = "ringing" | "live" | "ended";
 
@@ -241,7 +242,7 @@ export default function VslPage() {
     fireEvent("InitiateCheckout", { value: VSL_PRICE, currency: "USD", content_name: "CashClub Front" });
     stop();
     // o preço anunciado na chamada é fixo (US$ 29,90), igual ao original ao vivo
-    const to = checkoutUrl(BACK_CHECKOUT_FULL);
+    const to = checkoutUrl(BACK_CHECKOUT_FULL, { email: savedEmail() });
     router.push(`/hotwt/up1?to=${encodeURIComponent(to)}`);
   };
 

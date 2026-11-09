@@ -6,6 +6,7 @@ import { AiMaker } from "@/components/brands";
 import { OFFER_RATIO, VslCta, VturbPlayer } from "@/components/vturb-player";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState } from "@/lib/funnel";
 import { fireEvent } from "@/lib/meta-pixel";
+import { savedEmail } from "@/components/email-gate";
 import { track, trackingParams } from "@/lib/track";
 
 const MAKERS = [
@@ -141,7 +142,7 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event, ctaAt }
       currency: "USD",
       content_name: "CashClub Front",
     });
-    router.push(`${next}?to=${encodeURIComponent(checkoutUrl(BACK_CHECKOUT_FULL))}`);
+    router.push(`${next}?to=${encodeURIComponent(checkoutUrl(BACK_CHECKOUT_FULL, { email: savedEmail() }))}`);
   }, [balance, router, next, event]);
 
   return (

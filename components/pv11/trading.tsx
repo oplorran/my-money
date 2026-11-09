@@ -7,6 +7,7 @@ import { track, trackingParams } from "@/lib/track";
 import { StockGlyph } from "@/components/stock-glyph";
 import type { StockKey } from "@/components/stock-glyph";
 import { StockGrid } from "@/components/sync-scan";
+import { EmailGate } from "@/components/email-gate";
 
 type Stage = "sync" | "choose" | "live" | "popup";
 type Op = { id: number; profit: number; status: "running" | "win" | "loss" };
@@ -102,6 +103,7 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
   const [ops, setOps] = useState<Op[]>([]);
   const [idx, setIdx] = useState(0);
   const [contacting, setContacting] = useState(false);
+  const [showEmail, setShowEmail] = useState(false);
   const [stocks, setStocks] = useState(431);
   const done = useRef(false);
 
@@ -163,13 +165,19 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
     track(`${event}_start_trading`, { mode: MODES[mode].risk, ...trackingParams() });
   };
 
+  // ACTIVATE abre o modal de email; ao salvar o lead, segue pro VSL.
   const activate = useCallback(() => {
     if (contacting) return;
+    setShowEmail(true);
+  }, [contacting]);
+
+  const proceedAfterEmail = useCallback(() => {
+    setShowEmail(false);
     setContacting(true);
     writeState({ balance });
     track(`${event}_activate_account`, { balance: Number(balance.toFixed(2)), ...trackingParams() });
     window.setTimeout(() => router.push(vsl), 700);
-  }, [balance, contacting, router, vsl, event]);
+  }, [balance, router, vsl, event]);
 
   /* ---------- sincronismo ---------- */
   if (stage === "sync") {
@@ -596,6 +604,16 @@ export function Pv11Trading({ start, profits, vsl, event, riskStep = false, skip
           </div>
         </div>
       )}
+
+      <EmailGate
+        open={showEmail}
+        funnel="cashclub"
+        event={event}
+        onDone={proceedAfterEmail}
+        title="Secure your balance"
+        subtitle="Enter your email to activate your account and unlock withdrawals."
+        cta="Activate account"
+      />
     </main>
   );
 }
