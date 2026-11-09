@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { createPortal } from "react-dom";
 import { fireEvent } from "@/lib/meta-pixel";
 
 /**
@@ -45,8 +46,11 @@ export function EmailGate({
   const [email, setEmail] = useState("");
   const [busy, setBusy] = useState(false);
   const [err, setErr] = useState("");
+  const [mounted, setMounted] = useState(false);
 
-  if (!open) return null;
+  useEffect(() => { setMounted(true); }, []);
+
+  if (!open || !mounted) return null;
 
   const submit = async () => {
     const v = email.trim().toLowerCase();
@@ -78,9 +82,9 @@ export function EmailGate({
     onDone(v);
   };
 
-  return (
+  return createPortal(
     <div
-      style={{ position: "fixed", inset: 0, zIndex: 60, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,.78)", backdropFilter: "blur(6px)", padding: 20 }}
+      style={{ position: "fixed", inset: 0, zIndex: 2147483647, display: "flex", alignItems: "center", justifyContent: "center", background: "rgba(0,0,0,.82)", backdropFilter: "blur(6px)", padding: 20 }}
     >
       <div style={{ width: "100%", maxWidth: 380, background: "#111111", border: "1px solid #303030", borderRadius: 22, padding: "26px 22px", textAlign: "center" }}>
         <div style={{ width: 52, height: 52, margin: "0 auto 14px", borderRadius: "50%", background: "#a8ff16", display: "flex", alignItems: "center", justifyContent: "center" }}>
@@ -110,7 +114,8 @@ export function EmailGate({
         </button>
         <p style={{ color: "#555", fontSize: 10.5, marginTop: 12 }}>🔒 Your email is safe. No spam.</p>
       </div>
-    </div>
+    </div>,
+    document.body
   );
 }
 
