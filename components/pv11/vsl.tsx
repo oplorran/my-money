@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { AiMaker } from "@/components/brands";
 import { OFFER_RATIO, VslCta, VturbPlayer } from "@/components/vturb-player";
 import { BACK_CHECKOUT_FULL, VSL_PRICE, checkoutUrl, money, readState } from "@/lib/funnel";
+import { fireEvent } from "@/lib/meta-pixel";
 import { track, trackingParams } from "@/lib/track";
 
 const MAKERS = [
@@ -134,6 +135,12 @@ export function Pv11Vsl({ fallback, expires = 27 * 60 + 40, next, event, ctaAt }
 
   const activate = useCallback(() => {
     track(`${event}_vsl_activate`, { balance, ...trackingParams() });
+    // Meta CAPI + pixel: InitiateCheckout no clique que leva ao Paggins
+    fireEvent("InitiateCheckout", {
+      value: VSL_PRICE,
+      currency: "USD",
+      content_name: "CashClub Front",
+    });
     router.push(`${next}?to=${encodeURIComponent(checkoutUrl(BACK_CHECKOUT_FULL))}`);
   }, [balance, router, next, event]);
 

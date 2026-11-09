@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { INSTALL_BOOTSTRAP } from "@/lib/install-store";
+import { PIXEL_SCRIPT } from "@/lib/meta-pixel";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -49,6 +50,8 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       <head>
         {/* captura o beforeinstallprompt antes da hidratação */}
         <script dangerouslySetInnerHTML={{ __html: INSTALL_BOOTSTRAP }} />
+        {/* Meta Pixel (fbevents.js) + PageView — deduplicado com /api/capi via event_id */}
+        {PIXEL_SCRIPT && <script dangerouslySetInnerHTML={{ __html: PIXEL_SCRIPT }} />}
       </head>
       <body className="min-h-full">
         {children}
