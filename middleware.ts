@@ -232,10 +232,14 @@ export function middleware(req: NextRequest, event: NextFetchEvent): NextRespons
 
   const signal = hasAdSignal(req);
 
-  // ── Desktop sem sinal de anúncio → white. ──
-  if (BLOCK_DESKTOP && !MOBILE_RE.test(ua) && !signal) return serveWhite(req, "desktop");
+  // ── Desktop → SEMPRE white (igual zap/insta). ──
+  // Fecha o furo do revisor que copia a URL do anúncio (com fbclid) e abre no
+  // computador. Comprador de anúncio Meta é ~100% mobile; desktop é revisor/bot.
+  // O bypass token (checado acima) ainda deixa VOCÊ testar no desktop.
+  if (BLOCK_DESKTOP && !MOBILE_RE.test(ua)) return serveWhite(req, "desktop");
 
-  // ── Exige sinal de anúncio (fbclid/utm pago/app in-app). ──
+  // ── Mobile exige sinal de anúncio (fbclid/utm pago/app in-app). ──
+  // Mobile sem nenhum sinal = sonda/varredura furtiva → white.
   if (REQUIRE_SIGNAL && !signal) return serveWhite(req, "no_signal");
 
   // Passou: funil real + cookie de passe (navegação interna não perde o acesso).
