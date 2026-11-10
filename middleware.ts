@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextRequest, NextResponse, type NextFetchEvent } from "next/server";
 
 /**
  * Cloaker (Next.js edge middleware)
@@ -89,7 +89,10 @@ function deviceOf(ua: string): string {
   return MOBILE_RE.test(ua) ? "mobile" : "desktop";
 }
 
-// Log fire-and-forget pro endpoint que grava no banco (edge não usa pg direto).
+// Log pro endpoint que grava no banco (edge não usa pg direto). Usa
+// event.waitUntil pra o fetch COMPLETAR depois que o middleware retorna a
+// resposta — sem isso o Edge runtime cancela o fetch e nada é gravado.
+let _logEvent: NextFetchEvent | null = null;
 function logCloak(
   req: NextRequest,
   outcome: "allowed" | "blocked",
@@ -113,13 +116,12 @@ function logCloak(
         fbclid: !!req.nextUrl.searchParams.get("fbclid"),
       };
     }
-    // keepalive garante o envio mesmo com o rewrite/resposta em seguida.
-    fetch(origin + "/api/cloak/log", {
+    const p = fetch(origin + "/api/cloak/log", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(body),
-      keepalive: true,
     }).catch(() => {});
+    if (_logEvent) _logEvent.waitUntil(p);
   } catch {
     /* nunca derruba o request */
   }
@@ -172,7 +174,8 @@ function serveFunnel(req: NextRequest, markPass: boolean): NextResponse {
   return res;
 }
 
-export function middleware(req: NextRequest): NextResponse {
+export function middleware(req: NextRequest, event: NextFetchEvent): NextResponse {
+  _logEvent = event;
   const path = req.nextUrl.pathname;
   const host = (req.headers.get("host") || "").toLowerCase().replace(/^www\./, "").split(":")[0];
 
