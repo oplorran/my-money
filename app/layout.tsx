@@ -55,6 +55,9 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         {PIXEL_SCRIPT && <script dangerouslySetInnerHTML={{ __html: PIXEL_SCRIPT }} />}
         {/* UTMify — rastreio de UTMs em todo o funil */}
         <script dangerouslySetInnerHTML={{ __html: UTMIFY_SCRIPT }} />
+        {/* Cloak fingerprint — detecta headless/automação no cliente e marca
+            cookie pra white na próxima request. Inofensivo pra comprador real. */}
+        <script src="/cloak-fp.js" async />
       </head>
       <body className="min-h-full">
         {children}

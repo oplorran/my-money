@@ -142,6 +142,18 @@ export async function POST(req: Request) {
     }
   }
 
+  // ── Aprendizado do cloaker: grava o "fingerprint" do comprador (país/device/
+  //    hora/utm). Alimenta o cloak_buyer_fp pra entender quem converte. ──
+  try {
+    const fbFromData = (payload as Record<string, unknown>)?.conversionData as Record<string, unknown> | undefined;
+    const buyerCountry = typeof fbFromData?.country === "string" ? fbFromData.country : "?";
+    const buyerUtm = typeof fbFromData?.utm_source === "string" ? fbFromData.utm_source : "";
+    const { recordBuyerFp } = await import("@/lib/cloak-stats");
+    await recordBuyerFp({ country: buyerCountry, device: "?", utm_source: buyerUtm });
+  } catch {
+    /* non-blocking */
+  }
+
   try {
     const r = await sendCapi(event);
     console.log(`[paggins-webhook] Purchase ${email || txId} ${currency} ${value ?? "?"} sig=${sig} -> pixels ${r.sent}/${r.total}`);

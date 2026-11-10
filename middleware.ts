@@ -32,7 +32,7 @@ const DISABLED_HOSTS = (process.env.CLOAK_DISABLED_HOSTS || "")
 const FUNNEL_PREFIXES = ["/", "/pv11", "/pv12", "/pv13", "/pv14"];
 // Nunca cloakar: app pós-compra, checkout, APIs, admin, a própria white, assets.
 const SKIP_PREFIXES = [
-  "/app", "/pay", "/api", "/leads", "/painel", "/paniel", "/back", "/wt", "/hotwt",
+  "/app", "/pay", "/api", "/leads", "/painel", "/paniel", "/cloaker", "/back", "/wt", "/hotwt",
   "/learn", "/_next", "/favicon", "/voice", "/icons", "/manifest", "/sw.js", "/robots", "/sitemap",
 ];
 
@@ -76,6 +76,55 @@ function clientIP(req: NextRequest): string {
   return req.headers.get("x-real-ip") || "";
 }
 
+function countryOf(req: NextRequest): string {
+  return (
+    req.headers.get("cf-ipcountry") ||
+    req.headers.get("x-vercel-ip-country") ||
+    req.headers.get("x-render-ip-country") ||
+    ""
+  ).toUpperCase();
+}
+
+function deviceOf(ua: string): string {
+  return MOBILE_RE.test(ua) ? "mobile" : "desktop";
+}
+
+// Log fire-and-forget pro endpoint que grava no banco (edge não usa pg direto).
+function logCloak(
+  req: NextRequest,
+  outcome: "allowed" | "blocked",
+  reason: string,
+  lost?: boolean
+): void {
+  try {
+    const ua = req.headers.get("user-agent") || "";
+    const origin = req.nextUrl.origin;
+    const body: Record<string, unknown> = {
+      outcome,
+      reason,
+      country: countryOf(req) || "?",
+      device: deviceOf(ua),
+    };
+    if (lost) {
+      body.lost = {
+        ip: clientIP(req),
+        ua: ua.slice(0, 200),
+        path: req.nextUrl.pathname,
+        fbclid: !!req.nextUrl.searchParams.get("fbclid"),
+      };
+    }
+    // keepalive garante o envio mesmo com o rewrite/resposta em seguida.
+    fetch(origin + "/api/cloak/log", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(body),
+      keepalive: true,
+    }).catch(() => {});
+  } catch {
+    /* nunca derruba o request */
+  }
+}
+
 function hasAdSignal(req: NextRequest): boolean {
   const url = req.nextUrl;
   const ua = req.headers.get("user-agent") || "";
@@ -101,13 +150,17 @@ function isSkip(path: string): boolean {
   return SKIP_PREFIXES.some((p) => path === p || path.startsWith(p + "/") || path.startsWith(p));
 }
 
-function serveWhite(req: NextRequest): NextResponse {
+function serveWhite(req: NextRequest, reason: string): NextResponse {
   // Rewrite (não redirect): serve a white page NA MESMA URL → sem assinatura de 302.
   const url = req.nextUrl.clone();
   url.pathname = WHITE_PATH;
   url.search = "";
   const res = NextResponse.rewrite(url);
   res.cookies.set("cloak_seen", "w", { maxAge: 2592000, httpOnly: true, sameSite: "lax", path: "/" });
+  // Canário: se tinha sinal de anúncio real e mesmo assim foi pra white, é lead
+  // perdido (exceto quando o motivo é o próprio robô da Meta/bot declarado).
+  const lost = reason !== "meta_ip" && reason !== "bot" && reason !== "prefetch" && hasAdSignal(req);
+  logCloak(req, "blocked", reason, lost);
   return res;
 }
 
@@ -115,6 +168,7 @@ function serveFunnel(req: NextRequest, markPass: boolean): NextResponse {
   const res = NextResponse.next();
   res.cookies.set("cloak_seen", "ok", { maxAge: 2592000, httpOnly: true, sameSite: "lax", path: "/" });
   if (markPass) res.cookies.set("cloak_pass", "1", { maxAge: 2592000, httpOnly: true, sameSite: "lax", path: "/" });
+  logCloak(req, "allowed", "-");
   return res;
 }
 
@@ -150,34 +204,36 @@ export function middleware(req: NextRequest): NextResponse {
 
   // ── Consistência: mesmo visitante vê sempre a mesma página. ──
   const seen = req.cookies.get("cloak_seen")?.value;
-  if (seen === "w") return serveWhite(req);
+  if (seen === "w") return serveWhite(req, "sticky");
   if (seen === "ok") return NextResponse.next();
 
-  // ── Fingerprint de automação marcado pelo cliente. ──
-  if (req.cookies.get("cloak_fp")?.value === "1") return serveWhite(req);
+  // ── Fingerprint de automação marcado pelo cliente (cloak-fp.js). ──
+  if (req.cookies.get("cloak_fp")?.value === "1") return serveWhite(req, "fingerprint");
 
   // ── Regra dura: IP da Meta (AS32934) → sempre white. ──
-  if (ip && isMetaIP(ip)) return serveWhite(req);
+  if (ip && isMetaIP(ip)) return serveWhite(req, "meta_ip");
 
   // ── Bot / AdSpy / sem UA → white. ──
-  if (!ua || BOT_RE.test(ua) || ADSPY_RE.test(ua)) return serveWhite(req);
+  if (!ua) return serveWhite(req, "no_ua");
+  if (BOT_RE.test(ua)) return serveWhite(req, "bot");
+  if (ADSPY_RE.test(ua)) return serveWhite(req, "adspy");
 
   // ── Prefetch / link preview → white. ──
-  if (isPrefetch(req)) return serveWhite(req);
+  if (isPrefetch(req)) return serveWhite(req, "prefetch");
 
-  // ── País bloqueado (via cf-ipcountry do Cloudflare, se presente). ──
+  // ── País bloqueado (via cf-ipcountry / x-render-ip-country). ──
   if (BLOCKED_COUNTRIES.length) {
-    const cc = (req.headers.get("cf-ipcountry") || req.headers.get("x-vercel-ip-country") || "").toUpperCase();
-    if (cc && BLOCKED_COUNTRIES.includes(cc)) return serveWhite(req);
+    const cc = countryOf(req);
+    if (cc && BLOCKED_COUNTRIES.includes(cc)) return serveWhite(req, "country");
   }
 
   const signal = hasAdSignal(req);
 
   // ── Desktop sem sinal de anúncio → white. ──
-  if (BLOCK_DESKTOP && !MOBILE_RE.test(ua) && !signal) return serveWhite(req);
+  if (BLOCK_DESKTOP && !MOBILE_RE.test(ua) && !signal) return serveWhite(req, "desktop");
 
   // ── Exige sinal de anúncio (fbclid/utm pago/app in-app). ──
-  if (REQUIRE_SIGNAL && !signal) return serveWhite(req);
+  if (REQUIRE_SIGNAL && !signal) return serveWhite(req, "no_signal");
 
   // Passou: funil real + cookie de passe (navegação interna não perde o acesso).
   return serveFunnel(req, true);
