@@ -33,14 +33,9 @@
       if (claimsMobile && !hasTouch) tells.push("mobile_no_touch");
     } catch (e) {}
 
-    // 4) Sem plugins E sem languages (headless clássico)
-    try {
-      var noPlugins = !navigator.plugins || navigator.plugins.length === 0;
-      var noLang = !navigator.languages || navigator.languages.length === 0;
-      if (noLang) tells.push("no_languages");
-    } catch (e) {}
-
-    // 5) WebGL vendor "SwiftShader"/"llvmpipe" = renderização por software (headless)
+    // 4) WebGL vendor "SwiftShader"/"llvmpipe" = renderização por software (headless).
+    //    Só conta como tell se o renderer EXISTE e é software — ausência de WebGL
+    //    NÃO conta (muitos navegadores mobile/privacidade bloqueiam WebGL).
     try {
       var canvas = document.createElement("canvas");
       var gl = canvas.getContext("webgl") || canvas.getContext("experimental-webgl");
@@ -48,33 +43,22 @@
         var dbg = gl.getExtension("WEBGL_debug_renderer_info");
         if (dbg) {
           var renderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || "");
-          if (/SwiftShader|llvmpipe|Mesa OffScreen|software/i.test(renderer)) tells.push("swiftshader");
+          if (/SwiftShader|llvmpipe|Mesa OffScreen/i.test(renderer)) tells.push("swiftshader");
         }
-      } else {
-        tells.push("no_webgl");
       }
     } catch (e) {}
 
-    // 6) Resolução impossível / tela 0x0 (headless sem display)
+    // 5) Tela 0x0 (headless sem display) — sinal forte e sem falso-positivo.
     try {
       if (screen.width === 0 || screen.height === 0) tells.push("zero_screen");
-      if (window.outerWidth === 0 && window.outerHeight === 0) tells.push("zero_outer");
     } catch (e) {}
 
-    // 7) Permissions API inconsistente (headless retorna 'denied' + 'prompt' juntos)
-    try {
-      if (navigator.permissions && navigator.permissions.query) {
-        navigator.permissions.query({ name: "notifications" }).then(function (p) {
-          if (Notification && Notification.permission === "denied" && p.state === "prompt") {
-            report(["perm_mismatch"]);
-          }
-        }).catch(function () {});
-      }
-    } catch (e) {}
-
-    // Decisão: 1 sinal forte (webdriver/headless_ua/swiftshader) OU 2+ sinais fracos
-    var strong = tells.some(function (t) { return ["webdriver", "headless_ua", "swiftshader", "zero_screen"].indexOf(t) !== -1; });
-    var flagged = strong || tells.length >= 2;
+    // Decisão CONSERVADORA: só marca com sinal DEFINITIVO de automação.
+    // Nada de combinar sinais fracos (no_webgl/no_languages) — WebView do
+    // Instagram/Facebook e navegadores de privacidade dão falso-positivo.
+    var flagged = tells.some(function (t) {
+      return ["webdriver", "headless_ua", "swiftshader", "zero_screen", "mobile_no_touch"].indexOf(t) !== -1;
+    });
 
     if (flagged) {
       // Marca o cookie (middleware lê na próxima request)
