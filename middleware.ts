@@ -250,3 +250,4 @@ export const config = {
   // Roda em tudo menos assets estáticos óbvios (performance).
   matcher: ["/((?!_next/static|_next/image|favicon.ico|voice|icons|.*\\.(?:png|jpg|jpeg|gif|svg|webp|ico|woff|woff2|ttf|mp3|mp4|css|js|map)$).*)"],
 };
+// cloaker OFF — rebuild trigger 1794426926
