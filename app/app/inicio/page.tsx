@@ -7,6 +7,7 @@ import type { Lesson } from "@/lib/member";
 import { session, useSession } from "@/lib/session-store";
 import { InstallCard } from "@/components/install-card";
 import { Logo } from "@/components/marks";
+import { VturbPlayer } from "@/components/vturb-player";
 
 
 function Step({ n, title, minutes, done }: { n: number; title: string; minutes: string; done: boolean }) {
@@ -27,26 +28,27 @@ function Step({ n, title, minutes, done }: { n: number; title: string; minutes: 
   );
 }
 
-function Player({ lesson, onWatch }: { lesson: Lesson; onWatch: () => void }) {
-  const [open, setOpen] = useState(false);
-
+function Player({
+  lesson,
+  open,
+  onOpen,
+  onWatch,
+}: {
+  lesson: Lesson;
+  open: boolean;
+  onOpen: () => void;
+  onWatch: () => void;
+}) {
   return (
     <div className="relative mx-4 mb-4 overflow-hidden rounded-xl border border-[#303030] bg-black">
-      <div className="relative pb-[56.25%]">
-        {open ? (
-          <iframe
-            src={`https://www.youtube.com/embed/${lesson.video}?autoplay=1&rel=0&modestbranding=1&playsinline=1`}
-            title={lesson.track}
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-            allowFullScreen
-            className="absolute inset-0 h-full w-full"
-          />
-        ) : (
+      {open ? (
+        <VturbPlayer playerId={lesson.player} onPlay={onWatch} className="rounded-none border-0" />
+      ) : (
+        <div className="relative pb-[56.25%]">
           <button
             type="button"
             onClick={() => {
-              setOpen(true);
-              onWatch();
+              onOpen();
               cue("tap");
             }}
             aria-label={`Play, ${lesson.track}`}
@@ -62,15 +64,16 @@ function Player({ lesson, onWatch }: { lesson: Lesson; onWatch: () => void }) {
               {lesson.minutes} min · {lesson.track}
             </span>
           </button>
-        )}
-      </div>
+        </div>
+      )}
     </div>
   );
 }
 
 export default function Home() {
   const { member, watched, welcome } = useSession();
-
+  // só um player por vez: o stub do VTurb é global e remontaria os outros
+  const [openId, setOpenId] = useState<number | null>(null);
   const watch = (id: number) => session.watch(id);
 
   const lessonsDone = watched.length >= LESSONS.length;
@@ -154,7 +157,12 @@ export default function Home() {
                   </span>
                 </span>
               </div>
-              <Player lesson={lesson} onWatch={() => watch(lesson.id)} />
+              <Player
+                lesson={lesson}
+                open={openId === lesson.id}
+                onOpen={() => setOpenId(lesson.id)}
+                onWatch={() => watch(lesson.id)}
+              />
             </article>
           );
         })}

@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Poppins, Merriweather, JetBrains_Mono } from "next/font/google";
+import Script from "next/script";
 import { GoogleTagManager } from "@next/third-parties/google";
 import { INSTALL_BOOTSTRAP } from "@/lib/install-store";
 import { PIXEL_SCRIPT } from "@/lib/meta-pixel";
@@ -53,14 +54,17 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
         <script dangerouslySetInnerHTML={{ __html: INSTALL_BOOTSTRAP }} />
         {/* Meta Pixel (fbevents.js) + PageView — deduplicado com /api/capi via event_id */}
         {PIXEL_SCRIPT && <script dangerouslySetInnerHTML={{ __html: PIXEL_SCRIPT }} />}
-        {/* UTMify — rastreio de UTMs em todo o funil */}
-        <script dangerouslySetInnerHTML={{ __html: UTMIFY_SCRIPT }} />
         {/* Cloak fingerprint — detecta headless/automação no cliente e marca
             cookie pra white na próxima request. Inofensivo pra comprador real. */}
         <script src="/cloak-fp.js" async />
       </head>
       <body className="min-h-full">
         {children}
+        {/* UTMify — reescreve hrefs e injeta UTMs. Precisa rodar DEPOIS da
+            hidratação (`afterInteractive`): inline no <head> ela muda o DOM
+            antes do React comparar e o mismatch de hidratação derruba os
+            efeitos da página. */}
+        <Script id="utmify" strategy="afterInteractive" dangerouslySetInnerHTML={{ __html: UTMIFY_SCRIPT }} />
         {GTM_ID ? <GoogleTagManager gtmId={GTM_ID} /> : null}
       </body>
     </html>

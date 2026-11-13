@@ -2,10 +2,10 @@
 
 import Image from "next/image";
 
-const LOGO = "/logo-cash-club.png";
+const LOGO = "/logo-total.png";
 const LOGO_MARK = "/logo-mark.png";
-const LOGO_W = 464;
-const LOGO_H = 94;
+const LOGO_W = 1331;
+const LOGO_H = 225;
 const MARK_W = 360;
 const MARK_H = 462;
 

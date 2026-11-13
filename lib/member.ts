@@ -9,7 +9,8 @@ export type Lesson = {
   id: number;
   title: string;
   minutes: number;
-  video: string;
+  /** id do player VTurb (ConverteAI) da aula */
+  player: string;
   /** rótulo interno do player, igual ao original */
   track: string;
 };
@@ -47,11 +48,11 @@ export function pocketUrl(email?: string) {
 }
 
 export const LESSONS: Lesson[] = [
-  { id: 1, title: "How AI Works (Start Here)", minutes: 2, video: "y3rKY4MgbSc", track: "Class 1 – Welcome!" },
-  { id: 2, title: "Activate Your Account in 5 Minutes", minutes: 2, video: "F2H8NTrvkC8", track: "Class 2 – Create Your Account" },
-  { id: 3, title: "Your First AI Trade", minutes: 2, video: "zi9ESMHhhz8", track: "Class 3 – Activate Artificial Intelligence" },
-  { id: 4, title: "Plan $100 → $250,000 in 6 Months", minutes: 2, video: "O2xyqCMjM9Q", track: "Class 4 – Operating in Practice" },
-  { id: 5, title: "Next steps with your AI strategy", minutes: 2, video: "P7FFcQl3hbw", track: "Class 5 – Income Multiplier" },
+  { id: 1, title: "How AI Works (Start Here)", minutes: 2, player: "6af65a1040ab0c1e12e29612", track: "Class 1 – Welcome!" },
+  { id: 2, title: "Activate Your Account in 5 Minutes", minutes: 2, player: "6af65a3dfe9c64e8f3d04262", track: "Class 2 – Create Your Account" },
+  { id: 3, title: "Your First AI Trade", minutes: 2, player: "6af65a52316ca0a2a4f3e655", track: "Class 3 – Activate Artificial Intelligence" },
+  { id: 4, title: "Plan $100 → $250,000 in 6 Months", minutes: 2, player: "6af65a61d5fac6a4f3b454eb", track: "Class 4 – Operating in Practice" },
+  { id: 5, title: "Next steps with your AI strategy", minutes: 2, player: "6af65a74b5baa44d4a416780", track: "Class 5 – Income Multiplier" },
 ];
 
 /** Ativos da malha, na mesma ordem do original. */

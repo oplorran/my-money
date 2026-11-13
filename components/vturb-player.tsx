@@ -20,9 +20,9 @@ import { useCallback, useEffect, useRef, useState } from "react";
  */
 export const VTURB_PLAYER_ID = "6aeff6bb1822ce9617291427";
 const ORIGIN = "d331dfa7-f65a-427e-934f-2c0eb96fde35";
-const SCRIPT = `https://scripts.converteai.net/${ORIGIN}/players/${VTURB_PLAYER_ID}/v4/player.js`;
+const SCRIPT = (id: string) => `https://scripts.converteai.net/${ORIGIN}/players/${id}/v4/player.js`;
 
-const MARKUP = `<vturb-smartplayer id="vid-${VTURB_PLAYER_ID}" style="display:block;margin:0 auto;width:100%"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:56.25% 0 0;z-index:0;background-color:#000"></div></vturb-smartplayer>`;
+const MARKUP = (id: string) => `<vturb-smartplayer id="vid-${id}" style="display:block;margin:0 auto;width:100%"><div class="vturb-player-placeholder" style="position:relative;width:100%;padding:56.25% 0 0;z-index:0;background-color:#000"></div></vturb-smartplayer>`;
 
 /**
  * Segundo do vídeo em que a oferta entra no pitch — é quando o CTA libera.
@@ -41,12 +41,15 @@ type TimeDetail = CustomEvent<{ time: number }>;
 type MetaDetail = CustomEvent<{ duration: number }>;
 
 export function VturbPlayer({
+  playerId = VTURB_PLAYER_ID,
   onPlay,
   onProgress,
   onFinish,
   onMeta,
   className = "",
 }: {
+  /** id do player; sai do default quando a origem tem mais de um vídeo */
+  playerId?: string;
   onPlay?: () => void;
   onProgress?: (seconds: number) => void;
   onFinish?: () => void;
@@ -96,9 +99,13 @@ export function VturbPlayer({
     document.querySelectorAll('script[data-vturb]').forEach((s) => s.remove());
     document.getElementById("vturb-smartplayer-js")?.remove();
 
-    host.innerHTML = MARKUP;
+    host.innerHTML = MARKUP(playerId);
+    setReady(false);
+    setDenied(null);
+    setSeconds(0);
+    setPlaying(false);
 
-    const el = document.getElementById(`vid-${VTURB_PLAYER_ID}`) as (HTMLElement & { duration?: number }) | null;
+    const el = host.querySelector(`#vid-${playerId}`) as (HTMLElement & { duration?: number }) | null;
 
     const deniedMsg = (e: Event) => {
       const reason = String((e as CustomEvent<{ reason?: string }>).detail?.reason ?? "");
@@ -116,7 +123,7 @@ export function VturbPlayer({
 
     // o stub precisa do elemento no DOM; um tick dá tempo ao React
     const script = document.createElement("script");
-    script.src = SCRIPT;
+    script.src = SCRIPT(playerId);
     script.async = true;
     script.dataset.vturb = "1";
     const timer = window.setTimeout(() => document.head.appendChild(script), 0);
@@ -149,7 +156,7 @@ export function VturbPlayer({
       el?.removeEventListener("license:allowed", allowed);
       host.innerHTML = "";
     };
-  }, [handlePlay, handleTime, handleMeta]);
+  }, [playerId, handlePlay, handleTime, handleMeta]);
 
   return (
     <div className={className}>
