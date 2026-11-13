@@ -175,6 +175,17 @@ export function markNotificationsSeen() {
   write(NOTIF_KEY, true);
 }
 
+const PUSH_KEY = "cc_push_v1";
+
+/** Liga/desliga as notificações neste dispositivo (preferência local, não é a permissão do navegador). */
+export function notificationsEnabled() {
+  return read<boolean>(PUSH_KEY, false);
+}
+
+export function setNotificationsEnabled(on: boolean) {
+  write(PUSH_KEY, on);
+}
+
 export function readPlan() {
   return read<AcceleratorPlan | null>(PLAN_KEY, null);
 }

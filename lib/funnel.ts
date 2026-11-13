@@ -28,6 +28,9 @@ export const CHECKOUTS: Record<PriceTier, { full: string; down: string }> = {
   "97": { full: FRONT_CHECKOUT, down: FRONT_CHECKOUT },
 };
 
+/** Upgrade VIP vendido dentro da área de membros (card do perfil). */
+export const VIP_CHECKOUT = "https://paggins.com/checkout/d69d74bb-e229-4705-b4ed-5e93eab6a222";
+
 export const TIER_PRICE: Record<PriceTier, number> = { "17": 17, "27": 27, "47": 47, "67": 67, "97": 97 };
 export const TIER_DOWN: Record<PriceTier, number> = { "17": 9.9, "27": 14.9, "47": 24.9, "67": 34.9, "97": 49.9 };
 

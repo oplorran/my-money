@@ -4,11 +4,13 @@ import { useSyncExternalStore } from "react";
 import {
   markNotificationsSeen,
   markWatched,
+  notificationsEnabled,
   readMember,
   readPlan,
   readWatched,
   notificationsSeen,
   savePlan,
+  setNotificationsEnabled,
   signIn,
   signOut,
   clearPlan,
@@ -26,10 +28,19 @@ export type Session = {
   seen: boolean;
   welcome: boolean;
   plan: AcceleratorPlan | null;
+  push: boolean;
   ready: boolean;
 };
 
-const EMPTY: Session = { member: null, watched: [], seen: true, welcome: false, plan: null, ready: false };
+const EMPTY: Session = {
+  member: null,
+  watched: [],
+  seen: true,
+  welcome: false,
+  plan: null,
+  push: false,
+  ready: false,
+};
 
 let cache: Session = EMPTY;
 let loaded = false;
@@ -49,6 +60,7 @@ function ensure() {
     seen: notificationsSeen(),
     welcome: !sessionStorage.getItem("cc_welcome_seen"),
     plan: readPlan(),
+    push: notificationsEnabled(),
     ready: true,
   };
 }
@@ -78,7 +90,7 @@ export const session = {
   },
   leave() {
     signOut();
-    commit({ member: null, watched: [], seen: true, welcome: false, plan: null });
+    commit({ member: null, watched: [], seen: true, welcome: false, plan: null, push: notificationsEnabled() });
   },
   watch(id: number) {
     markWatched(id);
@@ -87,6 +99,11 @@ export const session = {
   alertsOn() {
     markNotificationsSeen();
     commit({ seen: true });
+  },
+  setPush(on: boolean) {
+    setNotificationsEnabled(on);
+    commit({ push: on, seen: on ? true : cache.seen });
+    if (on) markNotificationsSeen();
   },
   dismissWelcome() {
     try {
