@@ -52,7 +52,7 @@
 
 <div class="box">
   <b>Como usar.</b> Os links de <b>entrada</b> são a raiz de cada funil — as subrotas existem, mas
-  abrem sem estado. Os checkouts ficam em <code>go.centerpag.com</code> e são o destino de cobrança.
+  abrem sem estado. Os checkouts ficam em <code>paggins.com</code> e são o destino de cobrança.
   Parâmetros de rastreio aceitos: <code>sck</code>, <code>xcod</code>, <code>utm_source</code>,
   <code>utm_medium</code>, <code>utm_campaign</code>, <code>utm_content</code>, <code>utm_term</code>.
 </div>
@@ -125,7 +125,7 @@
 <span class="url">https://my-money-rz30.onrender.com/hot/up3a</span>
 
 <p>Com destino externo e rastreio:</p>
-<span class="url">https://my-money-rz30.onrender.com/hotwt/up1?to=https%3A%2F%2Fgo.centerpag.com%2FPPU38CQFUFH&amp;sck=FB01&amp;utm_source=facebook</span>
+<span class="url">https://my-money-rz30.onrender.com/hotwt/up1?to=https%3A%2F%2Fpaggins.com%2Fcheckout%2F046cb785-978f-491e-aa96-144495f3d593&amp;sck=FB01&amp;utm_source=facebook</span>
 
 <div class="box warn">
   <b>Só hosts da lista branca passam.</b> Destino em outro domínio é descartado em silêncio e o
@@ -151,37 +151,27 @@
 <span class="url">https://my-money-rz30.onrender.com/icons/apple-touch-icon.png</span>
 <span class="url">https://my-money-rz30.onrender.com/api/tts</span>
 
-<h2 class="pb">8. Checkouts — 14 links</h2>
+<h2 class="pb">8. Checkouts — 4 links</h2>
 
-<p>Base fixa: <code>https://go.centerpag.com/</code>. Estes são os destinos de cobrança reais.</p>
+<p>Front-end em <code>paggins.com</code> (cinco faixas e versão reduzida apontam para o mesmo link).
+Os upsells saem por <code>api.paggins.com</code> com <code>?offerProductId</code>.</p>
 
-<h3>Quiz — cheio e reduzido</h3>
+<h3>Front-end — quiz, <code>/back</code>, <code>/wt</code> e as quatro VSLs</h3>
 <table class="nobreak">
-  <thead><tr><th style="width:22%">Faixa</th><th style="width:22%">Preço</th><th>Link</th></tr></thead>
+  <thead><tr><th style="width:36%">Uso</th><th>Link</th></tr></thead>
   <tbody>
-    <tr><td>17</td><td>$17,00</td><td class="mono">https://go.centerpag.com/PPU38CQG07H</td></tr>
-    <tr><td>17 reduzido</td><td>$9,90</td><td class="mono">https://go.centerpag.com/PPU38CQG07N</td></tr>
-    <tr><td>27</td><td>$27,00</td><td class="mono">https://go.centerpag.com/PPU38CQG07I</td></tr>
-    <tr><td>27 reduzido</td><td>$14,90</td><td class="mono">https://go.centerpag.com/PPU38CQG07O</td></tr>
-    <tr><td>47</td><td>$47,00</td><td class="mono">https://go.centerpag.com/PPU38CQG07K</td></tr>
-    <tr><td>47 reduzido</td><td>$24,90</td><td class="mono">https://go.centerpag.com/PPU38CQG07P</td></tr>
-    <tr><td>67</td><td>$67,00</td><td class="mono">https://go.centerpag.com/PPU38CQG07L</td></tr>
-    <tr><td>67 reduzido</td><td>$34,90</td><td class="mono">https://go.centerpag.com/PPU38CQG07R</td></tr>
-    <tr><td>97</td><td>$97,00</td><td class="mono">https://go.centerpag.com/PPU38CQG07M</td></tr>
-    <tr><td>97 reduzido</td><td>$49,90</td><td class="mono">https://go.centerpag.com/PPU38CQG07S</td></tr>
+    <tr><td>Faixas 17 a 97 · cheio e reduzido</td><td class="mono">https://paggins.com/checkout/046cb785-978f-491e-aa96-144495f3d593</td></tr>
+    <tr><td><code>/back</code> · <code>/wt</code> · <code>to=</code> das VSLs</td><td class="mono">https://paggins.com/checkout/046cb785-978f-491e-aa96-144495f3d593</td></tr>
   </tbody>
 </table>
 
-<h3>Upsells e ativação</h3>
+<h3>Upsells pós-compra</h3>
 <table class="nobreak">
-  <thead><tr><th style="width:30%">Oferta</th><th style="width:16%">Preço</th><th>Link</th></tr></thead>
+  <thead><tr><th style="width:22%">Oferta</th><th style="width:14%">Preço</th><th>Link</th></tr></thead>
   <tbody>
-    <tr><td>Premium</td><td>$297,00</td><td class="mono">https://go.centerpag.com/PPU38CQHH1O</td></tr>
-    <tr><td>AI Multiplier</td><td>$197,00</td><td class="mono">https://go.centerpag.com/PPU38CQHH1P</td></tr>
-    <tr><td>Acesso vitalício</td><td>$67,00</td><td class="mono">https://go.centerpag.com/PPU38CQHH1Q</td></tr>
-    <tr><td>Ativação na chamada</td><td>$29,90</td><td class="mono">https://go.centerpag.com/PPU38CQFUFH</td></tr>
-    <tr><td>Ativação reduzida</td><td>$29,90</td><td class="mono">https://go.centerpag.com/PPU38CQFUFG</td></tr>
-    <tr><td>Article tripwire</td><td>$1,00</td><td class="mono">https://go.centerpag.com/PPU38CQ513F</td></tr>
+    <tr><td>Premium</td><td>$297,00</td><td class="mono">https://api.paggins.com/offers/bf8ed59f-e567-4e8f-96ce-f8504a661c5c/accept?offerProductId=302da005-f628-48bf-8616-c45a7ebd7677</td></tr>
+    <tr><td>AI Multiplier</td><td>$197,00</td><td class="mono">https://api.paggins.com/offers/dc04d8a9-894b-44d9-a356-4474e80865b0/accept?offerProductId=68c4a41d-b198-4c67-ba92-edd380d9cd1d</td></tr>
+    <tr><td>Acesso vitalício</td><td>$67,00</td><td class="mono">https://api.paggins.com/offers/14bb27aa-9bd6-45a1-ac72-2642b0a12c07/accept?offerProductId=e3bcfa73-a211-4b29-bc76-5c46627e4b37</td></tr>
   </tbody>
 </table>
 
@@ -204,8 +194,8 @@
 
 <div class="box danger">
   <b>PV14 cobra preço diferente do exibido.</b> A tela mostra $27
-  (<code>components/pv14/call.tsx:445</code>) e o CTA envia <code>PPU38CQFUFH</code> (valor
-  configurado no CenterPag, hoje $29,90).
+  (<code>components/pv14/call.tsx:445</code>) e o CTA envia o front-end Paggins (valor configurado no
+  painel, hoje $29,90).
 </div>
 
 <div class="box warn">

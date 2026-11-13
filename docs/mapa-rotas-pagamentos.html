@@ -66,8 +66,8 @@
   <h1>Mapa de rotas, checkouts e preços</h1>
   <p class="sub">Cash Club — funis PV, upsells, área de membros e destinos de pagamento.</p>
   <p class="meta">
-    Projeto: <b>my-money</b> · Base: <b>https://go.centerpag.com</b> ·
-    Gerado em: <b>07/11/2026</b> · Escopo: <b>app/, pay/, pv11–pv14, hot/, hotwt/, back, wt</b>
+    Projeto: <b>my-money</b> · Base: <b>https://paggins.com</b> ·
+    Gerado em: <b>12/11/2026</b> · Escopo: <b>app/, pay/, pv11–pv14, hot/, hotwt/, back, wt</b>
   </p>
 </div>
 
@@ -80,47 +80,67 @@
 
 <div class="kpi">
   <div><b>33</b><span>rotas de página</span></div>
-  <div><b>14</b><span>IDs de checkout</span></div>
+  <div><b>4</b><span>links de checkout</span></div>
   <div><b>8</b><span>faixas de preço</span></div>
   <div><b>6</b><span>redirecionadores</span></div>
 </div>
 
 <h2>1. Checkouts — registro central</h2>
 
-<p>Todos os IDs são servidos por <code>checkoutUrl()</code> em <code>lib/funnel.ts:107</code>, que monta
-<code>https://go.centerpag.com/&lt;ID&gt;</code> e anexa <code>?upsell=true</code> e/ou <code>?email=</code>
-quando chamado com essas opções.</p>
+<p>As URLs de front-end passam por <code>checkoutUrl()</code> em <code>lib/funnel.ts</code>, que aceita URL
+absoluta (Paggins) ou ID legado do CenterPag e anexa <code>?upsell=true</code> e/ou <code>?email=</code>
+sem perder a query já existente. Os upsells usam <code>oneClickAccept()</code>/<code>oneClickDecline()</code>:
+elas preferem o <code>acceptUrl</code>/<code>declineUrl</code> que o Paggins injeta na URL da página
+(sessão do pedido, cobrando o cartão salvo) e caem nos links fixos abaixo só como fallback.</p>
 
 <table class="nobreak">
   <thead>
-    <tr><th style="width:26%">Grupo</th><th style="width:14%">Preço</th><th style="width:26%">ID</th><th>Onde é usado</th></tr>
+    <tr><th style="width:24%">Grupo</th><th style="width:12%">Preço</th><th style="width:40%">Link</th><th>Onde é usado</th></tr>
   </thead>
   <tbody>
-    <tr><td>Quiz — faixa 17 (cheio)</td><td class="price">$17,00</td><td><span class="id">PPU38CQG07H</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 17 (reduzido)</td><td class="price">$9,90</td><td><span class="id">PPU38CQG07N</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 27 (cheio)</td><td class="price">$27,00</td><td><span class="id">PPU38CQG07I</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 27 (reduzido)</td><td class="price">$14,90</td><td><span class="id">PPU38CQG07O</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 47 (cheio)</td><td class="price">$47,00</td><td><span class="id">PPU38CQG07K</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 47 (reduzido)</td><td class="price">$24,90</td><td><span class="id">PPU38CQG07P</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 67 (cheio)</td><td class="price">$67,00</td><td><span class="id">PPU38CQG07L</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 67 (reduzido)</td><td class="price">$34,90</td><td><span class="id">PPU38CQG07R</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 97 (cheio)</td><td class="price">$97,00</td><td><span class="id">PPU38CQG07M</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Quiz — faixa 97 (reduzido)</td><td class="price">$49,90</td><td><span class="id">PPU38CQG07S</span></td><td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td></tr>
-    <tr><td>Upsell 1 — Premium</td><td class="price">$297,00</td><td><span class="id">PPU38CQHH1O</span></td><td><code>app/pay/up1</code></td></tr>
-    <tr><td>Upsell 2 — AI Multiplier</td><td class="price">$197,00</td><td><span class="id">PPU38CQHH1P</span></td><td><code>app/pay/up2</code></td></tr>
-    <tr><td>Upsell 3 — Acesso vitalício</td><td class="price">$67,00</td><td><span class="id">PPU38CQHH1Q</span></td><td><code>app/pay/up3</code></td></tr>
-    <tr><td>Ativação na chamada (cheio)</td><td class="price">$29,90</td><td><span class="id">PPU38CQFUFH</span></td><td>PV11, PV12, PV13, PV14 (VSL → <code>/hotwt/up1</code>)</td></tr>
-    <tr><td>Ativação na chamada (reduzido)</td><td class="price">$29,90</td><td><span class="id">PPU38CQFUFG</span></td><td><code>lib/funnel.ts</code> — <b>declarado e sem uso</b></td></tr>
-    <tr><td>Article tripwire</td><td class="price">$1,00</td><td><span class="id">PPU38CQ513F</span></td><td><code>components/wt-cta.tsx</code></td></tr>
+    <tr>
+      <td>Front-end — faixas 17 a 97, cheio e reduzido</td>
+      <td class="price">$17 a $97</td>
+      <td class="mono" style="word-break:break-all;">paggins.com/checkout/<br>046cb785-978f-491e-aa96-144495f3d593</td>
+      <td><code>components/quiz/Offer.tsx</code>, <code>app/back</code></td>
+    </tr>
+    <tr>
+      <td>Ativação na chamada (PV11–PV14)</td>
+      <td class="price">$29,90</td>
+      <td class="mono" style="word-break:break-all;">mesmo link acima via <code>BACK_CHECKOUT_FULL</code></td>
+      <td>VSL → <code>/hotwt/up1</code></td>
+    </tr>
+    <tr>
+      <td>Article tripwire</td>
+      <td class="price">$1,00</td>
+      <td class="mono" style="word-break:break-all;">mesmo link acima via <code>WT_CHECKOUT</code></td>
+      <td><code>components/wt-cta.tsx</code></td>
+    </tr>
+    <tr>
+      <td>Upsell 1 — Premium</td>
+      <td class="price">$297,00</td>
+      <td class="mono" style="word-break:break-all;">api.paggins.com/offers/<br>bf8ed59f-e567-4e8f-96ce-f8504a661c5c/accept<br>?offerProductId=302da005-f628-48bf-8616-c45a7ebd7677</td>
+      <td><code>app/pay/up1</code> (<code>UP1_ACCEPT</code>)</td>
+    </tr>
+    <tr>
+      <td>Upsell 2 — AI Multiplier</td>
+      <td class="price">$197,00</td>
+      <td class="mono" style="word-break:break-all;">api.paggins.com/offers/<br>dc04d8a9-894b-44d9-a356-4474e80865b0/accept<br>?offerProductId=68c4a41d-b198-4c67-ba92-edd380d9cd1d</td>
+      <td><code>app/pay/up2</code> (<code>UP2_ACCEPT</code>)</td>
+    </tr>
+    <tr>
+      <td>Upsell 3 — Acesso vitalício</td>
+      <td class="price">$67,00</td>
+      <td class="mono" style="word-break:break-all;">api.paggins.com/offers/<br>14bb27aa-9bd6-45a1-ac72-2642b0a12c07/accept<br>?offerProductId=e3bcfa73-a211-4b29-bc76-5c46627e4b37</td>
+      <td><code>components/up3-offer.tsx</code> (<code>UP3_ACCEPT</code>)</td>
+    </tr>
   </tbody>
 </table>
 
-<div class="box warn">
-  <b>Divergência de preço no PV14.</b> O card de oferta exibe <b>$27</b>
-  (<code>components/pv14/call.tsx:445</code>), mas o CTA usa <code>BACK_CHECKOUT_FULL</code> —
-  o mesmo checkout de <b>$29,90</b> dos outros funis. Quem paga vê $27 na tela e é cobrado conforme o
-  valor configurado no CenterPag para <code>PPU38CQFUFH</code>. Para o PV14 ter preço próprio é preciso
-  criar um checkout novo e apontar só ele aqui.
+<div class="box">
+  <b>Front-end único.</b> Não existe link por faixa: os cinco tiers e o desconto apontam para o mesmo
+  checkout, e o valor precisa ser resolvido no painel da Paggins. O mesmo link serve o tripwire de $1 —
+  o preço anunciado no artigo não tem configuração própria.
 </div>
 
 <h2>2. Funil principal — quiz</h2>
@@ -131,15 +151,15 @@ quando chamado com essas opções.</p>
 <div class="flow">
 <b>/</b> <span class="s">quiz → landing, 10 perguntas</span><br>
 &nbsp;&nbsp;└─ <b>Offer</b> <span class="s">preço do tier + botão “reduced version”</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ cheio&nbsp;&nbsp;→ <span class="s">CHECKOUTS[tier].full → go.centerpag.com</span><br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ reduzido → <span class="s">CHECKOUTS[tier].down → go.centerpag.com</span>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;├─ cheio&nbsp;&nbsp;→ <span class="s">CHECKOUTS[tier].full → paggins.com/checkout</span><br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;└─ reduzido → <span class="s">CHECKOUTS[tier].down → paggins.com/checkout</span>
 </div>
 
 <table class="nobreak">
   <thead><tr><th style="width:16%">Rota</th><th style="width:30%">Tela</th><th>Saída</th></tr></thead>
   <tbody>
-    <tr><td class="path">/</td><td>Quiz de perfil (10 perguntas, 2 insights)</td><td><span class="tag t-pay">checkout</span> CenterPag, tier + versão</td></tr>
-    <tr><td class="path">/back</td><td>Recuperação de abandono — “Your verification is still open”</td><td><span class="tag t-pay">checkout</span> CenterPag, tier + versão</td></tr>
+    <tr><td class="path">/</td><td>Quiz de perfil (10 perguntas, 2 insights)</td><td><span class="tag t-pay">checkout</span> Paggins, tier + versão</td></tr>
+    <tr><td class="path">/back</td><td>Recuperação de abandono — “Your verification is still open”</td><td><span class="tag t-pay">checkout</span> Paggins, tier + versão</td></tr>
   </tbody>
 </table>
 
@@ -151,8 +171,10 @@ quando chamado com essas opções.</p>
 
 <h2 class="pb">3. Rotas de upsell — /pay</h2>
 
-<p>Sequência pós-compra. Cada tela tem um CTA de compra e um escape que segue para a próxima etapa.
-Os escapes usam <code>router.push</code> direto, sem redirector intermediário.</p>
+<p>Sequência pós-compra. Cada tela tem um CTA de aceite 1-clique e um escape de recusa. O Paggins injeta
+<code>acceptUrl</code>/<code>declineUrl</code> na URL de cada etapa; o app usa esses quando presentes e o
+link fixo como fallback. A recusa no <code>/pay/up3</code> (último) cai em <code>MEMBERS_URL</code> quando
+não há <code>declineUrl</code>.</p>
 
 <table class="nobreak">
   <thead><tr><th style="width:14%">Rota</th><th style="width:22%">Oferta</th><th style="width:12%">Preço</th><th style="width:16%">CTA compra</th><th>Escape</th></tr></thead>
@@ -161,35 +183,37 @@ Os escapes usam <code>router.push</code> direto, sem redirector intermediário.<
       <td class="path">/pay/up1</td>
       <td>Plano Premium (40+ análises, 92% acerto, gerente)</td>
       <td class="price">$297 <span class="sub">(risco $497)</span></td>
-      <td><span class="tag t-pay">PPU38CQHH1O</span><br><code>page.tsx:66</code></td>
-      <td><span class="tag t-in">/pay/up2</span><br><code>page.tsx:71</code></td>
+      <td><span class="tag t-pay">api.paggins.com/offers…</span><br><code>page.tsx:66</code> (<code>UP1_ACCEPT</code>)</td>
+      <td><span class="tag t-ext">/offers/…/decline</span><br><code>page.tsx:71</code> (<code>UP1_DECLINE</code>)</td>
     </tr>
     <tr>
       <td class="path">/pay/up2</td>
       <td>AI Multiplier — 3 perguntas, “perfil pronto”, pitch, oferta</td>
       <td class="price">$197</td>
-      <td><span class="tag t-pay">PPU38CQHH1P</span><br><code>page.tsx:53</code></td>
-      <td><span class="tag t-in">/pay/up3</span><br><code>page.tsx:58</code></td>
+      <td><span class="tag t-pay">api.paggins.com/offers…</span><br><code>page.tsx:134</code> (<code>UP2_ACCEPT</code>)</td>
+      <td><span class="tag t-ext">/offers/…/decline</span><br><code>page.tsx:139</code> (<code>UP2_DECLINE</code>)</td>
     </tr>
     <tr>
       <td class="path">/pay/up3</td>
       <td>Acesso vitalício — urgência de 6 meses</td>
       <td class="price">$67</td>
-      <td><span class="tag t-pay">PPU38CQHH1Q</span><br><code>page.tsx:16</code></td>
-      <td><span class="tag t-in">/app/login</span><br><code>page.tsx:21</code> (<code>MEMBERS_URL</code>)</td>
+      <td><span class="tag t-pay">api.paggins.com/offers…</span><br><code>up3-offer.tsx:16</code> (<code>UP3_ACCEPT</code>)</td>
+      <td><span class="tag t-ext">/offers/…/decline</span> ou <span class="tag t-in">/app/login</span><br><code>up3-offer.tsx:21</code></td>
     </tr>
   </tbody>
 </table>
 
 <div class="box">
-  <code>MEMBERS_URL</code> (<code>lib/funnel.ts:39</code>) é o único ponto que define onde o funil
+  <code>MEMBERS_URL</code> (<code>lib/funnel.ts:69</code>) é o único ponto que define onde o funil
   termina. Hoje aponta para <code>/app/login</code>, a área de membros local.
 </div>
 
 <h2>4. Aliases de redirect — /hot e /hotwt</h2>
 
 <p>Existem para preservar as URLs do funil original. Seguram ~1,2 s, exibem um rótulo e saem.
-Repassam <code>to</code>, <code>sck</code>, <code>xcod</code> e UTMs.</p>
+Repassam <code>to</code>, <code>sck</code>, <code>xcod</code> e UTMs. Depois do 1-clique, as etapas
+seguintes vêm do próprio Paggins (<code>acceptUrl</code>/<code>declineUrl</code>), então estas rotas
+servem como entrada e fallback.</p>
 
 <table class="nobreak">
   <thead><tr><th style="width:16%">Rota</th><th style="width:20%">Fallback</th><th>Comportamento</th></tr></thead>
@@ -202,8 +226,9 @@ Repassam <code>to</code>, <code>sck</code>, <code>xcod</code> e UTMs.</p>
 
 <div class="box warn">
   <b>Lista branca de hosts</b> em <code>components/redirector.tsx:15</code>:
-  <code>go.centerpag.com</code>, <code>checkout.centerpag.com</code>, <code>pay.hotmart.com</code>,
-  <code>riseaiclub.com</code>, <code>growaiclub.com</code>, <code>transitaclub.com</code>.
+  <code>paggins.com</code> (cobre <code>api.paggins.com</code>), <code>go.centerpag.com</code>,
+  <code>checkout.centerpag.com</code>, <code>pay.hotmart.com</code>, <code>riseaiclub.com</code>,
+  <code>growaiclub.com</code>, <code>transitaclub.com</code>.
   Um link de checkout em domínio novo é <b>descartado em silêncio</b> e o redirector cai no fallback.
   Ao trocar de processador, atualize esta lista.
 </div>
@@ -294,7 +319,7 @@ para atribuição. Chamado em <code>app/app/inicio/page.tsx:170</code>,
 <table class="nobreak">
   <thead><tr><th style="width:16%">Rota</th><th style="width:34%">Tela</th><th>Saída</th></tr></thead>
   <tbody>
-    <tr><td class="path">/wt</td><td>Artigo “Research, not a pitch” — isca de $1</td><td><span class="tag t-pay">PPU38CQ513F</span> · <code>wt-cta.tsx:9</code></td></tr>
+    <tr><td class="path">/wt</td><td>Artigo “Research, not a pitch” — isca de $1</td><td><span class="tag t-pay">front Paggins</span> · <code>wt-cta.tsx:9</code></td></tr>
     <tr><td class="path">/painel</td><td>Catálogo interno dos roteiros PV11–PV14</td><td><span class="tag t-in">/</span></td></tr>
     <tr><td class="path">/paniel</td><td>Alias de digitação</td><td><span class="tag t-in">/painel</span></td></tr>
   </tbody>
@@ -323,10 +348,12 @@ para atribuição. Chamado em <code>app/app/inicio/page.tsx:170</code>,
 
 <h3>8.1 IDs de checkout</h3>
 
-<p>Todos centralizados em <code>lib/funnel.ts:18–35</code>. Para trocar um link de pagamento, edite
-ali — <code>CHECKOUTS</code> (linhas 18–22), <code>UP1_CHECKOUT</code> (29), <code>UP2_CHECKOUT</code> (30),
-<code>UP3_CHECKOUT</code> (31), <code>BACK_CHECKOUT_FULL</code> (34) e <code>BACK_CHECKOUT_DOWN</code> (35).
-O <code>PPU38CQ513F</code> do artigo é o único fora do arquivo (<code>components/wt-cta.tsx:9</code>).</p>
+<p>Todos centralizados em <code>lib/funnel.ts</code>. Para trocar um link de pagamento, edite
+ali — <code>FRONT_CHECKOUT</code> (21), <code>CHECKOUTS</code> (23–29), <code>UP1_ACCEPT</code> (40),
+<code>UP1_DECLINE</code> (41), <code>UP2_ACCEPT</code> (42), <code>UP3_ACCEPT</code> (44) e
+<code>BACK_CHECKOUT_FULL</code> (61). O <code>WT_CHECKOUT</code> (66) reusa o front-end e
+<code>oneClickAccept</code>/<code>oneClickDecline</code> usam o <code>acceptUrl</code>/<code>declineUrl</code>
+que o Paggins injeta.</p>
 
 <h2>9. Pontos de atenção</h2>
 

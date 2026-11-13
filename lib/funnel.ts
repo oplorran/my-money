@@ -18,7 +18,7 @@ export type PriceTier = "17" | "27" | "47" | "67" | "97";
  * Checkout único de front-end (Paggins). O preço é resolvido no checkout, então
  * as cinco faixas do quiz apontam para o mesmo link, cheio ou reduzido.
  */
-export const FRONT_CHECKOUT = "https://paggins.com/checkout/3e772ea7-64b7-44d8-94ad-72a21df5fc2b";
+export const FRONT_CHECKOUT = "https://paggins.com/checkout/046cb785-978f-491e-aa96-144495f3d593";
 
 export const CHECKOUTS: Record<PriceTier, { full: string; down: string }> = {
   "17": { full: FRONT_CHECKOUT, down: FRONT_CHECKOUT },
@@ -37,12 +37,12 @@ export const TIER_DOWN: Record<PriceTier, number> = { "17": 9.9, "27": 14.9, "47
  * (ligados à sessão do pedido) na URL da página de upsell; usamos esses quando
  * presentes e o link fixo abaixo como fallback.
  */
-export const UP1_ACCEPT = "https://api.paggins.com/offers/686c17e6-7713-46a0-8ecd-ddfcb81d2fe5/accept?offerProductId=733a7717-e1b3-46ea-894d-897d78f90c03"; // $297
-export const UP1_DECLINE = "https://api.paggins.com/offers/686c17e6-7713-46a0-8ecd-ddfcb81d2fe5/decline";
-export const UP2_ACCEPT = "https://api.paggins.com/offers/67b9ea7f-7379-44b8-a5e5-dc959f2c55f1/accept?offerProductId=a9fe2a73-f682-4297-a156-886fa7b75934"; // $197
-export const UP2_DECLINE = "https://api.paggins.com/offers/67b9ea7f-7379-44b8-a5e5-dc959f2c55f1/decline";
-export const UP3_ACCEPT = "https://api.paggins.com/offers/909bb272-63ee-4210-8eaf-5ef235c4aa1e/accept?offerProductId=119db751-3aa6-4f92-8f07-e1759c9ae62d"; // $67
-export const UP3_DECLINE = "https://api.paggins.com/offers/909bb272-63ee-4210-8eaf-5ef235c4aa1e/decline";
+export const UP1_ACCEPT = "https://api.paggins.com/offers/bf8ed59f-e567-4e8f-96ce-f8504a661c5c/accept?offerProductId=302da005-f628-48bf-8616-c45a7ebd7677"; // $297
+export const UP1_DECLINE = "https://api.paggins.com/offers/bf8ed59f-e567-4e8f-96ce-f8504a661c5c/decline";
+export const UP2_ACCEPT = "https://api.paggins.com/offers/dc04d8a9-894b-44d9-a356-4474e80865b0/accept?offerProductId=68c4a41d-b198-4c67-ba92-edd380d9cd1d"; // $197
+export const UP2_DECLINE = "https://api.paggins.com/offers/dc04d8a9-894b-44d9-a356-4474e80865b0/decline";
+export const UP3_ACCEPT = "https://api.paggins.com/offers/14bb27aa-9bd6-45a1-ac72-2642b0a12c07/accept?offerProductId=e3bcfa73-a211-4b29-bc76-5c46627e4b37"; // $67
+export const UP3_DECLINE = "https://api.paggins.com/offers/14bb27aa-9bd6-45a1-ac72-2642b0a12c07/decline";
 
 /** Aceite 1-clique: usa o acceptUrl injetado pelo Paggins na URL (sessão do pedido); senão o fixo. */
 export function oneClickAccept(fallbackAccept: string): string {
